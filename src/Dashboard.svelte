@@ -1,6 +1,8 @@
 <script lang="ts">
   import * as duckdb from "@duckdb/duckdb-wasm";
   import { db, connection } from "./lib/duckdb";
+  import { stats } from "./lib/queries/statistiques";
+  
   import { Chart } from "svelte-echarts";
 
   import { init, use } from "echarts/core";
@@ -104,10 +106,7 @@
       `);
 
 
-      const result = await connection.query(`
-          SELECT COUNT(*) AS total, AVG(age) as moyenne
-          FROM individus;
-      `);
+      const result = await stats(connection);;
 
       total = Number(result.getChild("total")?.get(0));
       moyenne = Number(result.getChild("moyenne")?.get(0));
