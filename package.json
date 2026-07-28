@@ -21,7 +21,7 @@
     "vite": "^8.1.1"
   },
   "dependencies": {
-    "@duckdb/duckdb-wasm": "^1.33.1-dev57.0",
+    "@duckdb/duckdb-wasm": "^1.33.1",
     "@tailwindcss/vite": "^4.3.3",
     "echarts-stat": "^1.2.0",
     "tailwindcss": "^4.3.3"

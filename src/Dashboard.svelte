@@ -1,4 +1,6 @@
 <script lang="ts">
+  import * as duckdb from "@duckdb/duckdb-wasm";
+  import { db, connection } from "./lib/duckdb";
   import { Chart } from "svelte-echarts";
 
   import { init, use } from "echarts/core";
@@ -66,11 +68,11 @@
       },
     ],
   };
-  
+
   let individus: unknown[] = [];
 
   let total = $state(0);
-  let moyen = $state(0);
+  let moyenne = $state(0);
   let stdev = $state(0);
   let mediane = $state(0);
   let minimum = $state(0);
@@ -85,35 +87,56 @@
     }
 
     try {
-      const text = await file.text();
-      individus = JSON.parse(text);
-      total = individus.length;
+      await db.registerFileHandle(
+            "individus.csv",
+            file,
+            duckdb.DuckDBDataProtocol.BROWSER_FILEREADER,
+            false
+      );
+
+      await connection.query(`
+          CREATE OR REPLACE TABLE individus AS
+          SELECT *
+          FROM read_csv_auto(
+              'individus.csv',
+              HEADER=true
+          );
+      `);
+
+
+      const result = await connection.query(`
+          SELECT COUNT(*) AS total, AVG(age) as moyenne
+          FROM individus;
+      `);
+
+      total = Number(result.getChild("total")?.get(0));
+      moyenne = Number(result.getChild("moyenne")?.get(0));
     } catch (err) {
       console.error("Impossible de lire le fichier JSON :", err);
     }
   }
 </script>
 
-<input type="file" accept="application/json,.json" onchange={chargerFichier} />
+<input type="file" accept="text/csv,.csv" onchange={chargerFichier} />
 
-<div style="display: flex">
-  <div>
-    <p>
-      <span class="strong">Individus :</span>
-      <span id="total" class="number">{total}</span><br />
-      <span class="strong">Âge moyen :</span><span id="mean" class="number"
-        >{moyen}</span
-      ><br />
-      <span class="strong">Médiane :</span>
-      <span id="median" class="number">{mediane}</span><br />
-      <span class="strong">Écart-type :</span>
-      <span id="ecart" class="number">{stdev}</span><br />
-      <span class="strong">Minimum :</span>
-      <span id="min" class="number">{minimum}</span><br />
-      <span class="strong">Maximum :</span>
-      <span id="max" class="number">{maximum}</span>
-    </p>
-  </div>
+<div class="flex">
+  <div class="strong">Individus :
+  <span id="total" class="number">{total}</span></div>
+
+  <div class="strong">Âge moyen :<span id="mean" class="number"
+    >{moyenne}</span></div>
+
+    <div class="strong">Médiane :
+    <span id="median" class="number">{mediane}</div>
+
+    <div class="strong">Écart-type :
+    <span id="ecart" class="number">{stdev}</div>
+
+    <div class="strong">Minimum :
+    <span id="min" class="number">{minimum}</div>
+
+    <div class="strong">Maximum :
+    <span id="max" class="number">{maximum}</span></div>
 </div>
 
 <div class="app">
