@@ -2,76 +2,21 @@
   import * as duckdb from "@duckdb/duckdb-wasm";
   import { db, connection } from "./lib/duckdb";
   import { stats } from "./lib/queries/statistiques";
-  
-  import { Chart } from "svelte-echarts";
+  import { genres } from "./lib/queries/genres";
 
+  import GenderChart from './lib/GenderChart.svelte'
+
+  import { Chart } from "svelte-echarts";
   import { init, use } from "echarts/core";
-  import { BarChart } from "echarts/charts";
+  import { BarChart, PieChart } from "echarts/charts";
   import { GridComponent, TitleComponent } from "echarts/components";
   import { CanvasRenderer } from "echarts/renderers";
 
   // now with tree-shaking
-  use([BarChart, GridComponent, CanvasRenderer, TitleComponent]);
+  use([BarChart, PieChart, GridComponent, CanvasRenderer, TitleComponent]);
 
-  let options = {
-    title: {
-      text: "ECharts Example",
-    },
-    xAxis: {
-      type: "category",
-      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-    },
-    yAxis: {
-      type: "value",
-    },
-    series: [
-      {
-        type: "bar",
-        data: [120, 200, 150, 80, 70, 110, 130],
-      },
-    ],
-  };
+let genres_data = stats([])
 
-  let option2 = {
-    tooltip: {
-      trigger: "item",
-    },
-    legend: {
-      top: "5%",
-      left: "center",
-    },
-    series: [
-      {
-        name: "Access From",
-        type: "pie",
-        radius: ["40%", "70%"],
-        avoidLabelOverlap: false,
-        label: {
-          show: false,
-          position: "center",
-        },
-        emphasis: {
-          label: {
-            show: true,
-            fontSize: 40,
-            fontWeight: "bold",
-          },
-        },
-        labelLine: {
-          show: false,
-        },
-        data: [
-          { value: 1048, name: "Search Engine" },
-          { value: 735, name: "Direct" },
-          { value: 580, name: "Email" },
-          { value: 484, name: "Union Ads" },
-          { value: 300, name: "Video Ads" },
-        ],
-      },
-    ],
-  };
-
-  let individus: unknown[] = [];
 
   let total = $state(0);
   let moyenne = $state(0);
@@ -105,11 +50,18 @@
           );
       `);
 
-
-      const result = await stats(connection);;
+      const result = await stats(connection);
 
       total = Number(result.getChild("total")?.get(0));
       moyenne = Number(result.getChild("moyenne")?.get(0));
+
+      const result2 = await genres(connection);
+      genres_data = result2.toArray().map(row => ({
+        name: row.name,
+        value: Number(row.value)
+    }));
+
+    console.log(genres_data);
     } catch (err) {
       console.error("Impossible de lire le fichier JSON :", err);
     }
@@ -126,20 +78,24 @@
     >{moyenne}</span></div>
 
     <div class="strong">Médiane :
-    <span id="median" class="number">{mediane}</div>
+    <span class="number">{mediane}</span>
+    </div>
 
     <div class="strong">Écart-type :
-    <span id="ecart" class="number">{stdev}</div>
+    <span class="number">{stdev}</span>
+    </div>
 
     <div class="strong">Minimum :
-    <span id="min" class="number">{minimum}</div>
+    <span class="number">{minimum}</span>
+    </div>
 
     <div class="strong">Maximum :
-    <span id="max" class="number">{maximum}</span></div>
+    <span class="number">{maximum}</span>
+    </div>
 </div>
 
 <div class="app">
-  <Chart {init} {options} />
+  <GenderChart />
 </div>
 
 <style>
