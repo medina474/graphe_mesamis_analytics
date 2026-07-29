@@ -1,9 +1,11 @@
 <script lang="ts">
   import * as duckdb from "@duckdb/duckdb-wasm";
   import { db, connection } from "./lib/duckdb";
+  import type { StatsData, GenderData } from "./lib/types";
   import { stats } from "./lib/queries/statistiques";
   import { genres } from "./lib/queries/genres";
 
+  import StatsValues from './lib/StatsValues.svelte'
   import GenderChart from './lib/GenderChart.svelte'
 
   import { Chart } from "svelte-echarts";
@@ -15,15 +17,15 @@
   // now with tree-shaking
   use([BarChart, PieChart, GridComponent, CanvasRenderer, TitleComponent]);
 
-let genres_data = stats([])
-
-
-  let total = $state(0);
-  let moyenne = $state(0);
-  let stdev = $state(0);
-  let mediane = $state(0);
-  let minimum = $state(0);
-  let maximum = $state(0);
+  let genderData = $state<GenderData[]>([]);
+  let statsData = $state<StatsData>({
+    total: 0,
+    moyenne: 0,
+    stdev: 0,
+    mediane: 0,
+    minimum: 0,
+    maximum: 0
+  });
 
   async function chargerFichier(event: Event) {
     const input = event.currentTarget as HTMLInputElement;
@@ -52,16 +54,22 @@ let genres_data = stats([])
 
       const result = await stats(connection);
 
-      total = Number(result.getChild("total")?.get(0));
-      moyenne = Number(result.getChild("moyenne")?.get(0));
+      statsData = {
+        total: Number(result.getChild("total")?.get(0)),
+        moyenne: Number(result.getChild("moyenne")?.get(0)),
+        stdev: 0,
+        mediane: 0,
+        minimum: 0,
+        maximum: 0
+      };
 
       const result2 = await genres(connection);
-      genres_data = result2.toArray().map(row => ({
+      genderData = result2.toArray().map(row => ({
         name: row.name,
         value: Number(row.value)
     }));
 
-    console.log(genres_data);
+    console.log(genderData);
     } catch (err) {
       console.error("Impossible de lire le fichier JSON :", err);
     }
@@ -70,32 +78,10 @@ let genres_data = stats([])
 
 <input type="file" accept="text/csv,.csv" onchange={chargerFichier} />
 
-<div class="flex">
-  <div class="strong">Individus :
-  <span id="total" class="number">{total}</span></div>
-
-  <div class="strong">Âge moyen :<span id="mean" class="number"
-    >{moyenne}</span></div>
-
-    <div class="strong">Médiane :
-    <span class="number">{mediane}</span>
-    </div>
-
-    <div class="strong">Écart-type :
-    <span class="number">{stdev}</span>
-    </div>
-
-    <div class="strong">Minimum :
-    <span class="number">{minimum}</span>
-    </div>
-
-    <div class="strong">Maximum :
-    <span class="number">{maximum}</span>
-    </div>
-</div>
+<StatsValues data={statsData} />
 
 <div class="app">
-  <GenderChart />
+  <GenderChart data={genderData} />
 </div>
 
 <style>

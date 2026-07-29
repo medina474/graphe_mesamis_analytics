@@ -1,10 +1,13 @@
 <script lang="ts">
 import { init, use } from "echarts/core";
+import type { GenreData } from "./types";
 
 import { Chart } from "svelte-echarts";
 import { PieChart } from "echarts/charts";
 
-let options = {
+let { data }: { data: GenreData[] } = $props();
+
+let options = $derived({
     title: {
       text: "Genres",
     },
@@ -18,10 +21,7 @@ let options = {
       {
         type: "pie",
         radius: ["40%", "80%"],
-        data: [
-          { value: 1048, name: "Hommes" },
-          { value: 735, name: "Femmes" }
-        ],
+        data,
         label: {
           show: true,
           position: "inside",
@@ -36,7 +36,7 @@ let options = {
         },
       },
     ],
-  };
+  });
 </script>
 
 <Chart {init} {options} />
