@@ -12,7 +12,11 @@ export async function getGenderData(
     SELECT gender AS name, COUNT(*) AS value
     FROM individus
     GROUP BY gender
-    ORDER BY gender
+    ORDER BY
+      CASE gender
+        WHEN 'F' THEN 1
+        WHEN 'M' THEN 2
+      END;
   `);
 
   return result.toArray().map(row => ({
