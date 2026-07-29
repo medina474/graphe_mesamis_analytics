@@ -1,8 +1,3 @@
-export interface GenderData {
-  name: string;
-  value: number;
-}
-
 export interface StatsData {
   total: number;
   moyenne: number;

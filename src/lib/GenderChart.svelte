@@ -1,11 +1,11 @@
 <script lang="ts">
 import { init, use } from "echarts/core";
-import type { GenreData } from "./types";
+import type { GenderData } from "./queries/GenderData";
 
 import { Chart } from "svelte-echarts";
 import { PieChart } from "echarts/charts";
 
-let { data }: { data: GenreData[] } = $props();
+let { data }: { data: GenderData[] } = $props();
 
 let options = $derived({
     title: {
