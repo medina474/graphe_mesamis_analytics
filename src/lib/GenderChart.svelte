@@ -5,6 +5,9 @@ import type { GenderData } from "./queries/GenderData";
 import { Chart } from "svelte-echarts";
 import { PieChart } from "echarts/charts";
 
+import { LegendComponent, TitleComponent } from 'echarts/components';
+use([LegendComponent, TitleComponent, PieChart]);
+
 let { data }: { data: GenderData[] } = $props();
 
 let options = $derived({

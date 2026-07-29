@@ -1,5 +1,13 @@
 import type { AsyncDuckDBConnection } from "@duckdb/duckdb-wasm";
-import type { StatsData } from "../types";
+
+export interface StatsData {
+  total: number;
+  moyenne: number;
+  stdev: number;
+  mediane: number;
+  minimum: number;
+  maximum: number;
+}
 
 export async function getStats(
   db: AsyncDuckDBConnection
