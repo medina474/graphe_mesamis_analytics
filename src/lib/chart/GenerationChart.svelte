@@ -1,6 +1,6 @@
 <script lang="ts">
 import { init, use } from "echarts/core";
-import type { GenderData } from "./queries/GenderData";
+import type { GenerationData } from "../data/GenerationData";
 
 import { Chart } from "svelte-echarts";
 import { PieChart } from "echarts/charts";
@@ -8,13 +8,13 @@ import { PieChart } from "echarts/charts";
 import { LegendComponent, TitleComponent } from 'echarts/components';
 use([LegendComponent, TitleComponent, PieChart]);
 
-let { data }: { data: GenderData[] } = $props();
+let { data }: { data: GenerationData[] } = $props();
 
 let options = $derived({
     title: {
-      text: "Genres",
+      text: "Génération",
     },
-    color: ["#4A90E2", "#FF69B4"],
+    color: ["#81C784", "#FFD54F", "#E57373"],
     legend: {
       orient: "horizontal",
       bottom: 0,

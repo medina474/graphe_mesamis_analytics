@@ -2,7 +2,7 @@
 import { init, use } from "echarts/core";
 import { Chart } from "svelte-echarts";
 import { HeatmapChart } from "echarts/charts";
-  import type { HeatMapData } from "./queries/HeatMapData";
+  import type { HeatMapData } from "../data/HeatMapData";
 
 import { LegendComponent, TitleComponent, GridComponent, VisualMapComponent } from 'echarts/components';
 use([LegendComponent, TitleComponent, GridComponent, VisualMapComponent, HeatmapChart]);

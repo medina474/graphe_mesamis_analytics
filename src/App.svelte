@@ -1,13 +1,13 @@
 <script lang="ts">
-  import { loadDataset } from "./lib/services/dataset";
-  import type { DashboardData } from "./lib/services/dataset";
+  import { loadDataset } from "./lib/data/DashboardData";
+  import type { DashboardData } from "./lib/data/DashboardData";
 
-  import StatsValues from './lib/StatsValues.svelte'
-  import GenderChart from './lib/GenderChart.svelte'
-  import GenerationChart from './lib/GenerationChart.svelte'
-  import PyramideChart from './lib/PyramideChart.svelte'
-  import HeatMapChart from './lib/HeatMapChart.svelte'
-  import RadarChart from './lib/RadarChart.svelte'
+  import StatsValues from './lib/chart/StatsValues.svelte'
+  import GenderChart from './lib/chart/GenderChart.svelte'
+  import GenerationChart from './lib/chart/GenerationChart.svelte'
+  import PyramideChart from './lib/chart/PyramideChart.svelte'
+  import HeatMapChart from './lib/chart/HeatMapChart.svelte'
+  import RadarChart from './lib/chart/RadarChart.svelte'
 
   import { use } from "echarts/core";
   import { CanvasRenderer } from "echarts/renderers";

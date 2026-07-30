@@ -1,6 +1,6 @@
 <script lang="ts">
   import { init, use } from "echarts/core";
-  import type { RadarData } from "./queries/RadarData";
+  import type { RadarData } from "../data/RadarData";
 
   import { Chart } from "svelte-echarts";
   import { RadarChart } from "echarts/charts";

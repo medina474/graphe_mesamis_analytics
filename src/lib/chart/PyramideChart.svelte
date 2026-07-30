@@ -1,6 +1,6 @@
 <script lang="ts">
 import { init, use } from "echarts/core";
-import type { PyramideData } from "./queries/PyramideData";
+import type { PyramideData } from "../data/PyramideData";
 
 import { Chart } from "svelte-echarts";
 import { BarChart } from "echarts/charts";

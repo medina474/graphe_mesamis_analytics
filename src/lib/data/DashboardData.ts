@@ -1,18 +1,18 @@
 import { connection } from "../duckdb/duckdb";
 import { importCsv } from "../duckdb/import";
 
-import { getStats } from "../queries/StatsData";
-import { getGenderData } from "../queries/GenderData";
-import { getGenerationData } from "../queries/GenerationData";
-import { getPyramideData } from "../queries/PyramideData";
-import { getRadarData } from "../queries/RadarData";
-import { getHeatMapData } from "../queries/HeatMapData";
+import { getStats } from "./StatsData";
+import { getGenderData } from "./GenderData";
+import { getGenerationData } from "./GenerationData";
+import { getPyramideData } from "./PyramideData";
+import { getRadarData } from "./RadarData";
+import { getHeatMapData } from "./HeatMapData";
 
-import type { StatsData } from "../queries/StatsData";
-import type { GenderData } from "../queries/GenderData";
-import type { GenerationData } from "../queries/GenerationData";
-import type { PyramideData } from "../queries/PyramideData";
-import type { RadarData } from "../queries/RadarData";
+import type { StatsData } from "./StatsData";
+import type { GenderData } from "./GenderData";
+import type { GenerationData } from "./GenerationData";
+import type { PyramideData } from "./PyramideData";
+import type { RadarData } from "./RadarData";
 
 export interface DashboardData {
   datasetLoaded: boolean;

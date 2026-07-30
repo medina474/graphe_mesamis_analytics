@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { StatsData } from "./queries/StatsData";
+import type { StatsData } from "../data/StatsData";
 
 let { data }: { data: StatsData } = $props();
 </script>
