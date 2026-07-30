@@ -5,7 +5,7 @@
   import StatsValues from './lib/StatsValues.svelte'
   import GenderChart from './lib/GenderChart.svelte'
   import GenerationChart from './lib/GenerationChart.svelte'
-  import PyramideChart from './lib/GenerationChart.svelte'
+  import PyramideChart from './lib/PyramideChart.svelte'
 
   import { use } from "echarts/core";
   import { CanvasRenderer } from "echarts/renderers";
@@ -48,15 +48,20 @@
   <GenderChart data={dashboard.genders} />
 </div>
 
-<GenerationChart data={dashboard.generation} />
-
 <div class="app">
-<PyramideChart data={dashboard.pyramide} />
+  <GenerationChart data={dashboard.generation} />
+</div>
+
+<div class="pyramid">
+  <PyramideChart data={dashboard.pyramide} />
 </div>
 
 <style>
   .app {
-    width: 100vw;
-    height: 50vh;
+    height: 30vh;
+  }
+
+  .pyramid {
+    height: 90vh;
   }
 </style>
