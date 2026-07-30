@@ -9,7 +9,7 @@ import { getRadarData } from "./RadarData";
 import { getHeatMapData } from "./HeatMapData";
 
 import type { StatsData } from "./StatsData";
-import type { GenderData } from "./GenderData";
+import type { PieData } from "./PieData";
 import type { GenerationData } from "./GenerationData";
 import type { PyramideData } from "./PyramideData";
 import type { RadarData } from "./RadarData";
@@ -17,7 +17,7 @@ import type { RadarData } from "./RadarData";
 export interface DashboardData {
   datasetLoaded: boolean;
   stats: StatsData;
-  genders: GenderData[];
+  genders: PieData[];
   generation: GenerationData[];
   pyramide: PyramideData[];
   radar: RadarData[];
