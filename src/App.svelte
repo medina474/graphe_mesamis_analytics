@@ -5,6 +5,7 @@
   import StatsValues from './lib/chart/StatsValues.svelte'
   import GenderChart from './lib/chart/GenderChart.svelte'
   import EducationChart from './lib/chart/GenderChart.svelte'
+  import WealthChart from './lib/chart/WealthChart.svelte'
   import GenerationChart from './lib/chart/GenerationChart.svelte'
   import PyramideChart from './lib/chart/PyramideChart.svelte'
   import HeatMapChart from './lib/chart/HeatMapChart.svelte'
@@ -72,6 +73,10 @@
 
 <div class="app">
   <EducationChart data={dashboard.education} />
+</div>
+
+<div class="app">
+  <WealthChart data={dashboard.wealth} />
 </div>
 
 <style>

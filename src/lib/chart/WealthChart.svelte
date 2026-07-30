@@ -27,7 +27,6 @@ let options = $derived({
         data,
         label: {
           show: true,
-          color: '#fff',
           position: "inside",
           formatter: (d) => `${d.percent.toFixed(1)}%`
         },
