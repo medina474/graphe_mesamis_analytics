@@ -4,6 +4,7 @@
 
   import StatsValues from './lib/chart/StatsValues.svelte'
   import GenderChart from './lib/chart/GenderChart.svelte'
+  import EducationChart from './lib/chart/GenderChart.svelte'
   import GenerationChart from './lib/chart/GenerationChart.svelte'
   import PyramideChart from './lib/chart/PyramideChart.svelte'
   import HeatMapChart from './lib/chart/HeatMapChart.svelte'
@@ -27,7 +28,8 @@
     generation: [],
     pyramide: [],
     radar: [],
-    heatmapp: []
+    heatmapp: [],
+    education: [],
   });
 
   async function chargerFichier(event: Event) {
@@ -66,6 +68,10 @@
 
 <div class="app">
   <HeatMapChart data={dashboard.heatmapp} />
+</div>
+
+<div class="app">
+  <EducationChart data={dashboard.education} />
 </div>
 
 <style>
