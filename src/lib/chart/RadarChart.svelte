@@ -1,5 +1,6 @@
 <script lang="ts">
   import { init, use } from "echarts/core";
+  import type { EChartsOption } from "echarts";
   import type { RadarData } from "../data/RadarData";
 
   import { Chart } from "svelte-echarts";
@@ -10,7 +11,7 @@ use([LegendComponent, TitleComponent, GridComponent, RadarChart]);
 
   let { data }: { data: RadarData[] } = $props();
 
-  let options =$derived({
+  let options =$derived<EChartsOption>({
   color: ['#67F9D8', '#FFE434', '#56A3F1', '#FF917C'],
   title: {
     text: 'Customized Radar Chart'

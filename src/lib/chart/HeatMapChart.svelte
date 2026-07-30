@@ -1,5 +1,6 @@
 <script lang="ts">
 import { init, use } from "echarts/core";
+import type { EChartsOption } from "echarts";
 import { Chart } from "svelte-echarts";
 import { HeatmapChart } from "echarts/charts";
   import type { HeatMapData } from "../data/HeatMapData";
@@ -9,7 +10,7 @@ use([LegendComponent, TitleComponent, GridComponent, VisualMapComponent, Heatmap
 
 let { data }: { data: HeatMapData } = $props();
 
-let options = $derived({
+let options = $derived<EChartsOption>({
   xAxis: {
     type: "category",
     data: data.ages

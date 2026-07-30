@@ -1,6 +1,7 @@
 <script lang="ts">
 import { init, use } from "echarts/core";
-import type { GenerationData } from "../data/GenerationData";
+import type { EChartsOption } from "echarts";
+import type { PieData } from "../data/PieData";
 
 import { Chart } from "svelte-echarts";
 import { PieChart } from "echarts/charts";
@@ -8,9 +9,9 @@ import { PieChart } from "echarts/charts";
 import { LegendComponent, TitleComponent } from 'echarts/components';
 use([LegendComponent, TitleComponent, PieChart]);
 
-let { data }: { data: GenerationData[] } = $props();
+let { data }: { data: PieData[] } = $props();
 
-let options = $derived({
+let options = $derived<EChartsOption>({
     title: {
       text: "Génération",
     },

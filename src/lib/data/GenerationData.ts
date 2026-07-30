@@ -1,14 +1,12 @@
 import type { AsyncDuckDBConnection } from "@duckdb/duckdb-wasm";
 
-export interface GenerationData {
-  name: string;
-  value: number;
-}
+import type { PieData } from "./PieData";
+import { getPieData } from "./PieData";
 
 export async function getGenerationData(
   db: AsyncDuckDBConnection
-): Promise<GenerationData[]> {
-  const result = await db.query(`
+): Promise<PieData[]> {
+  return getPieData(db, `
     SELECT
       CASE
         WHEN age < 30 THEN 'Jeunes'
@@ -25,9 +23,4 @@ export async function getGenerationData(
         WHEN 'Séniors' THEN 3
       END;
   `);
-
-  return result.toArray().map(row => ({
-    name: String(row.name),
-    value: Number(row.value)
-  }));
 }

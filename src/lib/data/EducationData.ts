@@ -8,6 +8,7 @@ export async function getEducationData(
 ): Promise<PieData[]> {
   return getPieData(db, `
     SELECT education AS name, COUNT(*) AS value
-    FROM individus GROUP BY education;
+    FROM individus
+    GROUP BY education;
   `);
 }

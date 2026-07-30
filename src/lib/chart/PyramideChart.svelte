@@ -1,5 +1,6 @@
 <script lang="ts">
 import { init, use } from "echarts/core";
+import type { EChartsOption } from "echarts";
 import type { PyramideData } from "../data/PyramideData";
 
 import { Chart } from "svelte-echarts";
@@ -10,7 +11,7 @@ use([LegendComponent, TitleComponent, GridComponent, BarChart]);
 
 let { data }: { data: PyramideData[] } = $props();
 
-let options = $derived({
+let options = $derived<EChartsOption>({
     grid: {
       left: "5%",
       right: "5%",
