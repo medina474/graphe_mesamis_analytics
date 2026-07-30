@@ -32,7 +32,7 @@ export async function getRadarData(
       END;
   `);
 
-  const data = result.toArray().map(row => ({
+  return result.toArray().map(row => ({
     name: row.tranche,
     value:[
       Number(row.etudes),
@@ -42,7 +42,4 @@ export async function getRadarData(
       Number(row.lecture)
     ]
   }));
-
-  console.log(data);
-  return data;
 }

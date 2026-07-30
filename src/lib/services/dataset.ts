@@ -6,6 +6,7 @@ import { getGenderData } from "../queries/GenderData";
 import { getGenerationData } from "../queries/GenerationData";
 import { getPyramideData } from "../queries/PyramideData";
 import { getRadarData } from "../queries/RadarData";
+import { getHeatMapData } from "../queries/HeatMapData";
 
 import type { StatsData } from "../queries/StatsData";
 import type { GenderData } from "../queries/GenderData";
@@ -20,6 +21,7 @@ export interface DashboardData {
   generation: GenerationData[];
   pyramide: PyramideData[];
   radar: RadarData[];
+  heatmapp: number[][];
 }
 
 export async function loadDataset(file: File): Promise<DashboardData> {
@@ -31,6 +33,7 @@ export async function loadDataset(file: File): Promise<DashboardData> {
     genders: await getGenderData(connection),
     generation: await getGenerationData(connection),
     pyramide: await getPyramideData(connection),
-    radar:  await getRadarData(connection)
+    radar:  await getRadarData(connection),
+    heatmapp: await getHeatMapData(connection),
   };
 }

@@ -6,7 +6,7 @@
   import GenderChart from './lib/GenderChart.svelte'
   import GenerationChart from './lib/GenerationChart.svelte'
   import PyramideChart from './lib/PyramideChart.svelte'
-  import HeatMap from './lib/HeatMap.svelte'
+  import HeatMapChart from './lib/HeatMapChart.svelte'
   import RadarChart from './lib/RadarChart.svelte'
 
   import { use } from "echarts/core";
@@ -26,7 +26,8 @@
     },
     generation: [],
     pyramide: [],
-    radar: []
+    radar: [],
+    heatmapp: []
   });
 
   async function chargerFichier(event: Event) {
@@ -61,6 +62,10 @@
 
 <div class="pyramid">
   <RadarChart data={dashboard.radar} />
+</div>
+
+<div class="app">
+  <HeatMapChart data={dashboard.heatmapp} />
 </div>
 
 <style>
