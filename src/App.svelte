@@ -6,6 +6,8 @@
   import GenderChart from './lib/GenderChart.svelte'
   import GenerationChart from './lib/GenerationChart.svelte'
   import PyramideChart from './lib/PyramideChart.svelte'
+  import HeatMap from './lib/HeatMap.svelte'
+  import RadarChart from './lib/RadarChart.svelte'
 
   import { use } from "echarts/core";
   import { CanvasRenderer } from "echarts/renderers";
@@ -23,7 +25,8 @@
       maximum: 0
     },
     generation: [],
-    pyramide: []
+    pyramide: [],
+    radar: []
   });
 
   async function chargerFichier(event: Event) {
@@ -54,6 +57,10 @@
 
 <div class="pyramid">
   <PyramideChart data={dashboard.pyramide} />
+</div>
+
+<div class="pyramid">
+  <RadarChart data={dashboard.radar} />
 </div>
 
 <style>
