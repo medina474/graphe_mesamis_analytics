@@ -13,7 +13,7 @@ let { data }: { data: PieData[] } = $props();
 
 let options = $derived<EChartsOption>({
     title: {
-      text: "Genres",
+      text: "Revenus",
     },
     color: ["#4A90E2", "#FF69B4"],
     legend: {
@@ -29,7 +29,7 @@ let options = $derived<EChartsOption>({
         label: {
           show: true,
           position: "inside",
-          formatter: (d) => `${d.percent.toFixed(1)}%`
+          formatter: (d) => `${d.value}`
         },
         itemStyle: {
           borderColor: '#fff',

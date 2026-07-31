@@ -1,6 +1,7 @@
 <script lang="ts">
   import { loadDataset } from "./lib/data/DashboardData";
   import type { DashboardData } from "./lib/data/DashboardData";
+  import { createEmptyDashboard } from "./lib/data/DashboardState.svelte";
 
   import StatsValues from './lib/chart/StatsValues.svelte'
   import GenderChart from './lib/chart/GenderChart.svelte'
@@ -15,24 +16,7 @@
   import { CanvasRenderer } from "echarts/renderers";
   use([CanvasRenderer]);
 
-  let dashboard = $state<DashboardData>({
-    datasetLoaded: false,
-    genders: [],
-    stats: {
-      total: 0,
-      moyenne: 0,
-      stdev: 0,
-      mediane: 0,
-      minimum: 0,
-      maximum: 0
-    },
-    generation: [],
-    pyramide: [],
-    radar: [],
-    heatmapp: {ages:[], values:[]},
-    education: [],
-    wealth: [],
-  });
+  let dashboard = $state<DashboardData>(createEmptyDashboard());
 
   async function chargerFichier(event: Event) {
     const input = event.currentTarget as HTMLInputElement;
