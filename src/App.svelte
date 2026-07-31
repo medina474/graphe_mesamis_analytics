@@ -53,7 +53,11 @@
 </div>
 
 <div class="app">
-  <HeatMapChart data={dashboard.heatmapp} />
+  <HeatMapChart data={dashboard.heatmappF} />
+</div>
+
+<div class="app">
+  <HeatMapChart data={dashboard.heatmappH} />
 </div>
 
 <div class="app">

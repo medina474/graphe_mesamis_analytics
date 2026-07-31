@@ -6,17 +6,22 @@ export interface HeatMapData {
 }
 
 export async function getHeatMapData(
-  db: AsyncDuckDBConnection
-): Promise<number[][]> {
-  const result = await db.query(`
+  db: AsyncDuckDBConnection,
+  gender: string
+): Promise<HeatMapData> {
+  const stmt = await db.prepare(`
     SELECT
-    age,
-    AVG(sport)    AS sport,
-    AVG(reading)  AS lecture,
-    AVG(music)    AS musique
+      age,
+      AVG(sport)   AS sport,
+      AVG(reading) AS lecture,
+      AVG(music)   AS musique
     FROM individus
-    GROUP BY age;
+    WHERE gender = ?
+    GROUP BY age
+    ORDER BY age
   `);
+
+  const result = await stmt.query(gender);
 
   const ages: string[] = [];
   const values: number[][] = [];

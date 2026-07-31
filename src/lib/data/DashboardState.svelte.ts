@@ -19,7 +19,7 @@ export function createEmptyDashboard(): DashboardData {
     pyramide: [],
     radar: [],
 
-    heatmappM: {
+    heatmappH: {
       ages: [],
       values: []
     },
