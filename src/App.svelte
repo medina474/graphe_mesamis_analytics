@@ -11,7 +11,7 @@
   import PyramideChart from './lib/chart/PyramideChart.svelte'
   import HeatMapChart from './lib/chart/HeatMapChart.svelte'
   import RadarChart from './lib/chart/RadarChart.svelte'
-
+import GraphView from "./GraphView.svelte";
   import { use } from "echarts/core";
   import { CanvasRenderer } from "echarts/renderers";
   use([CanvasRenderer]);
@@ -77,3 +77,4 @@
     height: 90vh;
   }
 </style>
+ <GraphView />
