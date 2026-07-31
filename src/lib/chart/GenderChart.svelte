@@ -2,7 +2,6 @@
 import { init, use } from "echarts/core";
 import type { EChartsOption } from "echarts";
 import type { PieData } from "../data/PieData";
-
 import { Chart } from "svelte-echarts";
 import { PieChart } from "echarts/charts";
 

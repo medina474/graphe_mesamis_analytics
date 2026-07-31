@@ -4,7 +4,7 @@
 
   import StatsValues from './lib/chart/StatsValues.svelte'
   import GenderChart from './lib/chart/GenderChart.svelte'
-  import EducationChart from './lib/chart/GenderChart.svelte'
+  import EducationChart from './lib/chart/EducationChart.svelte'
   import WealthChart from './lib/chart/WealthChart.svelte'
   import GenerationChart from './lib/chart/GenerationChart.svelte'
   import PyramideChart from './lib/chart/PyramideChart.svelte'
@@ -29,8 +29,9 @@
     generation: [],
     pyramide: [],
     radar: [],
-    heatmapp: [],
+    heatmapp: {ages:[], values:[]},
     education: [],
+    wealth: [],
   });
 
   async function chargerFichier(event: Event) {
