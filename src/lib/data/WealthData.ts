@@ -8,6 +8,8 @@ export async function getWealthData(
 ): Promise<PieData[]> {
   return getPieData(db, `
     SELECT wealth AS name, COUNT(*) AS value
-    FROM individus GROUP BY wealth;
+    FROM individus
+    WHERE age >= 18
+    GROUP BY wealth;
   `);
 }

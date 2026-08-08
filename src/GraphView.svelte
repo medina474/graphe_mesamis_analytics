@@ -96,7 +96,7 @@
         <option value="family">Famille</option>
         <option value="club">Clubs</option>
         <option value="work">Travail</option>
-        <option value="social">Amitiés</option>
+        <option value="friends">Amitiés</option>
         <option value="exchange">Échanges</option>
     </select>
 </div>

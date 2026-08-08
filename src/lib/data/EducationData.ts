@@ -9,6 +9,7 @@ export async function getEducationData(
   return getPieData(db, `
     SELECT education AS name, COUNT(*) AS value
     FROM individus
+    WHERE age >= 18
     GROUP BY education;
   `);
 }

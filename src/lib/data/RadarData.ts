@@ -23,6 +23,7 @@ export async function getRadarData(
     AVG(music)  AS musique
 
     FROM individus
+    WHERE age >= 18
     GROUP BY tranche
     ORDER BY
       CASE tranche

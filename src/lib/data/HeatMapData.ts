@@ -12,11 +12,11 @@ export async function getHeatMapData(
   const stmt = await db.prepare(`
     SELECT
       age,
-      AVG(sport)   AS sport,
-      AVG(reading) AS lecture,
-      AVG(music)   AS musique
+      AVG(sport) * 100  AS sport,
+      AVG(reading) * 100 AS lecture,
+      AVG(music)  * 100 AS musique
     FROM individus
-    WHERE gender = ?
+    WHERE gender = ? AND age >= 18
     GROUP BY age
     ORDER BY age
   `);

@@ -1,5 +1,5 @@
 import { connection } from "../duckdb/duckdb";
-import { importCsv } from "../duckdb/import";
+import { importCsv, importGraphData } from "../duckdb/import";
 
 import { getStats } from "./StatsData";
 import { getGenderData } from "./GenderData";
@@ -31,6 +31,23 @@ export interface DashboardData {
 
 export async function loadDataset(file: File): Promise<DashboardData> {
   await importCsv(file);
+
+  return {
+    datasetLoaded: true,
+    stats: await getStats(connection),
+    genders: await getGenderData(connection),
+    generation: await getGenerationData(connection),
+    pyramide: await getPyramideData(connection),
+    radar:  await getRadarData(connection),
+    heatmappH: await getHeatMapData(connection, 'M'),
+    heatmappF: await getHeatMapData(connection, 'F'),
+    education: await getEducationData(connection),
+    wealth: await getWealthData(connection),
+  };
+}
+
+export async function loadDatasetFromGraph(graphData: any): Promise<DashboardData> {
+  await importGraphData(graphData);
 
   return {
     datasetLoaded: true,

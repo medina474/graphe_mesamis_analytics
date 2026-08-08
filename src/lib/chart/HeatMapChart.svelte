@@ -23,7 +23,7 @@ let options = $derived<EChartsOption>({
 
   visualMap: {
     min: 0,
-    max: 1,
+    max: 100,
     calculable: true,
 
     orient: "horizontal",
