@@ -15,15 +15,9 @@ let options = $derived<EChartsOption>({
     grid: {
       left: "5%",
       right: "5%",
-      bottom: "15%",
+      bottom: "10%",
       containLabel: true
     },
-
-    title: {
-      text: "Pyramide des âges",
-    },
-
-    color: ["#81C784", "#FFD54F", "#E57373"],
 
     legend: {
       orient: "horizontal",
@@ -35,9 +29,11 @@ let options = $derived<EChartsOption>({
       type: "category",
       data: data.map(x => x.age)
     },
+
     xAxis: {
       type: "value"
     },
+    
     series: [
       {
         name: "Hommes",

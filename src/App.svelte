@@ -22,6 +22,8 @@
   type ViewId = "stats" | "graph";
   type SectionId =
     | "demographie"
+    | "pyramide"
+    | "graphe"
     | "clubs"
     | "emploi"
     | "logement"
@@ -40,6 +42,8 @@
   // puis un bloc {#if activeSection === "..."} dans le template.
   const sections: Section[] = [
     { id: "demographie", label: "Démographie", ready: true },
+    { id: "pyramide", label: "Pyramide des âges", ready: true },
+    { id: "graphe", label: "Graphe", ready: true },
     { id: "clubs", label: "Clubs sportifs", ready: false },
     { id: "emploi", label: "Emploi", ready: false },
     { id: "logement", label: "Taux d'occupation logements", ready: false },
@@ -47,7 +51,6 @@
     { id: "prets", label: "Prêts", ready: false },
   ];
 
-  let activeView = $state<ViewId>("stats");
   let activeSection = $state<SectionId>("demographie");
 
   onMount(async () => {
@@ -62,27 +65,9 @@
 </script>
 
 <div class="layout">
-  <header class="topbar">
-    <h1 class="title">Tableau de bord</h1>
-    <nav class="view-switch">
-      <button
-        class:active={activeView === "stats"}
-        onclick={() => (activeView = "stats")}
-      >
-        Statistiques
-      </button>
-      <button
-        class:active={activeView === "graph"}
-        onclick={() => (activeView = "graph")}
-      >
-        Graphe relationnel
-      </button>
-    </nav>
-  </header>
-
-  {#if activeView === "stats"}
     <div class="stats-layout">
       <aside class="sidebar">
+      <div>Mes Amis</div>
         {#each sections as section (section.id)}
           <button
             class:active={activeSection === section.id}
@@ -103,13 +88,20 @@
           <div class="grid">
             <div class="card"><GenderChart data={dashboard.genders} /></div>
             <div class="card"><GenerationChart data={dashboard.generation} /></div>
-            <div class="card card--tall"><PyramideChart data={dashboard.pyramide} /></div>
             <div class="card card--tall"><RadarChart data={dashboard.radar} /></div>
-            <div class="card"><HeatMapChart data={dashboard.heatmappF} /></div>
-            <div class="card"><HeatMapChart data={dashboard.heatmappH} /></div>
+            <div class="card card--wide"><HeatMapChart data={dashboard.heatmappF} title="Femmes" /></div>
+            <div class="card card--wide"><HeatMapChart data={dashboard.heatmappH} title="Hommes" /></div>
             <div class="card"><EducationChart data={dashboard.education} /></div>
             <div class="card"><WealthChart data={dashboard.wealth} /></div>
           </div>
+        {:else if activeSection === "pyramide"}
+        <div class="full">
+          <div class="card card--full card--wide"><PyramideChart data={dashboard.pyramide} /></div>
+        </div>
+        {:else if activeSection === "graphe"}
+        <div class="full">
+           <GraphView />
+        </div>
         {:else}
           <p class="placeholder">
             Cette section n'est pas encore alimentée. Ajoutez les données
@@ -121,9 +113,6 @@
         {/if}
       </main>
     </div>
-  {:else}
-    <GraphView />
-  {/if}
 </div>
 
 <style>
@@ -233,15 +222,27 @@
     margin-top: 1rem;
   }
 
+  .full {
+    height: 100%;
+  }
+
   .card {
     height: 30vh;
     border: 1px solid #e5e7eb;
-    border-radius: 0.75rem;
+    border-radius: 0.5rem;
     padding: 0.5rem;
   }
 
   .card--tall {
     height: 60vh;
+  }
+
+  .card--full {
+    width: 100%;
+    height: 100%;
+  }
+
+  .card--wide {
     grid-column: span 2;
   }
 

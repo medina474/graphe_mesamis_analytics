@@ -13,7 +13,7 @@ let { data }: { data: PieData[] } = $props();
 
 let options = $derived<EChartsOption>({
     title: {
-      text: "Génération",
+      text: "Générations",
     },
     color: ["#81C784", "#FFD54F", "#E57373"],
     legend: {

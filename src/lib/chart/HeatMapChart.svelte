@@ -3,14 +3,18 @@ import { init, use } from "echarts/core";
 import type { EChartsOption } from "echarts";
 import { Chart } from "svelte-echarts";
 import { HeatmapChart } from "echarts/charts";
-  import type { HeatMapData } from "../data/HeatMapData";
+import type { HeatMapData } from "../data/HeatMapData";
 
 import { LegendComponent, TitleComponent, GridComponent, VisualMapComponent } from 'echarts/components';
 use([LegendComponent, TitleComponent, GridComponent, VisualMapComponent, HeatmapChart]);
 
-let { data }: { data: HeatMapData } = $props();
+let { data, title }: { data: HeatMapData, title: string } = $props();
 
 let options = $derived<EChartsOption>({
+  title: {
+      text: title,
+    },
+
   xAxis: {
     type: "category",
     data: data.ages

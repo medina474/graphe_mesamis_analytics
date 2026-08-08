@@ -30,6 +30,13 @@
 
     const nodes = data.nodes.filter((node: any) => nodeIds.has(node.key));
 
+    data.nodes
+      .filter((node: any) => node.attributes.category === "Person" || node.attributes.category === "Address")
+      .map((node: any) => {
+        node.attributes.x = node.attributes.x_orig;
+        node.attributes.y = node.attributes.y_orig;
+      });
+
     graph.import({
       ...data,
       nodes,
@@ -44,19 +51,20 @@
 
     const graph = createGraph();
 
-
-        forceAtlas2.assign(graph, {
-            iterations: 100,
-            settings: {
-                gravity: 0.5,
-                scalingRatio: 5,
-                barnesHutOptimize: true,
-                strongGravityMode: false
-            }
-        });
+    if (relationFilter !== "LIVE") {
+      forceAtlas2.assign(graph, {
+        iterations: 100,
+        settings: {
+          gravity: 0.5,
+          scalingRatio: 5,
+          barnesHutOptimize: true,
+          strongGravityMode: false,
+        },
+      });
+    }
 
     renderer = new Sigma(graph, container, {
-        enableEdgeEvents: true,
+      enableEdgeEvents: true,
     });
 
     renderer.on("clickNode", ({ node }) => {
@@ -130,15 +138,19 @@
       <option value="member">Clubs</option>
       <option value="work">Travail</option>
       <option value="friends">Amitiés</option>
-      <option value="tag|WRITE|belongs-to|publication|parts-of|MANAGE|emprunte">Livres</option>
+      <option value="tag|WRITE|belongs-to|publication|parts-of|MANAGE|emprunte"
+        >Livres</option
+      >
       <option value="tag">Livres - tag</option>
       <option value="WRITE|tag">Livres - auteurs</option>
-      <option value="belongs-to|publication|tag|MANAGE">Livres - bibliothèques</option>
+      <option value="belongs-to|publication|tag|MANAGE"
+        >Livres - bibliothèques</option
+      >
       <option value="prete|publication">Livres - prêt</option>
       <option value="emprunte|publication">Livres - emprunt</option>
       <option value="publication">Livres - publication</option>
       <option value="parts-of|publication">Livres - Séries</option>
-      <option value="habite">Adresse</option>
+      <option value="LIVE">Adresse</option>
     </select>
   </div>
 </div>
@@ -154,7 +166,7 @@
   .graph-view {
     position: relative;
     width: 100%;
-    height: 100vh;
+    height: 100%;
   }
 
   .graph {
@@ -164,8 +176,8 @@
 
   .controls {
     position: absolute;
-    top: 1rem;
-    left: 1rem;
+    top: 0;
+    left: 0;
     z-index: 10;
   }
 </style>
