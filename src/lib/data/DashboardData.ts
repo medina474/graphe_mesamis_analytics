@@ -1,5 +1,5 @@
 import { connection } from "../duckdb/duckdb";
-import { importCsv, importGraphData } from "../duckdb/import";
+import { importGraphData, importBook } from "../duckdb/import";
 
 import { getStats } from "./StatsData";
 import { getGenderData } from "./GenderData";
@@ -30,7 +30,6 @@ export interface DashboardData {
 }
 
 export async function loadDataset(file: File): Promise<DashboardData> {
-  await importCsv(file);
 
   return {
     datasetLoaded: true,
@@ -48,6 +47,7 @@ export async function loadDataset(file: File): Promise<DashboardData> {
 
 export async function loadDatasetFromGraph(graphData: any): Promise<DashboardData> {
   await importGraphData(graphData);
+  await importBook(graphData);
 
   return {
     datasetLoaded: true,

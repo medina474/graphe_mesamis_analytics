@@ -13,9 +13,9 @@ let { data }: { data: PyramideData[] } = $props();
 
 let options = $derived<EChartsOption>({
     grid: {
-      left: "5%",
-      right: "5%",
-      bottom: "10%",
+      left: "0",
+      right: "0",
+      bottom: "25",
       containLabel: true
     },
 
@@ -31,14 +31,19 @@ let options = $derived<EChartsOption>({
     },
 
     xAxis: {
-      type: "value"
+      type: "value",
+      splitLine: {
+        lineStyle: {
+          type: "dashed"
+        }
+      }
     },
-    
+
     series: [
       {
         name: "Hommes",
         type: "bar",
-        stack: "hommes",
+        stack: "population",
         data: data.map(x => x.hommes),
         itemStyle: {
           color: "#2563eb"
@@ -47,7 +52,7 @@ let options = $derived<EChartsOption>({
       {
         name: "Écart hommes",
         type: "bar",
-        stack: "hommes",
+        stack: "population",
         data: data.map(x => x.hommesEcart),
         itemStyle: {
           color: "#93c5fd"
@@ -56,7 +61,7 @@ let options = $derived<EChartsOption>({
       {
         name: "Femmes",
         type: "bar",
-        stack: "femmes",
+        stack: "population",
         data: data.map(x => x.femmes),
         itemStyle: {
           color: "#db2777"
@@ -65,7 +70,7 @@ let options = $derived<EChartsOption>({
       {
         name: "Écart femmes",
         type: "bar",
-        stack: "femmes",
+        stack: "population",
         data: data.map(x => x.femmesEcart),
         itemStyle: {
           color: "#f9a8d4"

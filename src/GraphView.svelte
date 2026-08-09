@@ -3,10 +3,9 @@
   import { MultiDirectedGraph } from "graphology";
   import Sigma from "sigma";
   import forceAtlas2 from "graphology-layout-forceatlas2";
-  import { getAttributesItemsCount } from "sigma/rendering";
 
   let container: HTMLDivElement;
-  let relationFilter = $state("all");
+  let relationFilter = $state("NONE");
 
   let data: any;
   let renderer: Sigma | undefined;
@@ -30,19 +29,46 @@
 
     const nodes = data.nodes.filter((node: any) => nodeIds.has(node.key));
 
-    data.nodes
-      .filter((node: any) => node.attributes.category === "Person" || node.attributes.category === "Address")
-      .map((node: any) => {
-        node.attributes.x = node.attributes.x_orig;
-        node.attributes.y = node.attributes.y_orig;
-      });
-
     graph.import({
       ...data,
       nodes,
       edges,
     });
 
+    graph.forEachNode((node, attributes) => {
+      if (attributes.category !== "Person") {
+        return;
+      }
+
+      let count = 0;
+
+      if (relationFilter.includes("belongs-to")) {
+        count = attributes.reading * 6;
+      } else if (relationFilter.includes("work")) {
+        count = attributes.wealth * 2;
+      } else if (relationFilter.includes("friends")) {
+
+        graph.forEachEdge(node, (_edge, edgeAttributes) => {
+          if (edgeAttributes.relation === "friends") {
+            count++;
+          }
+        });
+      } else if (relationFilter.includes("child")) {
+
+        graph.forEachEdge(node, (_edge, edgeAttributes) => {
+          if (edgeAttributes.relation === "child") {
+            count++;
+          }
+        });
+      }
+      else {
+        count = 0
+      }
+
+      attributes.size = Math.log2(count + 1);
+      attributes.x = attributes.x_orig;
+      attributes.y = attributes.y_orig;
+    });
     return graph;
   }
 
@@ -131,10 +157,8 @@
 
   <div class="controls">
     <select bind:value={relationFilter}>
-      <option value="all">Toutes les relations</option>
+      <option value="NONE">Toutes les relations</option>
       <option value="marriage|child|father|mother">Famille</option>
-      <option value="marriage">Famille : mariages</option>
-      <option value="child">Famille : enfants</option>
       <option value="member">Clubs</option>
       <option value="work">Travail</option>
       <option value="friends">Amitiés</option>
@@ -148,8 +172,6 @@
       >
       <option value="prete|publication">Livres - prêt</option>
       <option value="emprunte|publication">Livres - emprunt</option>
-      <option value="publication">Livres - publication</option>
-      <option value="parts-of|publication">Livres - Séries</option>
       <option value="LIVE">Adresse</option>
     </select>
   </div>

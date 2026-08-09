@@ -15,12 +15,15 @@ let options = $derived<EChartsOption>({
     title: {
       text: "Générations",
     },
-    color: ["#81C784", "#FFD54F", "#E57373"],
+
+    color: ["#90CAF9", "#B39DDB", "#81C784", "#FFD54F", "#E57373"],
+
     legend: {
       orient: "horizontal",
       bottom: 0,
       left: "center"
     },
+
     series: [
       {
         type: "pie",

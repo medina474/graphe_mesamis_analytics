@@ -33,8 +33,8 @@
           { text: "Education", max: 1 },
           { text: "Richesse", max: 1 },
           { text: "Sport", max: 1 },
-          { text: "Lecture", max: 1 },
           { text: "Musique", max: 1 },
+          { text: "Lecture", max: 1 },
         ],
         radius: 120,
         axisName: {

@@ -12,6 +12,7 @@ export interface StatsData {
 export async function getStats(
   db: AsyncDuckDBConnection
 ): Promise<StatsData> {
+  
   const result = await db.query(`
     SELECT
       COUNT(*) AS total,

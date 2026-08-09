@@ -1,5 +1,4 @@
-import * as duckdb from "@duckdb/duckdb-wasm";
-import { db, connection } from "./duckdb";
+import { connection } from "./duckdb";
 
 function escapeSqlValue(value: unknown): string {
   if (value === undefined || value === null || value === "") {
@@ -12,24 +11,6 @@ function escapeSqlValue(value: unknown): string {
 
   const stringValue = String(value);
   return `'${stringValue.replace(/'/g, "''")}'`;
-}
-
-export async function importCsv(file: File) {
-  await db.registerFileHandle(
-    "individus.csv",
-    file,
-    duckdb.DuckDBDataProtocol.BROWSER_FILEREADER,
-    false
-  );
-
-  await connection.query(`
-    CREATE OR REPLACE TABLE individus AS
-    SELECT *
-    FROM read_csv_auto(
-      'individus.csv',
-      HEADER=true
-    );
-  `);
 }
 
 export async function importGraphData(graphData: any) {
@@ -71,5 +52,31 @@ export async function importGraphData(graphData: any) {
 
   if (values.length > 0) {
     await connection.query(`INSERT INTO individus VALUES ${values.join(",")} ;`);
+  }
+}
+
+export async function importBook(graphData: any) {
+  const nodes = Array.isArray(graphData?.nodes) ? graphData.nodes : [];
+
+  const values = nodes
+    .filter((node: any) => node?.attributes?.category === "book")
+    .map((node: any) => {
+      const attributes = node.attributes ?? {};
+
+      return `(
+        ${escapeSqlValue(node.key ?? null)},
+        ${escapeSqlValue(attributes.label ?? null)},
+      )`;
+    });
+
+  await connection.query(`
+    CREATE OR REPLACE TABLE books (
+      id VARCHAR,
+      title VARCHAR
+    );
+  `);
+
+  if (values.length > 0) {
+    await connection.query(`INSERT INTO books VALUES ${values.join(",")} ;`);
   }
 }

@@ -11,8 +11,8 @@ export async function getRadarData(
   const result = await db.query(`
     SELECT
     CASE
-        WHEN age < 30 THEN 'Jeunes'
-        WHEN age < 60 THEN 'Adultes'
+        WHEN age BETWEEN 18 AND 29 THEN 'Jeunes'
+        WHEN age BETWEEN 30 AND 59 < 60 THEN 'Adultes'
         ELSE 'Seniors'
     END AS tranche,
 
@@ -20,7 +20,7 @@ export async function getRadarData(
     AVG(wealth) / 3  AS richesse,
     AVG(sport)    AS sport,
     AVG(reading)  AS lecture,
-    AVG(music)  AS musique
+    AVG(music)    AS musique
 
     FROM individus
     WHERE age >= 18
