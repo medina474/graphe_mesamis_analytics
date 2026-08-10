@@ -36,40 +36,63 @@
     });
 
     graph.forEachNode((node, attributes) => {
-      if (attributes.category !== "Person") {
-        return;
+
+      if (typeof attributes.size === "undefined") {
+        attributes.size = 1;
+      }
+
+      if (attributes.category === "Person") {
+        attributes.x = attributes.x_orig;
+        attributes.y = attributes.y_orig;
+      } else if (typeof attributes.x === "undefined") {
+        attributes.x = Math.random() * 1000;
+        attributes.y = Math.random() * 1000;
       }
 
       let count = 0;
 
-      if (relationFilter.includes("belongs-to")) {
+      if (relationFilter.includes("MANAGE")) {
         count = attributes.reading * 6;
-      } else if (relationFilter.includes("work")) {
+      } else if (relationFilter.includes("WORK")) {
         count = attributes.wealth * 2;
+      } else if (relationFilter.includes("WRITE")) {
+        count = countEdge(graph, node, "WRITE")
+      }  else if (relationFilter.includes("PARTS-OF")) {
+        count = countEdge(graph, node, "PARTS-OF")
+      }  else if (relationFilter.includes("CLASSIFY-AS")) {
+        count = countEdge(graph, node, "CLASSIFY-AS")
+      } else if (relationFilter.includes("CONTAIN")) {
+        count = countEdge(graph, node, "CONTAIN")
       } else if (relationFilter.includes("friends")) {
-
         graph.forEachEdge(node, (_edge, edgeAttributes) => {
           if (edgeAttributes.relation === "friends") {
             count++;
           }
         });
-      } else if (relationFilter.includes("child")) {
-
+      } else if (relationFilter.includes("CHILD")) {
         graph.forEachEdge(node, (_edge, edgeAttributes) => {
-          if (edgeAttributes.relation === "child") {
+          if (edgeAttributes.relation === "CHILD") {
             count++;
           }
         });
-      }
-      else {
-        count = 0
+      } else {
+        count = 0;
       }
 
-      attributes.size = Math.log2(count + 1);
-      attributes.x = attributes.x_orig;
-      attributes.y = attributes.y_orig;
+      attributes.size = Math.log2(count + 2);
     });
+
     return graph;
+  }
+
+  function countEdge(graph: MultiDirectedGraph, node: any, relation: string): number {
+    let count = 0;
+    graph.forEachEdge(node, (_edge, edgeAttributes) => {
+      if (edgeAttributes.relation === relation) {
+        count++;
+      }
+    });
+    return count;
   }
 
   function render() {
@@ -162,16 +185,13 @@
       <option value="member">Clubs</option>
       <option value="work">Travail</option>
       <option value="friends">Amitiés</option>
-      <option value="tag|WRITE|belongs-to|publication|parts-of|MANAGE|emprunte"
-        >Livres</option
-      >
-      <option value="tag">Livres - tag</option>
-      <option value="WRITE|tag">Livres - auteurs</option>
-      <option value="belongs-to|publication|tag|MANAGE"
-        >Livres - bibliothèques</option
-      >
-      <option value="prete|publication">Livres - prêt</option>
-      <option value="emprunte|publication">Livres - emprunt</option>
+      <option value="WRITE">Livres - auteurs</option>
+      <option value="CLASSIFY-AS">- genres</option>
+      <option value="PARTS-OF">- series</option>
+      <option value="CONTAIN|COPY-OF">Livres - bibliothèques</option>
+      <option value="BORROW">- emprunt</option>
+      <option value="LEND|FOLLOW">- Prêt</option>
+      <option value="FOLLOW|RETURN-TO">Chaine de retour</option>
       <option value="LIVE">Adresse</option>
     </select>
   </div>

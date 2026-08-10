@@ -1,5 +1,5 @@
 import { connection } from "../duckdb/duckdb";
-import { importGraphData, importBook } from "../duckdb/import";
+import { importGraphData, importBook, importPret } from "../duckdb/import";
 
 import { getStats } from "./StatsData";
 import { getGenderData } from "./GenderData";
@@ -29,25 +29,10 @@ export interface DashboardData {
   wealth: PieData[];
 }
 
-export async function loadDataset(file: File): Promise<DashboardData> {
-
-  return {
-    datasetLoaded: true,
-    stats: await getStats(connection),
-    genders: await getGenderData(connection),
-    generation: await getGenerationData(connection),
-    pyramide: await getPyramideData(connection),
-    radar:  await getRadarData(connection),
-    heatmappH: await getHeatMapData(connection, 'M'),
-    heatmappF: await getHeatMapData(connection, 'F'),
-    education: await getEducationData(connection),
-    wealth: await getWealthData(connection),
-  };
-}
-
 export async function loadDatasetFromGraph(graphData: any): Promise<DashboardData> {
   await importGraphData(graphData);
   await importBook(graphData);
+  await importPret(graphData)
 
   return {
     datasetLoaded: true,

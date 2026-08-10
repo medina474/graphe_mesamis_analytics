@@ -19,7 +19,6 @@
 
   let dashboard = $state<DashboardData>(createEmptyDashboard());
 
-  type ViewId = "stats" | "graph";
   type SectionId =
     | "demographie"
     | "pyramide"
@@ -47,7 +46,7 @@
     { id: "clubs", label: "Clubs sportifs", ready: false },
     { id: "emploi", label: "Emploi", ready: false },
     { id: "logement", label: "Taux d'occupation logements", ready: false },
-    { id: "lecture", label: "Habitudes de lecture", ready: false },
+    { id: "lecture", label: "Lecture", ready: true },
     { id: "prets", label: "Prêts", ready: false },
   ];
 
@@ -98,6 +97,8 @@
         <div class="full">
           <div class="card card--full card--wide"><PyramideChart data={dashboard.pyramide} /></div>
         </div>
+        {:else if activeSection === "lecture"}
+          <StatsValues data={dashboard.stats} />
         {:else if activeSection === "graphe"}
         <div class="full">
            <GraphView />

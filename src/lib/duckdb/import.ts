@@ -80,3 +80,35 @@ export async function importBook(graphData: any) {
     await connection.query(`INSERT INTO books VALUES ${values.join(",")} ;`);
   }
 }
+
+export async function importPret(graphData: any) {
+  const edges = Array.isArray(graphData?.edges) ? graphData.edges : [];
+
+  const values = edges
+    .filter((edge: any) => edge?.attributes?.relation === "prete")
+    .map((edge: any) => {
+      const attributes = edge.attributes ?? {};
+
+      return `(
+        ${escapeSqlValue(edge.key ?? null)},
+        ${escapeSqlValue(edge.source ?? null)},
+        ${escapeSqlValue(edge.target ?? null)},
+        ${escapeSqlValue(attributes.dateDebut ?? null)},
+        ${escapeSqlValue(attributes.dateFin ?? null)},
+      )`;
+    });
+
+  await connection.query(`
+    CREATE OR REPLACE TABLE prete (
+      id VARCHAR,
+      exemplaire VARCHAR,
+      personne VARCHAR,
+      date_debut VARCHAR,
+      date_fin VARCHAR,
+      );
+  `);
+
+  if (values.length > 0) {
+    await connection.query(`INSERT INTO prete VALUES ${values.join(",")} ;`);
+  }
+}
