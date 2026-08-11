@@ -102,7 +102,7 @@
 
     if (relationFilter !== "LIVE") {
       forceAtlas2.assign(graph, {
-        iterations: 100,
+        iterations: 200,
         settings: {
           gravity: 0.5,
           scalingRatio: 5,
@@ -192,6 +192,7 @@
       <option value="BORROW">- emprunt</option>
       <option value="LEND|FOLLOW">- Prêt</option>
       <option value="FOLLOW|RETURN-TO">Chaine de retour</option>
+      <option value="REWARD|NOMINATE|BELONG|WRITE">Récompenses</option>
       <option value="LIVE">Adresse</option>
     </select>
   </div>
