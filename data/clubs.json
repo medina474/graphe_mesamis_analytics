@@ -1,0 +1,172 @@
+[
+    {
+        "id": "club-rugby",
+        "name": "Rugby Club",
+        "tags": ["sport", "collectif"],
+        "exclusive": ["sport"],
+        "capacity": 40,
+        "gender": {
+            "male": 1,
+            "female": 0
+        },
+        "criteria": {
+            "sport": 1
+        }
+    },
+    {
+        "id": "club-tennis",
+        "name": "Tennis Club",
+        "tags": ["sport", "individuel"],
+        "exclusive": ["sport"],
+        "capacity": 30,
+        "criteria": {
+            "sport": 1
+        }
+    },
+    {
+        "id": "club-theatre",
+        "name": "Troupe de Théâtre",
+        "tags": ["culture"],
+        "capacity": 20,
+        "criteria": {
+            "education": 1
+        }
+    },
+    {
+        "id": "club-handball",
+        "name": "Club Handball",
+        "tags": ["sport", "collectif"],
+        "exclusive": ["sport"],
+        "capacity": 30,
+        "criteria": {
+            "sport": 1
+        }
+    },
+    {
+        "id": "club-rando",
+        "name": "Randonnée",
+        "tags": ["sport", "nature"],
+        "capacity": 25
+    },
+    {
+        "id": "club-cyclo",
+        "name": "Union cycliste",
+        "tags": ["sport", "individuel"],
+        "exclusive": ["sport"],
+        "capacity": 30,
+        "gender": {
+            "male": 0.8,
+            "female": 0.2
+        },
+        "criteria": {
+            "sport": 1
+        }
+    },
+    {
+        "id": "club-danse",
+        "name": "Danse",
+        "tags": ["sport"],
+        "capacity": 30,
+        "genre": "F",
+        "gender": {
+            "male": 0.20,
+            "female": 0.80
+        },
+        "criteria": {
+            "sport": 0.8
+        }
+    },
+    {
+        "id": "club-golf",
+        "name": "Golf Club",
+        "tags": ["sport", "individuel"],
+        "capacity": 20,
+        "criteria": {
+            "sport": 0.8,
+            "wealth": 1
+        }
+    },
+    {
+        "id": "club-jazz",
+        "name": "Jazz Attitude",
+        "tags": ["culture", "musique"],
+        "capacity": 15,
+        "criteria": {
+            "music": 0.8
+        }
+    },
+    {
+        "id": "club-cinema",
+        "name": "Art et Essai",
+        "tags": ["culture", "cinéma"],
+        "capacity": 15,
+        "criteria": {
+            "education": 1
+        }
+    },
+    {
+        "id": "club-volley",
+        "name": "Club Volley",
+        "tags": ["sport", "collectif"],
+        "exclusive": ["sport"],
+        "capacity": 30,
+        "criteria": {
+            "sport": 1
+        }
+    },
+    {
+        "id": "club-basketball",
+        "name": "Club Basket",
+        "tags": ["sport", "collectif"],
+        "exclusive": ["sport"],
+        "capacity": 30,
+        "gender": {
+            "male": 0.75,
+            "female": 0.25
+        },
+        "criteria": {
+            "sport": 1
+        }
+    },
+    {
+        "id": "club-jeux",
+        "name": "Trolls du Donjon",
+        "tags": ["jeux"],
+        "capacity": 15,
+        "criteria": {
+            "education": 1
+        }
+    },
+    {
+        "id": "club-athletisme",
+        "name": "Athlétisme",
+        "tags": ["sport"],
+        "exclusive": ["sport"],
+        "capacity": 30,
+        "criteria": {
+            "sport": 1
+        }
+    },
+    {
+        "id": "club-confrerie",
+        "name": "Confrérie des Filbustiers",
+        "tags": ["culture"],
+        "capacity": 30
+    },
+    {
+        "id": "club-judo",
+        "name": "Dojo du couchant",
+        "tags": ["sport"],
+        "exclusive": ["sport"],
+        "capacity": 30,
+        "criteria": {
+            "sport": 1
+        }
+    },
+    {
+        "id": "club-petanque",
+        "name": "Petanque",
+        "tags": ["sport"],
+        "capacity": 30
+    }
+]

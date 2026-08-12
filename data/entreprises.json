@@ -1,0 +1,478 @@
+[
+    { 
+        "id": "ent-conserverie",
+        "name": "Conserverie",
+        "nace": "10.20",
+        "postes": [
+            {
+                "effectif": 1,
+                "richesse": 3,
+                "ageMinimum": 55,
+                "name": "patron"
+            },
+            {
+                "effectif": 2,
+                "richesse": 2,
+                "ageMinimum": 30,
+                "name": "cadre"
+            },
+            {
+                "effectif": 30,
+                "richesse": { "min": 0, "max": 1 },
+                "name": "ouvrier"
+            }
+        ]
+    }, 
+    { 
+        "id": "ent-boulangerie",
+        "name": "Au Pain Levant",
+        "nace": "47.24",
+        "postes": [
+            {
+                "effectif": 1,
+                "richesse": { "min": 2, "max": 3 },
+                "ageMinimum": 25,
+                "name": "patron"
+            },
+            {
+                "effectif": 1,
+                "richesse": 0,
+                "education": 0,
+                "ageMaximum": 20,
+                "name": "apprenti"
+            },
+            {
+              "effectif": 3,
+              "richesse": { "min": 0, "max": 1 },
+              "name": "vendeur"
+            }
+        ]
+    },
+    { 
+        "id": "ent-boucherie",
+        "name": "Boucherie de la côte",
+        "nace": "47.22",
+        "postes": [
+            {
+                "effectif": 4,
+                "name": "Salarié"
+            }
+        ]
+    },
+    { 
+        "id": "ent-coiffeur",
+        "name": "Coiffeur",
+        "nace": "96.21",
+        "postes": [
+            {
+                "effectif": 1,
+                "name": "patron"
+            },
+            {
+                "effectif": 1,
+                "richesse": 0,
+                "education": 0,
+                "ageMaximum": 20,
+                "name": "apprenti"
+            },
+            {
+                "effectif": 1,
+                "name": "coiffeur"
+            }
+        ]
+    },
+    { 
+        "id": "ent-restaurant",
+        "name": "L'Assiette Dorée",
+        "nace": "56.11",
+        "postes": [
+            {
+                "effectif": 1,
+                "richesse": 3 ,
+                "name": "patron"
+            },
+            {
+                "effectif": 1,
+                "richesse": 2,
+                "ageMinimum": 35,
+                "name": "chef"
+            },
+            {
+                "effectif": 1,
+                "richesse": 0,
+                "education": 0,
+                "ageMaximum": 20,
+                "name": "apprenti"
+            },
+            {
+                "effectif": 2,
+                "richesse": { "min": 1, "max": 2 },
+                "name": "cuisinier"
+            },
+            {
+                "effectif": 6,
+                "richesse": { "min": 0, "max": 1 },
+                "name": "serveur"
+            }
+        ]
+    },
+    { 
+        "id": "ent-creperie",
+        "name": "Crêperie du phare",
+        "nace": "56.11",
+        "postes": [
+            {
+                "effectif": 3,
+                "name": "Salarié"
+            }
+        ]
+    },
+    { 
+        "id": "ent-casino",
+        "name": "Royal Casino",
+        "nace": "92.00",
+        "postes": [
+            {
+                "effectif": 1,
+                "richesse": 3,
+                "name": "patron",
+                "ageMinimum": 40
+            },
+            {
+                "effectif": 1,
+                "richesse": { "min": 1, "max": 2 },
+                "name": "banqier",
+                "ageMinimum": 40
+            },
+            {
+                "effectif": 19,
+                "richesse": { "min": 0, "max": 1 },
+                "name": "croupier"
+            }
+        ]
+    },
+    {
+        "id": "ent-engineering",
+        "name": "Cabinet d'ingénierie",
+        "nace": "71.12",
+        "postes": [
+            {
+                "effectif": 7,
+                "niveauEtude": 3,
+                "richesse": { "min": 2, "max": 3 },
+                "ageMinimum": 25,
+                "ageMaximum": 42,
+                "name": "Ingénieurs"
+            }
+        ]
+    },
+    {
+        "id": "ent-banque-ouest",
+        "name": "Banque de l'Ouest",
+        "nace": "64.19",
+        "postes": [
+            {
+                "effectif": 5,
+                "name": "-"
+            }
+        ]
+    },
+    {
+        "id": "ent-banque-littoral",
+        "name": "Banque du littoral",
+        "nace": "64.19",
+        "postes": [
+            {
+                "effectif": 6,
+                "name": "-"
+            }
+        ]
+    },
+    {
+        "id": "ent-chantier",
+        "name": "Chantier naval",
+        "nace": "30.11",
+        "postes": [
+            {
+                "effectif": 1,
+                "richesse": 3,
+                "ageMinimum": 55,
+                "name": "patron"
+            },
+            {
+                "effectif": 6,
+                "richesse": 2,
+                "ageMinimum": 30,
+                "name": "ouvrier spécialisé"
+            },
+            {
+                "effectif": 20,
+                "richesse": { "min": 0, "max": 1 },
+                "name": "ouvrier"
+            }
+        ]
+    },
+    {
+        "id": "ent-poissonnerie",
+        "name": "Poissonnerie du Port",
+        "nace": "47.23",
+         "postes": [
+            {
+                "effectif": 8,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-jardins",
+        "name": "Jardins de Cocagne",
+        "nace": "01.13",
+         "postes": [
+            {
+                "effectif": 5,
+                "name": "encadrant"
+            },
+            {
+                "effectif": 20,
+                "richesse": 0,
+                "name": "ouvrier"
+            }
+         ]
+    },
+    {
+        "id": "ent-moulin",
+        "name": "Moulin des quatre vents",
+        "nace": "10.61",
+         "postes": [
+            {
+                "effectif": 2,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-biscuiterie",
+        "name": "Biscuiterie de l'île",
+        "nace": "10.72",
+         "postes": [
+            {
+                "effectif": 10,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-avicole",
+        "name": "Élevage de la plume",
+        "nace": "01.47",
+         "postes": [
+            {
+                "effectif": 5,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-verger",
+        "name": "Verger de la falaise",
+        "postes": [
+            {
+                "effectif": 4,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-bovin",
+        "name": "Élevage du sabot",
+        "nace": "01.42",
+        "postes": [
+            {
+                "effectif": 4,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-laiterie",
+        "name": "Laiterie",
+        "nace": "10.51",
+        "postes": [
+            {
+                "effectif": 12,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-fromagerie",
+        "name": "Fromagerie du lac",
+        "nace": "1051",
+        "postes": [
+            {
+                "effectif": 4,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-corbeille",
+        "name": "La corbeille d'Or",
+        "nace": "47.21",
+        "postes": [
+            {
+                "effectif": 3,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-cremerie",
+        "name": "Crémerie ambulante",
+        "nace": "47.81",
+        "postes": [
+            {
+                "effectif": 2,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-glacier",
+        "name": "Glacier du port",
+        "postes": [
+            {
+                "effectif": 6,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-aqua",
+        "name": "Ferme aquamarine",
+        "nace": "03.21",
+         "postes": [
+            {
+                "effectif": 14,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-apiculteur",
+        "name": "Apiculteur",
+        "nace": "01.48",
+         "postes": [
+            {
+                "effectif": 1,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-epicerie",
+        "name": "Épicerie",
+        "nace": "47.27",
+         "postes": [
+            {
+                "effectif": 3,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-librairie",
+        "name": "Librairie du pavé",
+        "nace": "47.61",
+         "postes": [
+            {
+                "effectif": 3,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-hotel",
+        "name": "Hôtel",
+        "nace": "55.10",
+         "postes": [
+            {
+                "effectif": 3,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-bergerie",
+        "name": "Bergerie des dunes",
+        "nace": "01.45",
+         "postes": [
+            {
+                "effectif": 3,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-ecurie",
+        "name": "Écurie de la plage",
+        "nace": "01.43",
+         "postes": [
+            {
+                "effectif": 3,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-veterinaire",
+        "name": "Clinique des animaux",
+        "nace": "75.00",
+         "postes": [
+            {
+                "effectif": 3,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-blanchisserie",
+        "name": "Blanchisserie",
+        "nace": "96.10",
+         "postes": [
+            {
+                "effectif": 3,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-camping",
+        "name": "Camping",
+        "nace": "55.30",
+         "postes": [
+            {
+                "effectif": 3,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-sae",
+        "name": "Software Architecture Évolution",
+        "nace": "62.10",
+         "postes": [
+            {
+                "effectif": 1,
+                "richesse": 0,
+                "education": 0,
+                "ageMaximum": 21,
+                "name": "apprenti"
+            },
+            {
+                "effectif": 10,
+                 "name": "-"
+            }
+         ]
+    }    
+]

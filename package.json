@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "data": "tsx src/lib/index.ts",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json"
   },
@@ -17,15 +18,18 @@
     "svelte": "^5.56.4",
     "svelte-check": "^4.7.1",
     "svelte-echarts": "^1.0.0",
+    "tsx": "^4.23.12",
     "typescript": "~6.0.2",
     "vite": "^8.1.1"
   },
   "dependencies": {
     "@duckdb/duckdb-wasm": "^1.32.0",
     "@tailwindcss/vite": "^4.3.3",
+    "csv": "^6.6.3",
     "echarts-stat": "^1.2.0",
     "graphology": "^0.26.0",
     "graphology-layout-forceatlas2": "^0.10.1",
+    "random-js": "^2.1.0",
     "sigma": "^3.0.3",
     "tailwindcss": "^4.3.3"
   }

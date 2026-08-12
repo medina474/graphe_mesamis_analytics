@@ -182,8 +182,8 @@
     <select bind:value={relationFilter}>
       <option value="NONE">Toutes les relations</option>
       <option value="marriage|child|father|mother">Famille</option>
-      <option value="member">Clubs</option>
-      <option value="work">Travail</option>
+      <option value="MEMBER">Clubs</option>
+      <option value="WORK">Travail</option>
       <option value="friends">Amitiés</option>
       <option value="WRITE">Livres - auteurs</option>
       <option value="CLASSIFY-AS">- genres</option>
@@ -194,6 +194,7 @@
       <option value="FOLLOW|RETURN-TO">Chaine de retour</option>
       <option value="REWARD|NOMINATE|BELONG|WRITE">Récompenses</option>
       <option value="LIVE">Adresse</option>
+      <option value="INVOICE">Facturation</option>
     </select>
   </div>
 </div>

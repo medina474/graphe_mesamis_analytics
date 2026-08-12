@@ -1,0 +1,328 @@
+id,auteur,titre,genres,serie,tome
+B001,Alain-Fournier,Le Grand Meaulnes,roman,,
+B002,Albert Camus,L'Étranger,roman,,
+B003,Albert Camus,La Peste,roman,,
+B004,Alexandre Dumas,Les Trois Mousquetaires,aventure,,
+B005,Alexandre Dumas,Le comte de Monte-Cristo,classique|aventure,,
+B006,Alexiane Thill,Le dernier conte,romance|romantasy,,
+B007,André Malraux,La Condition humaine,roman,,
+B008,Anna Gavalda,"Ensemble, c'est tout",romance,,
+B009,Anna Gavalda,Je voudrais que quelqu'un m'attende quelque part,romance|nouvelles,,
+B010,Anne Golon,Le Chemin de Versailles,romance|historique,S007,1
+B011,Anne Golon,Marquise des Anges,romance|historique,S007,2
+B012,Anne Golon,La Fiancée vendue,romance|historique,S007,3
+B013,Anne Golon,Fêtes royales,romance|historique,S007,4
+B014,Anne Golon,Le Supplicié de Notre-Dame,romance|historique,S007,5
+B015,Anne Golon,Ombres et Lumières,romance|historique,S007,6
+B016,Anne Rice,Entretien avec un vampire,bitlit|vampire,,
+B017,Antoine de Saint-Exupéry,Le Petit Prince,conte,,
+B018,Antoine de Saint-Exupéry,Terre des hommes,récit,,
+B019,Arthur Rimbaud,Une saison en enfer,poesie,,
+B020,Ayerdhal,Mytale,science-fiction,,
+B021,Bernard Werber,Les Fourmis,science-fiction,,
+B022,Boris Vian,L'Écume des jours,roman,,
+B023,Charles Baudelaire,Les Fleurs du mal,poesie,,
+B024,Chloé Wallerand,The Devil's Sons,dark romance,,
+B025,Colleen Hoover,Jamais plus,dark romance,,
+B026,Dan Brown,Da Vinci Code,thriller,,
+B027,Edmond Rostand,Cyrano de Bergerac,theatre,,
+B028,Émile Querbalec,Quitter les monts d'automne,science-fiction,,
+B029,Émile Zola,Germinal,classique|roman naturaliste,S001,13
+B030,Émile Zola,L'Assommoir,classique|roman naturaliste,S001,7
+B031,Emily Brontë,Les Hauts de Hurle-Vent,roman|dark romance,,
+B032,François Rabelais,Gargantua,classique,,
+B033,Françoise Chandernagor,L'Allée du roi,romance|historique,,
+B034,Françoise Sagan,Bonjour tristesse,roman,,
+B035,Fred Vargas,Pars vite et reviens tard,policier|enquête,,
+B036,Fred Vargas,L'Homme aux cercles bleus,policier|enquête,,
+B037,Frédéric Beigbeder,L'Amour dure trois ans,romance|comédie,,
+B038,Gaston Leroux,Le Mystère de la chambre jaune,enquête,,
+B039,Gaston Leroux,Le Fantôme de l'Opéra,policier|mystère,,
+B040,George Orwell,1984,science-fiction|dystopie,,
+B041,Georges Simenon,Le Chien jaune,policier,,
+B042,Georges Simenon,Pietr-le-Letton,policier,,
+B043,Gustave Flaubert,Madame Bovary,roman,,
+B044,Gustave Flaubert,L'Éducation sentimentale,roman,,
+B045,Gustave Le Rouge,Le Mystérieux Docteur Cornélius,aventure|fantastique,,
+B046,Guy de Maupassant,Le Horla,fantastique,,
+B047,Guy de Maupassant,Bel-Ami,roman,,
+B048,Henri Vernes,La Vallée infernale,aventure,S003,1
+B049,Henri Vernes,Le Sultan de Jarawak,aventure,S003,8
+B050,Henri Vernes,La Couronne de Golconde,aventure,S003,33
+B051,Henri Vernes,Les guerriers de l'Ombre Jaune,aventure,S003,35
+B052,Henri Vernes,Terreur à la Manicouagan,aventure,S003,71
+B053,Honoré de Balzac,Le Père Goriot,roman,,
+B054,Honoré de Balzac,Eugénie Grandet,roman,,
+B055,Isaac Asimov,Fondation,science-fiction,,
+B056,Isabelle Lesteplume,La guerre des ombres,romance|romantasy,,
+B057,J. K. Rowling,Harry Potter à l'école des sorciers,fantasy,S004,1
+B058,J.R.R. Tolkien,Le Seigneur des anneaux,fantasy,,
+B059,Jean Bruce,Atout coeur à Tokyo,espionnage,S002,
+B060,Jean Bruce,Gâchis à Karachi,espionnage,S002,65
+B061,Jean Bruce,Les monstres du Holy Loch,espionnage,S002,89
+B062,Jean Bruce,Cache cache au Cachemire,espionnage,S002,40
+B063,Jean Bruce,Lila de Calcutta,espionnage,S002,74
+B064,Jean Ray,La Chambre 113,policier|fantastique,S008,8
+B065,Jean Ray,La Maison du scorpion,policier|fantastique,S008,6
+B066,Jean-Christophe Grangé,Les Rivières pourpres,thriller,,
+B067,Jean-Christophe Grangé,Le Concile de pierre,thriller,,
+B068,Jeanne Bourin,La Chambre des dames,romance|historique,,
+B069,John Ajvide Lindqvist,Laisse-moi entrer,horreur|vampire,,
+B070,Joyce Kitten,Borderline,dark romance,,
+B071,Jules Vernes,Voyage au centre de la terre,roman,,
+B072,Julia Verlanger,L'autoroute sauvage,science-fiction,,
+B073,Juliette Benzoni,Catherine,romance|historique,,
+B074,Juliette Benzoni,La Florentine,romance|historique,,
+B075,Leïla Slimani,Chanson douce,roman,,
+B076,Louis-Ferdinand Céline,Voyage au bout de la nuit,roman,,
+B077,Marc Levy,Et si c'était vrai...,romance,,
+B078,Marc Levy,Vous revoir,romance,,
+B079,Marcel Pagnol,La Gloire de mon père,autobiographie,,
+B080,Marcel Pagnol,Le Château de ma mère,autobiographie,,
+B081,Marcel Pagnol,Jean de Florette,roman,,
+B082,Marcel Pagnol,Manon des Sources,roman,,
+B083,Marguerite Duras,L'Amant,roman,,
+B084,Maurice Leblanc,"Arsène Lupin,gentleman-cambrioleur",policier,,
+B085,Maurice Leblanc,L'Aiguille creuse,policier,,
+B086,Michel Zévaco,Les Pardaillan,aventure historique,,
+B087,Michel Zévaco,Le Capitan,aventure historique,,
+B088,Mireille Calmel,Le Lit d'Aliénor,romance|historique,,
+B089,Mireille Calmel,Lady Pirate,romance|historique,,
+B090,Molière,L'Avare,theatre,,
+B091,Neal Stephenson,L'Âge de diamant,science-fiction,,
+B092,Olivier Norek,Dans les brumes de Capelans,policier,,
+B093,Orson Scott Card,La Stratégie Ender,science-fiction,S020,1
+B094,Paolo Bacigalupi,La Fille automate,science-fiction|biopunk,,
+B095,Paul Féval,Le Bossu,aventure historique,,
+B096,Paul Féval,Les Habits noirs,aventure|policier,,
+B097,Pierre Bordage,Les guerriers du silence,science-fiction,,
+B098,Pierre Boulle,La planète des singes,science-fiction,,
+B099,Pierre Corneille,Le Cid,theatre,,
+B100,Pierre Lemaitre,Au revoir là-haut,roman,,
+B101,Pierre Lemaitre,Alex,thriller|policier,,
+B102,Raymond Queneau,Zazie dans le métro,roman,,
+B103,Régine Deforges,La bicyclette bleue,romance|historique,,
+B104,Stephen King,Salem,horreur|vampire,,
+B105,Richard Matheson,Je suis une Légende,science-fiction|vampire,,
+B106,Robin Hobb,L'Assassin royal,fantasy,,
+B107,Romain Benassaya,Pyramide,science-fiction|vaisseau générationnel,,
+B108,Romain Gary,La Promesse de l'aube,roman,,
+B109,Romain Lucazeau,Latium,science-fiction|robots,,
+B110,Sarah Rivens,Captive,dark romance,,
+B111,Stendhal,Le Rouge et le Noir,roman,,
+B112,Stendhal,La Chartreuse de Parme,roman,,
+B113,Stephen King,Ça,horreur,,
+B114,Stephen King,Christine,horreur,,
+B115,Tom Clancy,Octobre rouge,espionnage|sous-marin,,
+B116,Umberto Eco,Le Nom de la rose,policier|médiéval,,
+B117,Vernor Vinge,Au tréfonds du ciel,science-fiction,S022,3
+B118,Victor Dixen,Vampyria,bitlit|vampire,,
+B119,Victor Hugo,Les Misérables,classique|historique,,
+B120,Victor Hugo,Notre-Dame de Paris,roman,,
+B121,Voltaire,Candide,conte philosophique,,
+B122,William Gibson,Neuromancien,science-fiction|cyberpunk,,
+B123,Émile Zola,La Fortune des Rougon,classique|roman naturaliste,S001,1
+B124,Émile Zola,La Curée,classique|roman naturaliste,S001,2
+B125,Émile Zola,Le Ventre de Paris,classique|roman naturaliste,S001,3
+B126,Émile Zola,La Conquête de Plassans,classique|roman naturaliste,S001,4
+B127,Émile Zola,La Faute de l'abbé Mouret,classique|roman naturaliste,S001,5
+B128,Émile Zola,Son Excellence Eugène Rougon,classique|roman naturaliste,S001,6
+B129,Émile Zola,Une page d'amour,classique|roman naturaliste,S001,8
+B130,Émile Zola,Nana,classique|roman naturaliste,S001,9
+B131,Émile Zola,Pot-Bouille,classique|roman naturaliste,S001,10
+B132,Émile Zola,Au Bonheur des Dames,classique|roman naturaliste,S001,11
+B133,Émile Zola,La Joie de vivre,classique|roman naturaliste,S001,12
+B134,Émile Zola,L'Œuvre,classique|roman naturaliste,S001,14
+B135,Émile Zola,La Terre,classique|roman naturaliste,S001,15
+B136,Émile Zola,Le Rêve,classique|roman naturaliste,S001,16
+B137,Émile Zola,La Bête humaine,classique|roman naturaliste,S001,17
+B138,Émile Zola,L'Argent,classique|roman naturaliste,S001,18
+B139,Émile Zola,La Débâcle,classique|roman naturaliste|guerre,S001,19
+B140,Émile Zola,Le Docteur Pascal,classique|roman naturaliste,S001,20
+B141,J. K. Rowling,Harry Potter et la Chambre des secrets,fantasy,S004,2
+B142,J. K. Rowling,Harry Potter et le Prisonnier d'Azkaban,fantasy,S004,3
+B143,J. K. Rowling,Harry Potter et la Coupe de feu,fantasy,S004,4
+B144,J. K. Rowling,Harry Potter et l'Ordre du Phénix,fantasy,S004,5
+B145,J. K. Rowling,Harry Potter et le Prince de sang-mêlé,fantasy,S004,6
+B146,J. K. Rowling,Harry Potter et les Reliques de la Mort,fantasy,S004,7
+B147,Christelle Dabos,Les Fiancés de l'hiver,fantasy,S006,1
+B148,Christelle Dabos,Les Disparus du Clairdelune,fantasy,S006,2
+B149,Christelle Dabos,La Mémoire de Babel,fantasy,S006,3
+B150,Christelle Dabos,La Tempête des échos,fantasy,S006,4
+B151,Frank Herbert,Dune,science-fiction,S005,1
+B152,Frank Herbert,Le Messie de Dune,science-fiction,S005,2
+B153,Frank Herbert,Les Enfants de Dune,science-fiction,S005,3
+B154,Frank Herbert,L'Empereur-Dieu de Dune,science-fiction,S005,4
+B155,Frank Herbert,Les Hérétiques de Dune,science-fiction,S005,5
+B156,Frank Herbert,La Maison des mères,science-fiction,S005,6
+B157,Stephen King,Le Pistolero,fantasy,S009,1
+B158,Stephen King,Les Trois Cartes,fantasy,S009,2
+B159,Stephen King,Terres perdues,fantasy,S009,3
+B160,Stephen King,Magie et Cristal,fantasy,S009,4
+B161,Stephen King,Les Loups de la Calla,fantasy,S009,5
+B162,Stephen King,Le Chant de Susannah,fantasy,S009,6
+B163,Stephen King,La Tour sombre,fantasy,S009,7
+B164,Stephen King,La Clé des vents,fantasy,S009,8
+B165,Loïs McMaster Bujold,Opération Cay,science-fiction,S010,1
+B166,Loïs McMaster Bujold,Cordelia Vorkosigan,science-fiction,S010,2
+B167,Loïs McMaster Bujold,Barrayar,science-fiction,S010,3
+B168,Loïs McMaster Bujold,L'apprentissage du guerrier,science-fiction,S010,4
+B169,Loïs McMaster Bujold,Miles Vorkosigan,science-fiction,S010,5
+B170,Loïs McMaster Bujold,Cetaganda,science-fiction,S010,6
+B171,Loïs McMaster Bujold,Ethan d'Athos,science-fiction,S010,7
+B172,Loïs McMaster Bujold,Les Frontières de l'infini,science-fiction,S010,8
+B173,Loïs McMaster Bujold,Un Clone encombrant,science-fiction,S010,9
+B174,Loïs McMaster Bujold,La danse du miroir,science-fiction,S010,10
+B175,Loïs McMaster Bujold,Memory,science-fiction,S010,11
+B176,Loïs McMaster Bujold,Komarr,science-fiction,S010,12
+B177,Loïs McMaster Bujold,Ekaterin,science-fiction,S010,13
+B178,Loïs McMaster Bujold,Immunité diplomatique,science-fiction,S010,14
+B179,Loïs McMaster Bujold,Cryoburn,science-fiction,S010,15
+B180,Loïs McMaster Bujold,L'alliance,science-fiction,S010,16
+B181,Loïs McMaster Bujold,La Reine rouge,science-fiction,S010,17
+B183,Anne Rice,Entretien avec un vampire,horreur|vampire,S011,1
+B184,Anne Rice,Lestat le vampire,horreur|vampire,S011,2
+B185,Anne Rice,La reine des damnés,horreur|vampire,S011,3
+B186,Anne Rice,Le voleur de corps,horreur|vampire,S011,4
+B187,Anne Rice,Memnoch le démon,horreur|vampire,S011,5
+B188,Anne Rice,Armand le vampire,horreur|vampire,S011,6
+B189,Anne Rice,Merrick,horreur|vampire,S011,7
+B190,Anne Rice,Le sang et l'or,horreur|vampire,S011,8
+B191,Anne Rice,Le domaine Blackwood,horreur|vampire,S011,9
+B192,Anne Rice,Cantique sanglant,horreur|vampire,S011,10
+B193,Anne Rice,Prince Lestat,horreur|vampire,S011,11
+B194,Anne Rice,Prince Lestat et l'Atlantide,horreur|vampire,S011,12
+B195,Anne Rice,Blood communion,horreur|vampire,S011,13
+B196,Anne Rice,La momie,horreur,,
+B197,Anne Rice,Le violon,horreur,,
+B198,Anne Rice,Le lien maléfique,horreur,S012,1
+B199,Anne Rice,L'heure des sorcières,horreur,S012,2
+B200,Anne Rice,Taltos,horreur,S012,3
+B201,Jules Vernes,Cinq Semaines en ballon,roman,,
+B202,Jules Vernes,Les Enfants du capitaine Grant,roman,,
+B203,Jules Vernes,Vingt Mille Lieues sous les mers,roman,,
+B204,Jules Vernes,Le Tour du monde en quatre-vingts jours,roman,,
+B205,Jules Vernes,L'Île mystérieuse,roman|île,,
+B206,Jules Vernes,Michel Strogoff,roman,,
+B207,Jules Vernes,Les Tribulations d'un Chinois en Chine,roman,,
+B208,Jules Vernes,Les Révoltés de la Bounty,roman|île,,
+B209,Jules Vernes,Deux Ans de vacances,roman|île,,
+B210,Jules Vernes,L'École des Robinsons,roman|île,,
+B211,Jules Vernes,Les Cinq Cents Millions de la Bégum,roman,,
+B212,Jules Vernes,De la Terre à la Lune,science-fiction,,
+B213,Le Robinson suisse,Johann David Wyss,roman|île,,
+B214,Pierre Boulle,Le pont de la rivière Kwaï,roman|guerre,,
+B215,William Golding,Sa majesté des mouches,roman|île,,
+B216,François Baranger,Sorcier d'Empire,dark fantasy|uchronie,S013,1
+B217,François Baranger,Second sorcier,dark fantasy|uchronie,S013,2
+B218,François Baranger,Sorcier d'Empire,dark fantasy|uchronie,S013,3
+B219,François Baranger,Sorcier de Sang,dark fantasy|uchronie,S013,4
+B220,François Baranger,Dominium Mundi,science-fiction,,
+B221,François Baranger,Tepuy,science-fiction,,
+B222,Tim Powers,Les Cieux découronnés,science-fiction,,
+B223,Tim Powers,Les Chevaliers de la brune,science-fiction,,
+B224,Tim Powers,Les Voies d'Anubis,science-fiction,,
+B225,Tim Powers,Le Palais du Déviant,science-fiction,,
+B226,Tim Powers,Sur des mers plus ignorées ...,science-fiction,,
+B227,Tim Powers,Les Pêcheurs du ciel,science-fiction,,
+B228,Tim Powers,Le Poids de son regard,science-fiction,,
+B229,Tim Powers,Poker d'âmes,science-fiction,,
+B230,Tim Powers,Date d'expiration,science-fiction,,
+B231,Tim Powers,Les Puissances de l'invisible,science-fiction,,
+B232,Tim Powers,À deux pas du néant,science-fiction,,
+B233,Tim Powers,Parmi les tombes,science-fiction,,
+B234,Tim Powers,Earthquake Weather,science-fiction,,
+B235,Tim Powers,Medusa's Web,science-fiction,,
+B236,Stieg Larsson,Les hommes qui n'aimaient pas les femmes,polar|polar nordique,,1
+B237,Stieg Larsson,La fille qui rêvait d'un bidon d'essence et d'une allumette,polar|polar nordique,,2
+B238,Stieg Larsson,La reine dans le palais des courants d'air,polar|polar nordique,,3
+B239,Stieg Larsson,Ce qui ne me tue pas,polar|polar nordique,,4
+B240,Stieg Larsson,La fille qui rendait coup pour coup,polar|polar nordique,,5
+B241,Stieg Larsson,La fille qui devait mourir,polar|polar nordique,,6
+B242,Stieg Larsson,La Fille dans les serres de l'aigle,polar|polar nordique,,7
+B244,Stieg Larsson,La Fille dans les griffes du lynx,polar|polar nordique,,8
+B245,Camilla Läckberg,La Princesse des glaces,polar|polar nordique,,
+B246,Jo Nesbø,L'Homme chauve-souris,polar|polar nordique,,
+B247,Jussi Adler-Olsen,Miséricorde,polar|polar nordique,,
+B248,Arnaldur Indriðason,La Femme en vert,polar|polar nordique,,
+B249,Joan D. Vinge,La Reine des neiges,science-fiction,S017,1
+B250,C. J. Cherryh,Forteresse des étoiles,science-fiction,,
+B251,C. J. Cherryh,Cyteen,science-fiction,,
+B252,Dan Simmons,Hypérion,science-fiction,S014,1
+B253,Dan Simmons,La chute d'Hypérion,science-fiction,S014,2
+B254,Dan Simmons,Endymion,science-fiction,S014,3
+B255,Dan Simmons,L'Éveil d'Endymion,science-fiction,S014,4
+B256,Dan Simmons,La mort du Centaure,science-fiction,S014,5
+B257,Dan Simmons,Les orphelins de l'Hélice,science-fiction,S014,6
+B258,Octavia E. Butler,La Parabole du semeur,science-fiction,,
+B259,Octavia E. Butler,Liens de sang,science-fiction,,
+B260,Octavia E. Butler,L'Aube,science-fiction,S015,1
+B261,Octavia E. Butler,L'initiation,science-fiction,S015,2
+B262,Octavia E. Butler,Imago,science-fiction,S015,3
+B263,Octavia E. Butler,La Parabole des talents,science-fiction,,
+B264,Octavia E. Butler,Novice,science-fiction|vampire,,
+B265,Émile Querbalec,Les Chants de Nüying,science-fiction,,
+B266,Émile Querbalec,Les Jardins du temps,science-fiction,,
+B267,Andreas Eschbach,Des milliards de tapis de cheveux,science-fiction,,
+B268,Stephen King,Misery,thriller,,
+B269,Pierre Bordage,Les Fables de l'Humpur,science-fiction,,
+B270,Alain Damasio,La Horde du Contrevent,science-fiction,,
+B271,Jean-Philippe Jaworski,Même pas mort,fantasy,,
+B272,Kim Stanley Robinson,Mars la Rouge,science-fiction,S016,1
+B273,Kim Stanley Robinson,Mars la Verte,science-fiction,S016,2
+B274,Kim Stanley Robinson,Mars la Bleue,science-fiction,S016,3
+B275,Arthur C. Clarke,Les fontaines du Paradis,science-fiction,,
+B276,Joan D. Vinge,Finismonde,science-fiction,S017,2
+B277,Joan D. Vinge,La reine de l'été,science-fiction,S017,3
+B278,Isaac Asimov,Fondation foudroyée,science-fiction,S018,6
+B279,David Brin,Marée stellaire,science-fiction,S019,2
+B280,Orson Scott Card,La Voix des morts,science-fiction,S020,2
+B281,David Brin,Jusqu'au coeur du Soleil,science-fiction,S019,1
+B282,David Brin,Elévation,science-fiction,S019,3
+B283,David Brin,Le Monde de l'exil,science-fiction,S021,4
+B284,David Brin,Le Monde de l'oubli,science-fiction,S021,5
+B285,David Brin,Le Chemin des bannis,science-fiction,S021,6
+B286,David Brin,Les Rives de l'Infini,science-fiction,S021,7
+B287,David Brin,Le grand défi,science-fiction,S021,8
+B288,Connie Willis,Le grand livre,science-fiction,,
+B289,Vernor Vinge,Un feu sur l'abîme,science-fiction,S022,1
+B290,Vernor Vinge,Les enfants du ciel,science-fiction,S022,2
+B291,Joe Haldeman,La Paix éternelle,science-fiction,,
+B292,Connie Willis,Sans parler du chien,science-fiction,,
+B293,Neil Gaiman,American Gods,science-fiction,,
+B294,Vernor Vinge,Rainbows End,science-fiction,,
+B295,David Brin,Le facteur,science-fiction,,
+B296,Joan D. Vinge,Cat le Psion,science-fiction,,
+B297,Thomas Harris,Le Silence des agneaux,horreur,,
+B298,Dan Simmons,L'Échiquier du Mal,horreur,,
+B299,Robert R. McCammon,Mary Terreur,horreur,,
+B300,Robert R. McCammon,Zephyr Alabama,horreur,,
+B301,Thomas F. Monteleone,Le sang de l'agneau,horreur,,
+B302,Peter Straub,La Gorge,horreur,,
+B303,Nancy Holder,L'appel des profondeurs,horreur,,
+B304,Stephen King,La Ligne verte,horreur,,
+B305,Stephen King,Sac d'os,horreur,,
+B306,Peter Straub,Mr X,horreur,,
+B307,Joyce Carol Oates,Zombi,horreur,,
+B308,Peter Straub,Les enfants perdus,horreur,,
+B309,Peter Straub,Le cabinet noir,horreur,,
+B310,David Morrell,Accès interdit,horreur,,
+B311,David Morrell,Rambo,triller,,
+B312,Stephen King,Histoire de Lisey,horreur,,
+B313,Stephen King,Duma Key,horreur,,
+B314,Sarah Langan,Audrey's door,horreur,,
+B315,Peter Straub,Messe noire,horreur,,
+B316,Joe McKinney,Flesh Eaters,horreur,,
+B317,Caitlin R. Kiernan,La Fille qui se noie,horreur,,
+B318,Stephen King,Docteur Sleep,horreur,,
+B319,Stephen King,Shining,horreur,,
+B320,Stephen King,Carrie,horreur,,
+B321,Stephen King,Simetierre,horreur,,
+B322,Stephen King,Marche ou crève,horreur,,
+B323,Stephen King,Cujo,horreur,,
+B324,Stephen King,Running Man,science-fiction,,
+B325,Stephen King,Le Fléau,horreur,,
+B326,Stephen King,Charlie,thriller,,
+B327,Stephen King,La Part des ténèbres,horreur,,
+B328,Stephen King,Les Tommyknockers,horreur,,
+B329,Stephen King,Chantier,horreur,,
