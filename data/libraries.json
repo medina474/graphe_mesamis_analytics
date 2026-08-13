@@ -28,5 +28,6 @@
   { "id":"L27", "taille": 35, "tags": ["science-fiction"] },
   { "id":"L28", "taille": 23, "tags": ["horreur"] },
   { "id":"L29", "taille": 20, "tags": ["roman|conte"] },
-  { "id":"L30", "taille": 25, "tags": ["policier|polar"] }
+  { "id":"L30", "taille": 25, "tags": ["policier|polar"] },
+  { "id":"L31", "taille": 20, "tags": ["young adult|dystopie"] }
 ]

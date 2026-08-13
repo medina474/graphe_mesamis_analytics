@@ -41,17 +41,17 @@ export class FriendsGenerator {
       /*
        * Affinité intrinsèque
        */
-      const affinity = similarity * age * gender;
+      const affinity = 3 * similarity + 1.5 * age + 1 * gender;
 
       /*
        * Opportunités sociales
        */
-      const opportunity = 1 + interaction * 2 + triadic * 2;
+      const opportunity = 2 * interaction + 2 * triadic;
 
       /*
        * Probabilité finale
        */
-      const z = -2 + 3 * similarity + 1.5 * age + 1 * gender + 2 * interaction + 2 * triadic;
+      const z = -2 + affinity + opportunity;
       const p = 1 / (1 + Math.exp(-z));
 
       //console.log(`affinity = ${affinity.toFixed(2)} : ${similarity.toFixed(2)} * ${age.toFixed(2)} * ${gender.toFixed(2)}`);
@@ -137,7 +137,6 @@ export class FriendsGenerator {
 
   private triadicScore(a: string, b: string): number {
     const neighborsA = new Set(this.graph.neighbors(a));
-
     const neighborsB = new Set(this.graph.neighbors(b));
 
     let common = 0;

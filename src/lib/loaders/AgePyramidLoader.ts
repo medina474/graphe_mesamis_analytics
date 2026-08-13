@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 
-import { AgePyramidStat, AgePyramidEntry } from "../models/AgePyramidStat.js";
+import { AgePyramidStat } from "../models/AgePyramidStat.js";
+import type { AgePyramidEntry } from "../models/AgePyramidStat.js";
 
 export class AgePyramidLoader {
   static load(path: string): AgePyramidStat {
