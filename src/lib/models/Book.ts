@@ -7,6 +7,7 @@ export class Serie {
         public readonly id:string,
         public readonly label:string,
         public readonly isOrdered:boolean, /* L'ordre des tomes est important */
+        public volumes: number, /* Quel est le n° de tome le plus élevé de la série */
     ) {
     }
 }
