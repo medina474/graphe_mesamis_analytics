@@ -7,7 +7,8 @@ export class Serie {
         public readonly id:string,
         public readonly label:string,
         public readonly isOrdered:boolean, /* L'ordre des tomes est important */
-        public volumes: number, /* Quel est le n° de tome le plus élevé de la série */
+        public volumes: number = 0,
+        public volumesAvailable: number = 0, /* Quel est le n° de tome le plus élevé de la série */
     ) {
     }
 }
@@ -30,7 +31,7 @@ export class Book {
         public readonly genres: string[],
         public readonly serie?: Serie,
         public readonly order?: number,
-        public readonly awards: AwardEdition[] = [], 
+        public readonly awards: AwardEdition[] = [],
     ) {
     }
 }

@@ -1,9 +1,10 @@
-import { Book, Library } from "../models/Book.js";
+import { Book, Library, Serie } from "../models/Book.js";
 
 export class LibrariesGenerator {
   constructor(
     private readonly books: Book[],
     private readonly libraries: Library[],
+    private readonly series: Serie[],
   ) {}
 
   generate(library: Library): Book[] {
@@ -17,9 +18,9 @@ export class LibrariesGenerator {
 
   /**
    * Dernier tome d'une série
-   * @param oeuvre 
-   * @param resultat 
-   * @returns 
+   * @param oeuvre
+   * @param resultat
+   * @returns
    */
   private premierTome(oeuvre: Book, resultat: Book[]): number {
 
@@ -71,7 +72,7 @@ export class LibrariesGenerator {
         // Le livre fait partie d'une série, il faut les ajouter dans l'ordre
         // Il ne faut pas le retirer pour autant des livres disponibles
         // Mais prendre le premier tome disponible de la série
-        index = disponibles.findIndex(d => d.serie?.id == choix.serie!.id && d.order == premierTome)!
+        index = disponibles.findIndex(b => b.serie?.id == choix.serie!.id && b.order == premierTome)!
         choix = disponibles[index];
       }
 
@@ -87,13 +88,17 @@ export class LibrariesGenerator {
       library.books = this.generate(library);
     }
 
-    for (serie of series)
-      filter book
-      sort tome
-      while (some library contains book)
-      maxVolume++
-    for (const book of books.filter(book.serie => book.serie.ordered)) {
-      
+    for (const serie of this.series) {
+      const suites = this.books.filter(b => b.serie == serie)
+        .sort((a, b) => b.order! - a.order!)
+
+      if (suites.length == 0) continue;
+
+      serie.volumes = serie.volumesAvailable = suites[0].order || 0;
+      while (serie.volumesAvailable > 0
+        && !this.libraries.some(l => l.books.some(b => b.serie == serie && b.order == serie.volumesAvailable))) {
+        serie.volumesAvailable--;
+      }
     }
   }
 }

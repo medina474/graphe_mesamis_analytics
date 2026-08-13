@@ -55,7 +55,6 @@ export class WorkRunner {
       color: "#3575ff",
     });
 
-    console.log(facture)
     this.graph.addEdge(facture.fournisseur, facture.client, {
       relation: "INVOICE",
       weight: 1,

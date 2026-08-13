@@ -6,10 +6,11 @@ import {
   Library,
   Author,
   Loan,
-  GenreInfo,
   Award,
   AwardEdition
 } from "../models/Book.js";
+
+import type  { GenreInfo } from "../models/Book.js";
 
 import { LibrariesGenerator } from "../generators/LibrariesGenerator.js";
 import { BooksLoader } from "../loaders/BooksLoader.js";
@@ -120,6 +121,7 @@ export class LibrariesRunner {
     const librariesGenerator = new LibrariesGenerator(
       this.books,
       this.libraries,
+      this.series,
     );
 
     //Affecter les livres (oeuvres) aux bibliothèques
@@ -186,11 +188,15 @@ export class LibrariesRunner {
       this.exemplaires,
       this.genres,
     );
+
     this.prets = loanGenerator.generer(nb, new Date(2026, 0, 1));
     for (const pret of this.prets) {
       this.addLoan(pret);
     }
 
+    for (const serie of this.series) {
+      console.log(`${serie.label} ${serie.volumesAvailable}/${serie.volumes}`)
+    }
     /* Mettre à jour la propriété reading des personnes */
     let total = 0;
     for (const person of this.population) {
@@ -325,7 +331,7 @@ export class LibrariesRunner {
     this.addEdgeBorrow(pret.emprunteur, pret)
     this.addEdgeLend(pret.preteur, pret)
     this.addEdgeConcern(pret, pret.copy)
-    
+
     if (pret.previous) {
       this.addEdgeFollow(pret, pret.previous)
     }

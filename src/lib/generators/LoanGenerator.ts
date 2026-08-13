@@ -8,13 +8,14 @@ export class LoanGenerator {
   constructor(
     private readonly personnes: Person[],
     private readonly copies: Copy[],
-    private readonly genres: Record<string, GenreInfo>
+    private readonly genres: Record<string, GenreInfo>,
   ) {
     const genresNames = Object.keys(genres);
     this.personnes
       .filter((p) => Object.keys(p.interestTags).length === 0)
       .forEach((p) => {
-        const genre = genresNames[Math.floor(Math.random() * genresNames.length)];
+        const genre =
+          genresNames[Math.floor(Math.random() * genresNames.length)];
         p.interestTags[genre] = 1;
       });
   }
@@ -124,8 +125,10 @@ export class LoanGenerator {
          * Cette personne ne dispose finalement d'aucun livre compatible.
          * Elle doit attendre 7 jours pour être de nouveau disponible et laisser la chance à d'autres
          */
-        
-        console.log(`Pas de copie compatible pour ${emprunteur.firstname} ${Object.keys(emprunteur.interestTags).join(', ')}`)
+
+        console.log(
+          `Pas de copie compatible pour ${emprunteur.firstname} ${Object.keys(emprunteur.interestTags).join(", ")}`,
+        );
         emprunteur.availableAt = new Date(
           currentDay.getTime() + Random.int(3, 8),
         );
@@ -189,6 +192,9 @@ export class LoanGenerator {
       }
 
       // Stocker les séries en cours de lecture
+      if (exemplaire.book.serie) {
+        emprunteur.series[exemplaire.book.serie.id] = exemplaire.book.order!;
+      }
     }
 
     return prets;
@@ -226,8 +232,12 @@ export class LoanGenerator {
     // et qui n'ont pas été lues par l'emprunteur
     // qui ont comme genre le ou les genres préférés de l'emprunteur
     const selection = this.copiesAvalaiblesCurrentDay.filter((copy) => {
-      return !emprunteur.oeuvresLues.has(copy.book) && 
-        Object.keys(emprunteur.interestTags).some(t => copy.book.genres.includes(t));
+      return (
+        !emprunteur.oeuvresLues.has(copy.book) &&
+        Object.keys(emprunteur.interestTags).some((t) =>
+          copy.book.genres.includes(t),
+        )
+      );
     });
 
     if (selection.length === 0) {
@@ -238,24 +248,66 @@ export class LoanGenerator {
       this.scoreExemplaire(emprunteur, exemplaire),
     );
 
-    const total = poids.reduce((somme, poids) => somme + poids, 0);
-    let tirage = Math.random() * total;
+    const total = poids.reduce((somme, p) => somme + p, 0);
+
+    const drawIndex = (): number => {
+      let tirage = Math.random() * total;
+      let i = 0;
+      for (; i < selection.length; i++) {
+        tirage -= poids[i];
+        if (tirage < 0) break;
+      }
+      if (i >= selection.length) i = selection.length - 1;
+      return i;
+    };
+
+    let attempts = 0;
     let index = 0;
 
-    for (; index < selection.length; index++) {
-      tirage -= poids[index];
+    while (attempts < 3) {
+      index = drawIndex();
 
-      if (tirage < 0) {
-        break;
+      // Si la sélection fait partie d'une série,
+      // préférer le tome suivant si la série est en cours (ou le tome 1)
+      if (selection[index].book.serie) {
+        const book = selection[index].book;
+        const serieId = book.serie!.id;
+        console.log(`${book.serie!.label} ${book.order}`);
+
+        const preferredOrder = emprunteur.series[serieId]
+          ? emprunteur.series[serieId] + 1
+          : 1;
+
+        if (book.order === preferredOrder) {
+          break;
+        }
+
+        // Chercher le tome préféré dans la sélection (copies disponibles aujourd'hui)
+        const preferredIndex = selection.findIndex(
+          (c) =>
+            c.book.serie?.id === serieId && c.book.order === preferredOrder,
+        );
+
+        if (preferredIndex >= 0) {
+          index = preferredIndex;
+          console.log(`prends le tome ${preferredOrder} d'abord`);
+          break;
+        } else {
+          console.log(`le tome ${preferredOrder} n'est pas disponible.`);
+          // Faire jusqu'à 3 ré-essais d'un nouveau tirage pour choisir un autre exemplaire
+          attempts++;
+
+          if (attempts >= 3) {
+            // Après 3 essais, abandonner
+            console.log(
+              `Abandon après ${attempts} essais, aucun autre exemplaire trouvé.`,
+            );
+            return null;
+          }
+        }
       }
     }
 
-    if (index >= selection.length) {
-      index = selection.length - 1;
-    }
-
-    // Si la sélection fait partie d'une série. Verifier les tomes precédent suivant la position où s'est arrêté l'emprunteur
-    // Si non disponible refaire un tirage ? Dans ce cas limiter la boucle à x essais
     return selection[index];
   }
 

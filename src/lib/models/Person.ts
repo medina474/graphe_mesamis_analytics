@@ -45,7 +45,7 @@ export class Person {
   oeuvresLues: Set<Book>;
   interestTags: Record<string, number>;
   series: Record<string, number>;
-  
+
   edges: number = 0;
 
   // Famille
@@ -54,7 +54,7 @@ export class Person {
   mother?: Person;
   children: Person[] = [];
   cousins: Person[] = [];
-  
+
   address?: Address;
   work?: Enterprise;
 
@@ -66,6 +66,7 @@ export class Person {
     this.interestTags = {};
     this.availableAt = new Date()
     this.oeuvresLues = new Set<Book>;
+    this.series = {};
   }
 
   public isMarried(): boolean {

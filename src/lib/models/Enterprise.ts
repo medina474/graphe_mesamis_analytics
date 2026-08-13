@@ -57,10 +57,10 @@ export class Facture {
     public readonly fournisseur: Enterprise,
     public readonly client: Enterprise,
     public readonly lignes: LigneFacture[],
-    public readonly montant_ht: Number,
-    public readonly taux_tva: Number,
-    public readonly montant_tva: Number,
-    public readonly montant_ttc: Number,
+    public readonly montant_ht: number,
+    public readonly taux_tva: number,
+    public readonly montant_tva: number,
+    public readonly montant_ttc: number,
   ) {}
 
   static fromJson(json: any): Facture {
