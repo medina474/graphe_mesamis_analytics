@@ -44,19 +44,22 @@ export class Person {
   availableAt: Date;
   oeuvresLues: Set<Book>;
   interestTags: Record<string, number>;
+  series: Record<string, number>;
   
   edges: number = 0;
 
+  // Famille
   spouse?: Person;
   father?: Person;
   mother?: Person;
   children: Person[] = [];
-
+  cousins: Person[] = [];
+  
   address?: Address;
   work?: Enterprise;
 
   clubs: Club[] = [];
-  tags: Set<string>; /* tag pour les type de clubs auxquels la psonne est déja membre */
+  tags: Set<string>; /* tag pour les type de clubs auxquels la personne est déja membre */
 
   constructor(public readonly id: string) {
     this.tags = new Set<string>();
