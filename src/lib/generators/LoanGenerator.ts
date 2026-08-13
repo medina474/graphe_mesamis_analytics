@@ -187,6 +187,8 @@ export class LoanGenerator {
       for (const tag of exemplaire.book.genres) {
         emprunteur.interestTags[tag] = (emprunteur.interestTags[tag] ?? 0) + 1;
       }
+
+      // Stocker les séries en cours de lecture
     }
 
     return prets;
@@ -222,6 +224,7 @@ export class LoanGenerator {
   private choisirExemplaire(emprunteur: Person): Copy | null {
     // Les oeuvres sont celles qui sont disponibles ce jour
     // et qui n'ont pas été lues par l'emprunteur
+    // qui ont comme genre le ou les genres préférés de l'emprunteur
     const selection = this.copiesAvalaiblesCurrentDay.filter((copy) => {
       return !emprunteur.oeuvresLues.has(copy.book) && 
         Object.keys(emprunteur.interestTags).some(t => copy.book.genres.includes(t));
@@ -251,6 +254,8 @@ export class LoanGenerator {
       index = selection.length - 1;
     }
 
+    // Si la sélection fait partie d'une série. Verifier les tomes precédent suivant la position où s'est arrêté l'emprunteur
+    // Si non disponible refaire un tirage ? Dans ce cas limiter la boucle à x essais
     return selection[index];
   }
 
