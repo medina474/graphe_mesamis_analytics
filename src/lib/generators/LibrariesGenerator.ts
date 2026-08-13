@@ -86,5 +86,14 @@ export class LibrariesGenerator {
     for (const library of this.libraries) {
       library.books = this.generate(library);
     }
+
+    for (serie of series)
+      filter book
+      sort tome
+      while (some library contains book)
+      maxVolume++
+    for (const book of books.filter(book.serie => book.serie.ordered)) {
+      
+    }
   }
 }
