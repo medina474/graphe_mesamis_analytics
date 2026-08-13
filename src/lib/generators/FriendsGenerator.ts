@@ -121,13 +121,36 @@ export class FriendsGenerator {
   }
 
   private contextAffinity(a: Person, b: Person): number {
-    const difference = Math.abs(a.age - b.age);
-    return Math.exp(-difference / 15);
+    let score: number = 0;
+
+    // Clubs communs
+    const clubsA = this.getNeighborsByCategory(a.id, "MEMBER");
+    const clubsB = this.getNeighborsByCategory(b.id, "MEMBER");
+
+    const commonClubs = this.intersectionSize(clubsA, clubsB);
+
+    // Entreprise commune
+    const enterprisesA = this.getNeighborsByCategory(a.id, "WORK");
+    const enterprisesB = this.getNeighborsByCategory(b.id, "WORK");
+
+    const commonEnterprises = this.intersectionSize(enterprisesA, enterprisesB);
+
+    /**
+     * 1 - Math.exp(-commonClubs)
+     * 0 : 0
+     * 1 : 0.63
+     * 2 : 0.86
+     * 3 : 0.95
+     */
+    score +=  (1 - Math.exp(-commonClubs));
+    score += 0.32 * (1 - Math.exp(-commonEnterprises));
+
+    /* 1 et 1 : min : 0 max : 10 */
+    return score * 12;
   }
 
   private ageAffinity(a: Person, b: Person): number {
     const difference = Math.abs(a.age - b.age);
-
     return Math.exp(-difference / 15);
   }
 

@@ -9,6 +9,15 @@
 
   let data: any;
   let renderer: Sigma | undefined;
+  let showDialog = false;
+  let selectedNodeInfo: any = null;
+  let selectedRelations: any[] = [];
+
+  function closeDialog() {
+    showDialog = false;
+    selectedNodeInfo = null;
+    selectedRelations = [];
+  }
 
   function createGraph() {
     const graph = new MultiDirectedGraph();
@@ -132,17 +141,17 @@
         });
       });
 
-      console.clear();
       const attributes = graph.getNodeAttributes(node);
-      const info = [];
-      info.push({
+
+      selectedNodeInfo = {
         id: node,
         category: attributes.category,
         label: attributes.label,
-      });
-      console.table(info);
-      console.log("Noeud sélectionné :", graph.getNodeAttributes(node));
-      console.table(relations);
+        attributes,
+      };
+
+      selectedRelations = relations;
+      showDialog = true;
     });
 
     renderer.on("clickEdge", ({ edge }) => {
@@ -197,6 +206,30 @@
       <option value="INVOICE">Facturation</option>
     </select>
   </div>
+
+  {#if showDialog}
+    <div class="dialog-backdrop" on:click={closeDialog}>
+      <div class="dialog" on:click|stopPropagation>
+        <button class="dialog-close" aria-label="Fermer" on:click={closeDialog}>×</button>
+        <h3>{selectedNodeInfo?.label}</h3>
+        <div class="dialog-section">
+          <strong>Catégorie:</strong> {selectedNodeInfo?.category}
+        </div>
+        <div class="dialog-section">
+          <strong>Attributs:</strong>
+          <pre class="attrs">{JSON.stringify(selectedNodeInfo?.attributes, null, 2)}</pre>
+        </div>
+        <div class="dialog-section">
+          <strong>Relations ({selectedRelations.length}):</strong>
+          <ul>
+            {#each selectedRelations as r}
+              <li><strong>{r.relation}</strong> — {r.nom} (id: {r.id})</li>
+            {/each}
+          </ul>
+        </div>
+      </div>
+    </div>
+  {/if}
 </div>
 
 <style>
@@ -224,4 +257,39 @@
     left: 0;
     z-index: 10;
   }
+
+  .dialog-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+  }
+
+  .dialog {
+    background: white;
+    color: #111;
+    padding: 1rem;
+    border-radius: 8px;
+    width: min(90%, 700px);
+    max-height: 80%;
+    overflow: auto;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  }
+
+  .dialog-close {
+    position: absolute;
+    right: 12px;
+    top: 8px;
+    background: transparent;
+    border: none;
+    font-size: 1.25rem;
+    cursor: pointer;
+  }
+
+  .dialog-section { margin-top: 0.5rem; }
+
+  .attrs { background: #f7f7f7; padding: 0.5rem; border-radius: 4px; }
 </style>

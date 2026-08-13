@@ -149,12 +149,12 @@ B147,Christelle Dabos,Les Fiancés de l'hiver,fantasy,S006,1
 B148,Christelle Dabos,Les Disparus du Clairdelune,fantasy,S006,2
 B149,Christelle Dabos,La Mémoire de Babel,fantasy,S006,3
 B150,Christelle Dabos,La Tempête des échos,fantasy,S006,4
-B151,Frank Herbert,Dune,science-fiction,S005,1
-B152,Frank Herbert,Le Messie de Dune,science-fiction,S005,2
-B153,Frank Herbert,Les Enfants de Dune,science-fiction,S005,3
-B154,Frank Herbert,L'Empereur-Dieu de Dune,science-fiction,S005,4
-B155,Frank Herbert,Les Hérétiques de Dune,science-fiction,S005,5
-B156,Frank Herbert,La Maison des mères,science-fiction,S005,6
+B151,Frank Herbert,Dune,science-fiction,serie-dune,1
+B152,Frank Herbert,Le Messie de Dune,science-fiction,serie-dune,2
+B153,Frank Herbert,Les Enfants de Dune,science-fiction,serie-dune,3
+B154,Frank Herbert,L'Empereur-Dieu de Dune,science-fiction,serie-dune,4
+B155,Frank Herbert,Les Hérétiques de Dune,science-fiction,serie-dune,5
+B156,Frank Herbert,La Maison des mères,science-fiction,serie-dune,6
 B157,Stephen King,Le Pistolero,fantasy,S009,1
 B158,Stephen King,Les Trois Cartes,fantasy,S009,2
 B159,Stephen King,Terres perdues,fantasy,S009,3
@@ -350,3 +350,21 @@ B350,Alexandra Bracken,Héritage,young adult|dystopie,S027,4
 B351,Alexandra Bracken,Through the Dark,young adult|dystopie,S027,5
 B352,Alexandra Bracken,In Time,young adult|dystopie,S027,6
 B353,Alexandra Bracken,Sparks Rise,young adult|dystopie,S027,7
+B354,Kass Morgan,Les 100,young adult|dystopie,serie-100,1
+B355,Kass Morgan,21e jour,young adult|dystopie,serie-100,2
+B356,Kass Morgan,Retour,young adult|dystopie,serie-100,3
+B357,Kass Morgan,Rebellion,young adult|dystopie,serie-100,4
+B358,Primo Levi,Si c'est un homme,guerre,,
+B359,John Steinbeck,Des souris et des hommes,roman,,
+B360,John Steinbeck,Les raisons de la colère,roman,,
+B361,John Steinbeck,À l'est d'Éden,roman,,
+B362,Jane Austen,Orgueil et Préjugés,classique,,
+B363,Anne Frank,Journal d'Anne Frank,autobiographie|guerre,,
+B364,Charlotte Brontë,Jane Eyre,classique|autobiographie,,
+B365,George Orwell,La Ferme des animaux,dystopie,,
+B366,Harper Lee,Ne tirez pas sur l'oiseau moqueur,roman,,
+B367,Anne Brontë,Agnès Grey,classique,,
+B368,Anne Brontë,La Recluse de Wildfell Hall,classique,,
+B369,Anne Brontë,La Dame du château de Wildfell,classique,,
+B370,Jane Austen,Raison et Sentiments,classique,,
+B371,Les Liaisons dangereuses,Pierre Choderlos de Laclos,classique,,

@@ -3,7 +3,7 @@ S001,Rougon-Macquart,0
 S002,OSS 117,0
 S003,Bob Morane,0
 S004,Harry Potter,1
-S005,Dune,1
+serie-dune,Dune,1
 S006,La Passe-Miroir,1
 S007,Angélique,1
 S008,Harry Dickson,0
@@ -26,3 +26,4 @@ S024,Divergente,1
 S025,Hunger Games,1
 S026,Twilight,1
 S027,Darkest Minds,1
+serie-100,Les 100,1
