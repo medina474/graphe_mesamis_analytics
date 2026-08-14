@@ -1,7 +1,7 @@
 import type { Distribution } from "./Distribution.js";
 import { Gender, Person } from "../models/Person.js";
 import { AgePyramidStat } from "../models/AgePyramidStat.js";
-import { Random } from "../stats/Random.js";
+import { Random } from "../utilities/Random.js";
 
 export class GenderDistribution implements Distribution<Gender> {
   constructor(private readonly pyramid: AgePyramidStat) {}

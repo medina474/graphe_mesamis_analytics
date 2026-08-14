@@ -4,10 +4,8 @@ import { Address, Voie } from "../models/Address.js";
 import { JsonLoader } from "../loaders/JsonLoader.js";
 import { AddressLoader } from "../loaders/AddressLoader.js";
 import { Person } from "../models/Person.js";
-import { Random } from "../stats/Random.js";
-
-const R = 6371000;
-const DEG2RAD = Math.PI / 180;
+import { Random } from "../utilities/Random.js";
+import { Geo } from "../utilities/Geo.js";
 
 export class AddressRunner {
   private voies: Voie[] = [];
@@ -16,8 +14,6 @@ export class AddressRunner {
   constructor(
     private readonly graph: DirectedGraph,
     private readonly population: Person[],
-    private lat0 = 48.75,
-    private lon0 = -4,
   ) {}
 
   public load(voiePath: string, addressPath: string) {
@@ -40,7 +36,7 @@ export class AddressRunner {
         });
 
         // 20 mètres autour
-        const { x, y } = this.geoToGraph(p.address.lat, p.address.lon);
+        const { x, y } = Geo.coordToGraph(p.address.lat, p.address.lon);
         const position = Random.around(x, y, 0.1);
 
         this.graph.mergeNodeAttributes(p.id, {
@@ -53,20 +49,6 @@ export class AddressRunner {
     }
   }
 
-  /**
-   *
-   * @param lat hectomètres
-   * @param lon
-   * @returns
-   */
-  private geoToGraph(lat: number, lon: number) {
-    const x =
-      ((lon - this.lon0) * DEG2RAD * Math.cos(this.lat0 * DEG2RAD) * R) / 100.0;
-
-    const y = ((lat - this.lat0) * DEG2RAD * R) / 100.0;
-
-    return { x, y };
-  }
 
   addVoies(voies: Voie[]) {
     for (const voie of voies) {
@@ -92,7 +74,7 @@ export class AddressRunner {
   }
 
   addAddress(address: Address): void {
-    const { x, y } = this.geoToGraph(address.lat, address.lon);
+    const { x, y } = Geo.coordToGraph(address.lat, address.lon);
 
     this.graph.addNode(address.id, {
       category: "Address",

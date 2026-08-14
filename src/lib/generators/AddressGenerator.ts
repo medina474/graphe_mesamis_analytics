@@ -1,7 +1,7 @@
 import { DirectedGraph } from "graphology";
 import { Person, Gender } from "../models/Person.js";
 import { Address } from "../models/Address.js";
-import { Random } from "../stats/Random.js";
+import { Random } from "../utilities/Random.js";
 
 export class AddressGenerator {
 

@@ -1,6 +1,6 @@
 import type { Distribution } from "./Distribution.js";
 import { Person } from "../models/Person.js";
-import { Random } from "../stats/Random.js";
+import { Random } from "../utilities/Random.js";
 import { LastnameStat } from "../models/PersonStat.js";
 
 export class LastnameDistribution implements Distribution<string> {

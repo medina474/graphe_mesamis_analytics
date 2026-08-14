@@ -53,7 +53,6 @@ Emploi
       label: enterprise.name,
       x: Math.random() * 100,
       y: Math.random() * 100,
-      size: 1,
       color: "#ffd035",
     });
   }

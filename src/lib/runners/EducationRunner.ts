@@ -1,15 +1,39 @@
 import { DirectedGraph } from "graphology";
 import { Person } from "../models/Person.js";
-import type { Grade } from "../models/Education.js";
+import type {
+  Etablissement,
+  EtablissementGrade,
+  Grade,
+} from "../models/Education.js";
 import { EducationGenerator } from "../generators/EducationGenerator.js";
+import { Geo } from "../utilities/Geo.js";
 
 export class EducationRunner {
   private grades: Grade[];
+  private etablissements: Etablissement[];
 
   constructor(
     private readonly graph: DirectedGraph,
     private readonly population: Person[],
   ) {
+    this.etablissements = [
+      {
+        id: "E1",
+        latitude: 48.74438,
+        longitude: -4.01705,
+        name: "École du Centre",
+      },
+      {
+        id: "E2",
+        latitude: 48.74188,
+        longitude: -4.00033,
+        name: "École du Phare",
+      },
+      { id: "E3", latitude: 48.74786, longitude: -4.00872, name: "Collège" },
+      { id: "E4", latitude: 48.74786, longitude: -4.00872, name: "Lycée" },
+      { id: "E5", latitude: 48.74906, longitude: -4.02761, name: "Université" },
+    ];
+
     this.grades = [
       {
         niveau: "CP",
@@ -21,8 +45,8 @@ export class EducationRunner {
           { ageOffset: 1, probability: 0.01 },
         ],
         etablissements: [
-          { latitude: 48.74438, longitude: -4.01705, classes: [] },
-          { latitude: 48.74188, longitude: -4.00033, classes: [] },
+          { etablissement: this.etablissements[0], classes: [] },
+          { etablissement: this.etablissements[1], classes: [] },
         ],
       },
       {
@@ -35,8 +59,8 @@ export class EducationRunner {
           { ageOffset: 1, probability: 0.01 },
         ],
         etablissements: [
-          { latitude: 48.74438, longitude: -4.01705, classes: [] },
-          { latitude: 48.74188, longitude: -4.00033, classes: [] },
+          { etablissement: this.etablissements[0], classes: [] },
+          { etablissement: this.etablissements[1], classes: [] },
         ],
       },
       {
@@ -49,8 +73,8 @@ export class EducationRunner {
           { ageOffset: 1, probability: 0.01 },
         ],
         etablissements: [
-          { latitude: 48.74438, longitude: -4.01705, classes: [] },
-          { latitude: 48.74188, longitude: -4.00033, classes: [] },
+          { etablissement: this.etablissements[0], classes: [] },
+          { etablissement: this.etablissements[1], classes: [] },
         ],
       },
       {
@@ -63,8 +87,8 @@ export class EducationRunner {
           { ageOffset: 1, probability: 0.01 },
         ],
         etablissements: [
-          { latitude: 48.74438, longitude: -4.01705, classes: [] },
-          { latitude: 48.74188, longitude: -4.00033, classes: [] },
+          { etablissement: this.etablissements[0], classes: [] },
+          { etablissement: this.etablissements[1], classes: [] },
         ],
       },
       {
@@ -77,8 +101,8 @@ export class EducationRunner {
           { ageOffset: 1, probability: 0.01 },
         ],
         etablissements: [
-          { latitude: 48.74438, longitude: -4.01705, classes: [] },
-          { latitude: 48.74188, longitude: -4.00033, classes: [] },
+          { etablissement: this.etablissements[0], classes: [] },
+          { etablissement: this.etablissements[1], classes: [] },
         ],
       },
       {
@@ -91,7 +115,7 @@ export class EducationRunner {
           { ageOffset: 1, probability: 0.01 },
         ],
         etablissements: [
-          { latitude: 48.74786, longitude: -4.00872, classes: [] },
+          { etablissement: this.etablissements[2], classes: [] },
         ],
       },
       {
@@ -104,7 +128,7 @@ export class EducationRunner {
           { ageOffset: 1, probability: 0.02 },
         ],
         etablissements: [
-          { latitude: 48.74786, longitude: -4.00872, classes: [] },
+          { etablissement: this.etablissements[2], classes: [] },
         ],
       },
       {
@@ -117,7 +141,7 @@ export class EducationRunner {
           { ageOffset: 1, probability: 0.03 },
         ],
         etablissements: [
-          { latitude: 48.74786, longitude: -4.00872, classes: [] },
+          { etablissement: this.etablissements[2], classes: [] },
         ],
       },
       {
@@ -130,7 +154,7 @@ export class EducationRunner {
           { ageOffset: 1, probability: 0.04 },
         ],
         etablissements: [
-          { latitude: 48.74786, longitude: -4.00872, classes: [] },
+          { etablissement: this.etablissements[2], classes: [] },
         ],
       },
       {
@@ -144,7 +168,7 @@ export class EducationRunner {
           { ageOffset: 2, probability: 0.01 },
         ],
         etablissements: [
-          { latitude: 48.74786, longitude: -4.00872, classes: [] },
+          { etablissement: this.etablissements[3], classes: [] },
         ],
       },
       {
@@ -158,7 +182,7 @@ export class EducationRunner {
           { ageOffset: 2, probability: 0.02 },
         ],
         etablissements: [
-          { latitude: 48.74786, longitude: -4.00872, classes: [] },
+          { etablissement: this.etablissements[3], classes: [] },
         ],
       },
       {
@@ -173,7 +197,7 @@ export class EducationRunner {
           { ageOffset: 3, probability: 0.01 },
         ],
         etablissements: [
-          { latitude: 48.74786, longitude: -4.00872, classes: [] },
+          { etablissement: this.etablissements[3], classes: [] },
         ],
       },
       {
@@ -189,7 +213,7 @@ export class EducationRunner {
           { ageOffset: 4, probability: 0.02 },
         ],
         etablissements: [
-          { latitude: 48.74906, longitude: -4.02761, classes: [] },
+          { etablissement: this.etablissements[4], classes: [] },
         ],
       },
       {
@@ -205,7 +229,7 @@ export class EducationRunner {
           { ageOffset: 4, probability: 0.02 },
         ],
         etablissements: [
-          { latitude: 48.74906, longitude: -4.02761, classes: [] },
+          { etablissement: this.etablissements[4], classes: [] },
         ],
       },
       {
@@ -221,7 +245,7 @@ export class EducationRunner {
           { ageOffset: 4, probability: 0.02 },
         ],
         etablissements: [
-          { latitude: 48.74906, longitude: -4.02761, classes: [] },
+          { etablissement: this.etablissements[4], classes: [] },
         ],
       },
       {
@@ -237,7 +261,7 @@ export class EducationRunner {
           { ageOffset: 4, probability: 0.02 },
         ],
         etablissements: [
-          { latitude: 48.74906, longitude: -4.02761, classes: [] },
+          { etablissement: this.etablissements[4], classes: [] },
         ],
       },
       {
@@ -253,7 +277,7 @@ export class EducationRunner {
           { ageOffset: 4, probability: 0.02 },
         ],
         etablissements: [
-          { latitude: 48.74906, longitude: -4.02761, classes: [] },
+          { etablissement: this.etablissements[4], classes: [] },
         ],
       },
     ];
@@ -264,22 +288,24 @@ export class EducationRunner {
 Education
 ----------------------------------------`);
 
+    this.addNodesEtablissements();
+
     const educationGenerator = new EducationGenerator(
       this.population,
       this.grades,
     );
     educationGenerator.generateAll();
 
+    let index = 1;
     for (let grade of this.grades) {
-      console.log(`Niveau ${grade.niveau}`)
-      let index = 1;
-      for (let etablissement of grade.etablissements) {
-        let indexClasse = 1
-        console.log(`Établissement ${index++} : ${etablissement.classes.length} classes`)
-        for (let classe of etablissement.classes) {
-          console.log(
-            `Classe ${indexClasse++} : ${classe.length} élèves`,
-          );
+      console.log(`Niveau ${grade.niveau}`);
+
+      for (let e of grade.etablissements) {
+        let indexClasse = 1;
+        console.log(`${e.etablissement.name} : ${e.classes.length} classes`);
+        for (let classe of e.classes) {
+          this.addNodeClasse(classe, e, index++, grade);
+          console.log(`Classe ${indexClasse++} : ${classe.length} élèves`);
         }
       }
     }
@@ -288,6 +314,51 @@ Education
   addNodesEtablissements() {
     for (const etablissement of this.etablissements) {
       this.addNodeEtablissement(etablissement);
+    }
+  }
+
+  addNodeEtablissement(etablissement: Etablissement) {
+    const { x, y } = Geo.coordToGraph(
+      etablissement.latitude,
+      etablissement.longitude,
+    );
+    this.graph.addNode(etablissement.id, {
+      category: "Etablissement",
+      name: etablissement.name,
+      label: etablissement.name,
+      x,
+      y,
+      color: "#ffd035",
+    });
+  }
+
+  addNodeClasse(
+    classe: Person[],
+    etablissement: EtablissementGrade,
+    index: number,
+    grade: Grade,
+  ) {
+    this.graph.addNode(`class-${index}`, {
+      category: "Classe",
+      name: grade.niveau,
+      label: grade.niveau,
+      color: "#508415",
+    });
+
+    this.graph.addEdge(`${etablissement.etablissement.id}`, `class-${index}`, {
+      relation: "ZZ",
+      weight: 1,
+    });
+
+    for (const p of classe) {
+      this.graph.addEdge(
+        `class-${index}`,
+        p.id,
+        {
+          relation: "YY",
+          weight: 1,
+        },
+      );
     }
   }
 }

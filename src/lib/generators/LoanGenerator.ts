@@ -1,7 +1,7 @@
 import { Person } from "../models/Person.js";
 import { Copy, Loan } from "../models/Book.js";
 import type { GenreInfo } from "../models/Book.js"
-import { Random } from "../stats/Random.js";
+import { Random } from "../utilities/Random.js";
 
 export class LoanGenerator {
   private copiesAvalaiblesCurrentDay: Copy[] = [];

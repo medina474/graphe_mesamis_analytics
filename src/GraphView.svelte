@@ -204,6 +204,7 @@
       <option value="REWARD|NOMINATE|BELONG|WRITE">Récompenses</option>
       <option value="LIVE">Adresse</option>
       <option value="INVOICE">Facturation</option>
+      <option value="ZZ|YY">Education</option>
     </select>
   </div>
 

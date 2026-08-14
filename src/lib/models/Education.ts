@@ -1,9 +1,15 @@
 import { Person } from "../models/Person.js";
 
-interface Etablissement {
+export interface EtablissementGrade {
+  etablissement: Etablissement,
+  classes: Person[][];
+}
+
+export interface Etablissement {
+  id: string;
   latitude: number;
   longitude: number;
-  classes: Person[][];
+  name: string;
 }
 
 interface AgeDistribution {
@@ -19,5 +25,5 @@ export interface Grade {
   tailleMax: number;
 
   ageDistribution: AgeDistribution[];
-  etablissements: Etablissement[];
+  etablissements: EtablissementGrade[];
 }

@@ -1,4 +1,4 @@
-import { Random } from "../stats/Random.js";
+import { Random } from "../utilities/Random.js";
 import { Person } from "../models/Person.js";
 import { UndirectedGraph } from "graphology";
 

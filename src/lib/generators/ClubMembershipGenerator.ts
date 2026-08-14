@@ -1,7 +1,7 @@
 import { DirectedGraph } from "graphology";
 import { Gender, Person } from "../models/Person.js";
 import { Club } from "../models/Club.js";
-import { Random } from "../stats/Random.js";
+import { Random } from "../utilities/Random.js";
 
 export class ClubMembershipGenerator {
     constructor(
@@ -39,31 +39,31 @@ export class ClubMembershipGenerator {
 
       return score;
   }
-  
+
   generate() {
 
     for (const club of this.clubs) {
 
-      // Les clubs ont une capacité maximale. 
+      // Les clubs ont une capacité maximale.
       // Calculons la capacité réelle
-      const capacite_reelle = Math.floor(club.capacity * (Math.random() / 3 + 0.7)) 
+      const capacite_reelle = Math.floor(club.capacity * (Math.random() / 3 + 0.7))
 
       console.log("----------------------------------------")
-      console.log(`${club.name}`) 
+      console.log(`${club.name}`)
 
       // Choisir les candidats :
       // - Ils ne doivent pas déja appartenir au club.
       let candidats: Person[] = this.individus.filter(i => !i.clubs.includes(club) &&
         i.age > 18
       );
-      
+
       // - Si un seul membre du tableau exclusive se retrouve dans les tags de la personne,
       // elle est exclue. Une personne ne peut appartenir à des clubs fortement concurentiels.
       if (club.exclusive) {
         candidats = candidats.filter(p => !club.exclusive!.some(t => p.tags.has(t)));
       }
 
-      // Trier les candidats suivant le score Club 
+      // Trier les candidats suivant le score Club
       // Sélectionner une population 2 fois plus grande.
       // Les trier aléatoirement
       let retenus = Random.shuffle(

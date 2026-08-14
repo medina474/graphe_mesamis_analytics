@@ -2,7 +2,7 @@ import { DirectedGraph } from "graphology";
 import { Gender, Person, Education, Wealth } from "../models/Person.js";
 import { Enterprise, Poste, Emploi, Affectation } from "../models/Enterprise.js";
 import type { PlageRichesse } from "../models/Enterprise.js";
-import { Random } from "../stats/Random.js";
+import { Random } from "../utilities/Random.js";
 
 
 export class WorkGenerator {

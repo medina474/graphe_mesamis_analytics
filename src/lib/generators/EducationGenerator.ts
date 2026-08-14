@@ -1,6 +1,6 @@
 import { Gender, Person, Education, Wealth } from "../models/Person.js";
 import type { Grade } from "../models/Education.js";
-import { Random } from "../stats/Random.js";
+import { Random } from "../utilities/Random.js";
 
 export class EducationGenerator {
   private readonly assigned = new Set<string>();
@@ -64,8 +64,8 @@ export class EducationGenerator {
             this.haversine(
               student.address.lat,
               student.address.lon,
-              et.latitude,
-              et.longitude,
+              et.etablissement.latitude,
+              et.etablissement.longitude,
             ),
           );
         }

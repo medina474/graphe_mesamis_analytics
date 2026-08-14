@@ -3,14 +3,14 @@ import { DirectedGraph } from "graphology";
 import { Person, Gender } from "./models/Person.js"
 import { Club } from "./models/Club.js"
 import { ClubMembershipGenerator } from "./generators/ClubMembershipGenerator.js"
-import { Random } from "./stats/Random.js";
+import { Random } from "./utilities/Random.js";
 
 describe("Club", () => {
   it("exclut les personnes ayant une catégorie du club", () => {
     const graph = new DirectedGraph()
 
     const person = new Person("1")
-    
+
     person.tags.add("sport")
     const persons: Person[] = [person];
 
@@ -24,7 +24,7 @@ describe("Club", () => {
     );
 
     const clubs: Club[] = [club];
-    
+
     const clubMembershipGenerator = new ClubMembershipGenerator(graph, persons , clubs);
     clubMembershipGenerator.generate();
     expect(club.capacity).toEqual(1);
