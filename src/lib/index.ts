@@ -6,6 +6,7 @@ import { LibrariesRunner } from "./runners/LibrariesRunner.js";
 import { MembershipRunner } from "./runners/MembershipRunner.js";
 import { WorkRunner } from "./runners/WorkRunner.js";
 import { AddressRunner } from "./runners/AddressRunner.js";
+import { EducationRunner } from "./runners/EducationRunner.js";
 import { MultiDirectedGraph } from "graphology";
 
 const graph: MultiDirectedGraph = new MultiDirectedGraph();
@@ -18,6 +19,8 @@ populationRunner.load(
 );
 const population = populationRunner.run(2080, 1, 85);
 
+const educationRunner = new EducationRunner(graph, population)
+educationRunner.run()
 const familyRunner = new FamilyRunner(graph, population);
 familyRunner.run();
 
