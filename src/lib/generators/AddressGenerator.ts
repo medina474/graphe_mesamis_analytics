@@ -6,7 +6,7 @@ import { Random } from "../stats/Random.js";
 export class AddressGenerator {
 
     private addressesDisponibles: Address[]
-        
+
     constructor(
         private graph: DirectedGraph,
         private addresses: Address[],
@@ -51,38 +51,111 @@ export class AddressGenerator {
     }
 
     public generateAll(persons: Person[]) {
-        // Gérer les pensions de famille
-        const candidates = persons.filter(person =>
+            console.log(`----------------------------------------
+Logement
+----------------------------------------`);
+
+        // Pensions de famille
+        let boarders = persons.filter(person =>
+            !person.address &&
             person.gender === Gender.Female &&
-            person.age > 64 &&
+            person.age >= 64 &&
             !person.spouse &&
             !person.address
         );
-        const capacity = Random.int(2, 7);
-        
+
+        console.log(`Pensions de famille potentielles : ${boarders.length}`)
+
+        for (const person of boarders.slice(0, Math.min(boarders.length, Random.int(5, 10)))) {
+            console.log(`Pension de famille : ${person.firstname} (${person.age})`);
+
+            if (person.address) continue;
+            this.generate(person)
+
+            // Trouver les pensionnaires
+            const residents = persons.filter(person =>
+                !person.address &&
+                !person.spouse &&
+                person.father == null && person.mother == null &&
+                person.age >= 18 && person.age < 55 &&
+                person.children.length == 0
+            );
+
+            if (residents.length == 0) {
+                console.log("Pas de résidents disponibles");
+                break;
+            }
+
+            Random.shuffle(residents)
+
+            for (const resident of residents.slice(0, Random.int(2, 7))) {
+                resident.address = person.address
+                console.log(`Résident : ${resident.firstname} (${resident.age})`);
+            }
+        }
+
+
         // Gérer les jeunes filles au pair
         const families = persons.filter(person =>
+            !person.address &&
             person.spouse &&
-            person.children?.some(child => child.age < 10)
+            person.children?.some(child => child.age < 12)
         );
 
-        const candidates = persons.filter(person =>
+        console.log(`Familles d'accueil potentielles : ${families.length}`)
+
+        for (const family of families.slice(0, Math.min(boarders.length, Random.int(7, 15)))) {
+            if (!family.address) {
+                this.generate(family)
+            }
+
+            // Trouver les jeunes filles au pair
+
+            const girls = persons.filter(person =>
+                !person.address &&
+                !person.spouse &&
+                person.age >= 18 && person.age < 27 &&
+                person.gender == Gender.Female &&
+                person.father == null && person.mother == null &&
+                person.children.length == 0 &&
+                person.work == null
+            );
+
+            //console.log(`Jeunes filles : ${girls.length}`)
+
+            Random.shuffle(girls)
+
+            if (girls.length > 0) {
+                girls[0].address = family.address
+                console.log(`Jeune fille au pair : ${girls[0].firstname} ( ${girls[0].age})`)
+            }
+        }
+
+        // Colocataires
+        const jeunes = [...persons.filter(person =>
             !person.address &&
             !person.spouse &&
-            person.age >= 18 &&
-            person.age <= 30
-        );
-        
-        // Gérer les cohabitations
-        const jeunes = persons.filter(person =>
-            !person.spouse &&
-            person.age < 30  &&
-            !person.address
-        );
+            person.age >= 18 && person.age < 28 &&
+            person.children.length == 0
+        )];
 
-        console.log(`Nombre de célibataires de moins de 30 ans : ${jeunes.length}`)
-        Random.shuffle(eligibles);
-        
+        console.log(`Célibataires de moins de 28 ans : ${jeunes.length}`)
+        Random.shuffle(jeunes)
+
+        let colocation = Random.int(7, 15);
+
+        while (colocation > 0 && jeunes.length > 0) {
+            const jeune = jeunes.splice(0, 1)[0];
+            this.generate(jeune)
+            console.log(`* ${jeune.firstname} (${jeune.age})`)
+            for (const j of jeunes.splice(0, Random.int(0, 3) + 1)) {
+                j.address = jeune.address
+                console.log(`- ${j.firstname} (${j.age})`)
+            }
+
+            colocation--;
+        }
+
         for (const person of persons.sort((a, b) => b.age - a.age)) {
             if (!person.address) {
                 this.generate(person)

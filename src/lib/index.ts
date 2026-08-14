@@ -17,7 +17,7 @@ populationRunner.load(
   "data/prenoms.json",
   "data/noms.csv",
 );
-const population = populationRunner.run(2080, 1, 85);
+const population = populationRunner.run(2254, 1, 85);
 
 const educationRunner = new EducationRunner(graph, population)
 educationRunner.run()
