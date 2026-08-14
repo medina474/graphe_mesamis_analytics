@@ -46,14 +46,14 @@
 
     graph.forEachNode((node, attributes) => {
 
-      if (typeof attributes.size === "undefined") {
+      if (typeof attributes.size === undefined) {
         attributes.size = 1;
       }
 
-      if (attributes.category === "Person") {
-        attributes.x = attributes.x_orig;
-        attributes.y = attributes.y_orig;
-      } else if (typeof attributes.x === "undefined") {
+      if (typeof attributes.x_geo !== undefined) {
+        attributes.x = attributes.x_geo;
+        attributes.y = attributes.y_geo;
+      } else if (typeof attributes.x === undefined) {
         attributes.x = Math.random() * 1000;
         attributes.y = Math.random() * 1000;
       }
@@ -109,7 +109,7 @@
 
     const graph = createGraph();
 
-    if (relationFilter !== "LIVE") {
+    if (relationFilter !== "LIVE" && relationFilter !== "ZZ|YY") {
       forceAtlas2.assign(graph, {
         iterations: 200,
         settings: {

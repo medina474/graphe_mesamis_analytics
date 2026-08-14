@@ -7,6 +7,7 @@ import type {
 } from "../models/Education.js";
 import { EducationGenerator } from "../generators/EducationGenerator.js";
 import { Geo } from "../utilities/Geo.js";
+import { Random } from "../utilities/Random.js";
 
 export class EducationRunner {
   private grades: Grade[];
@@ -326,8 +327,8 @@ Education
       category: "Etablissement",
       name: etablissement.name,
       label: etablissement.name,
-      x,
-      y,
+      x_geo: x,
+      y_geo: y,
       color: "#ffd035",
     });
   }
@@ -338,10 +339,14 @@ Education
     index: number,
     grade: Grade,
   ) {
+    const { x, y } = Geo.coordToGraph(etablissement.etablissement.latitude, etablissement.etablissement.longitude);
+    const position = Random.around(x, y, 0.1);
     this.graph.addNode(`class-${index}`, {
       category: "Classe",
       name: grade.niveau,
       label: grade.niveau,
+      x_geo: x,
+      y_geo: y,
       color: "#508415",
     });
 

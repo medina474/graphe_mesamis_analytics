@@ -40,10 +40,8 @@ export class AddressRunner {
         const position = Random.around(x, y, 0.1);
 
         this.graph.mergeNodeAttributes(p.id, {
-          x: position.x,
-          y: position.y,
-          x_orig: position.x,
-          y_orig: position.y,
+          x_geo: position.x,
+          y_geo: position.y,
         });
       }
     }
@@ -79,10 +77,8 @@ export class AddressRunner {
     this.graph.addNode(address.id, {
       category: "Address",
       label: address.label,
-      x,
-      y,
-      x_orig: x,
-      y_orig: y,
+      x_geo: x,
+      y_geo: y,
       size: 1,
       color: "#540303",
     });
