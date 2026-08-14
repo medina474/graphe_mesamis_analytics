@@ -27,7 +27,9 @@ export class WorkRunner {
     );
 
     workGenerator.generate();
-    this.updateEnterprises(enterprises);
+
+    population.reduce((s, c) => { s+= c.enterprise ? : 1 : 0 }, 0)
+    console.log(`${ s / population.length }`)
   }
 
   addEnterprise(enterprise: Enterprise): void {
@@ -50,7 +52,6 @@ export class WorkRunner {
       taux_tva: facture.taux_tva,
       montant_tva: facture.montant_tva,
       montant_ttc: facture.montant_ttc,
-      size: 1,
       color: "#3575ff",
     });
 
@@ -58,13 +59,5 @@ export class WorkRunner {
       relation: "INVOICE",
       weight: 1,
     });
-  }
-
-  updateEnterprises(enterprises: Enterprise[]): void {
-    for (const enterprise of enterprises) {
-      this.graph.mergeNodeAttributes(enterprise.id, {
-        size: Math.ceil(enterprise.effectif / 3.0),
-      });
-    }
   }
 }
