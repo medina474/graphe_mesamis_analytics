@@ -1,8 +1,8 @@
-import { Distribution } from "./Distribution.js";
+import type { Distribution } from "./Distribution.js";
 import { Education, Person } from "../models/Person.js";
 import { Random } from "../stats/Random.js";
 
-export class EducationDistribution
+export class EducationLevelDistribution
     implements Distribution<Education>{
 
     sample(person:Partial<Person>):Education{

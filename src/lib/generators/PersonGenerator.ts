@@ -9,7 +9,7 @@ import { GenderDistribution } from "../distributions/GenderDistribution.js";
 import { FirstnameDistribution } from "../distributions/FirstnameDistribution.js";
 import { LastnameDistribution } from "../distributions/LastnameDistribution.js";
 
-import { EducationDistribution } from "../distributions/EducationDistribution.js";
+import { EducationLevelDistribution } from "../distributions/EducationLevelDistribution.js";
 import { WealthDistribution } from "../distributions/WealthDistribution.js";
 import { SportDistribution } from "../distributions/SportDistribution.js";
 import { ReadingDistribution } from "../distributions/ReadingDistribution.js";
@@ -22,7 +22,7 @@ export class PersonGenerator {
   private readonly firstnameDistribution: FirstnameDistribution;
   private readonly lastnameDistribution: LastnameDistribution;
 
-  private readonly educationDistribution: EducationDistribution;
+  private readonly educationDistribution: EducationLevelDistribution;
   private readonly wealthDistribution: WealthDistribution;
 
   private readonly sportDistribution: SportDistribution;
@@ -40,7 +40,7 @@ export class PersonGenerator {
     this.genderDistribution = new GenderDistribution(pyramid);
     this.firstnameDistribution = new FirstnameDistribution(firstnames);
     this.lastnameDistribution = new LastnameDistribution(lastnames);
-    this.educationDistribution = new EducationDistribution();
+    this.educationDistribution = new EducationLevelDistribution();
     this.wealthDistribution = new WealthDistribution();
     this.sportDistribution = new SportDistribution();
     this.readingDistribution = new ReadingDistribution();
