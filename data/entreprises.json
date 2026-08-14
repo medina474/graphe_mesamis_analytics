@@ -1,5 +1,5 @@
 [
-    { 
+    {
         "id": "ent-conserverie",
         "name": "Conserverie",
         "nace": "10.20",
@@ -8,7 +8,7 @@
                 "effectif": 1,
                 "richesse": 3,
                 "ageMinimum": 55,
-                "name": "patron"
+                "name": "dirigeant"
             },
             {
                 "effectif": 3,
@@ -27,8 +27,8 @@
                 "name": "ouvrier"
             }
         ]
-    }, 
-    { 
+    },
+    {
         "id": "ent-boulangerie",
         "name": "Au Pain Levant",
         "nace": "47.24",
@@ -37,7 +37,7 @@
                 "effectif": 1,
                 "richesse": { "min": 2, "max": 3 },
                 "ageMinimum": 25,
-                "name": "patron"
+                "name": "boulanger"
             },
             {
                 "effectif": 1,
@@ -53,25 +53,32 @@
             }
         ]
     },
-    { 
+    {
         "id": "ent-boucherie",
         "name": "Boucherie de la côte",
         "nace": "47.22",
         "postes": [
             {
-                "effectif": 4,
-                "name": "Salarié"
+                "effectif": 3,
+                "name": "Boucher"
+            },
+            {
+                "effectif": 1,
+                "richesse": 0,
+                "education": 0,
+                "ageMaximum": 20,
+                "name": "apprenti"
             }
         ]
     },
-    { 
+    {
         "id": "ent-coiffeur",
         "name": "Coiffeur",
         "nace": "96.21",
         "postes": [
             {
                 "effectif": 1,
-                "name": "patron"
+                "name": "coiffeur"
             },
             {
                 "effectif": 1,
@@ -86,7 +93,7 @@
             }
         ]
     },
-    { 
+    {
         "id": "ent-restaurant",
         "name": "L'Assiette Dorée",
         "nace": "56.11",
@@ -94,7 +101,7 @@
             {
                 "effectif": 1,
                 "richesse": 3 ,
-                "name": "patron"
+                "name": "dirigeant"
             },
             {
                 "effectif": 1,
@@ -121,7 +128,7 @@
             }
         ]
     },
-    { 
+    {
         "id": "ent-creperie",
         "name": "Crêperie du phare",
         "nace": "56.11",
@@ -132,7 +139,7 @@
             }
         ]
     },
-    { 
+    {
         "id": "ent-casino",
         "name": "Royal Casino",
         "nace": "92.00",
@@ -140,7 +147,7 @@
             {
                 "effectif": 1,
                 "richesse": 3,
-                "name": "patron",
+                "name": "dirigeant",
                 "ageMinimum": 40
             },
             {
@@ -177,8 +184,16 @@
         "nace": "64.19",
         "postes": [
             {
-                "effectif": 5,
-                "name": "-"
+                "effectif": 1,
+                "name": "dirigeant"
+            },
+            {
+                "effectif": 2,
+                "name": "conseiller"
+            },
+            {
+                "effectif": 3,
+                "name": "caissier"
             }
         ]
     },
@@ -188,8 +203,16 @@
         "nace": "64.19",
         "postes": [
             {
-                "effectif": 6,
-                "name": "-"
+                "effectif": 1,
+                "name": "dirigeant"
+            },
+            {
+                "effectif": 2,
+                "name": "conseiller"
+            },
+            {
+                "effectif": 3,
+                "name": "caissier"
             }
         ]
     },
@@ -202,7 +225,7 @@
                 "effectif": 1,
                 "richesse": 3,
                 "ageMinimum": 55,
-                "name": "patron"
+                "name": "dirigeant"
             },
             {
                 "effectif": 6,
@@ -224,7 +247,7 @@
          "postes": [
             {
                 "effectif": 8,
-                 "name": "-"
+                "name": "-"
             }
          ]
     },
@@ -251,7 +274,7 @@
          "postes": [
             {
                 "effectif": 2,
-                 "name": "-"
+                "name": "-"
             }
          ]
     },
@@ -262,7 +285,7 @@
          "postes": [
             {
                 "effectif": 10,
-                 "name": "-"
+                "name": "-"
             }
          ]
     },
@@ -273,7 +296,7 @@
          "postes": [
             {
                 "effectif": 5,
-                 "name": "-"
+                "name": "-"
             }
          ]
     },
@@ -283,7 +306,7 @@
         "postes": [
             {
                 "effectif": 4,
-                 "name": "-"
+                "name": "-"
             }
          ]
     },
@@ -294,7 +317,7 @@
         "postes": [
             {
                 "effectif": 4,
-                 "name": "-"
+                "name": "-"
             }
          ]
     },
@@ -305,7 +328,7 @@
         "postes": [
             {
                 "effectif": 12,
-                 "name": "-"
+                "name": "-"
             }
          ]
     },
@@ -316,7 +339,7 @@
         "postes": [
             {
                 "effectif": 4,
-                 "name": "-"
+                "name": "-"
             }
          ]
     },
@@ -327,7 +350,7 @@
         "postes": [
             {
                 "effectif": 3,
-                 "name": "-"
+                "name": "-"
             }
          ]
     },
@@ -338,7 +361,7 @@
         "postes": [
             {
                 "effectif": 2,
-                 "name": "-"
+                "name": "-"
             }
          ]
     },
@@ -348,7 +371,7 @@
         "postes": [
             {
                 "effectif": 6,
-                 "name": "-"
+                "name": "-"
             }
          ]
     },
@@ -359,7 +382,7 @@
          "postes": [
             {
                 "effectif": 14,
-                 "name": "-"
+                "name": "-"
             }
          ]
     },
@@ -370,7 +393,7 @@
          "postes": [
             {
                 "effectif": 1,
-                 "name": "-"
+                "name": "-"
             }
          ]
     },
@@ -381,7 +404,7 @@
          "postes": [
             {
                 "effectif": 3,
-                 "name": "-"
+                "name": "-"
             }
          ]
     },
@@ -392,7 +415,7 @@
          "postes": [
             {
                 "effectif": 3,
-                 "name": "-"
+                "name": "libraire"
             }
          ]
     },
@@ -403,7 +426,7 @@
          "postes": [
             {
                 "effectif": 3,
-                 "name": "-"
+                "name": "-"
             }
          ]
     },
@@ -414,7 +437,7 @@
          "postes": [
             {
                 "effectif": 3,
-                 "name": "-"
+                "name": "-"
             }
          ]
     },
@@ -425,7 +448,7 @@
          "postes": [
             {
                 "effectif": 3,
-                 "name": "-"
+                "name": "-"
             }
          ]
     },
@@ -436,7 +459,7 @@
          "postes": [
             {
                 "effectif": 3,
-                 "name": "-"
+                "name": "-"
             }
          ]
     },
@@ -447,7 +470,7 @@
          "postes": [
             {
                 "effectif": 3,
-                 "name": "-"
+                "name": "-"
             }
          ]
     },
@@ -458,7 +481,7 @@
          "postes": [
             {
                 "effectif": 3,
-                 "name": "-"
+                "name": "-"
             }
          ]
     },
@@ -469,15 +492,99 @@
          "postes": [
             {
                 "effectif": 1,
+                "name": "dirigeant"
+            },
+            {
+                "effectif": 2,
                 "richesse": 0,
                 "education": 0,
                 "ageMaximum": 21,
                 "name": "apprenti"
             },
             {
-                "effectif": 10,
-                 "name": "-"
+                "effectif": 1,
+                "education": 3,
+                "name": "architecte de données"
+            },
+            {
+                "effectif": 1,
+                "education": 3,
+                "name": "administrateur réseau"
+            },
+            {
+                "effectif": 1,
+                "name": "designer ui/ux"
+            },
+            {
+                "effectif": 6,
+                "name": "développeur"
             }
          ]
-    }    
+    },
+    {
+        "id": "ent-ecole-centre",
+        "name": "École du Centre",
+        "nace": "85.10",
+         "postes": [
+            {
+                "effectif": 5,
+                "name": "professeur des écoles",
+                "education": 3
+            }
+         ]
+    },
+    {
+        "id": "ent-ecole-phare",
+        "name": "École du Phare",
+        "nace": "85.10",
+         "postes": [
+            {
+                "effectif": 5,
+                "name": "professeur des écoles",
+                "education": 3
+            }
+         ]
+    },
+    {
+        "id": "ent-college",
+        "name": "College",
+        "nace": "85.31",
+         "postes": [
+            {
+                "effectif": 15,
+                "name": "professeur",
+                "education": 3
+            }
+         ]
+    },
+    {
+        "id": "ent-lycee",
+        "name": "Lycée",
+        "nace": "85.31",
+         "postes": [
+            {
+                "effectif": 15,
+                "name": "professeur",
+                "education": 3
+            }
+         ]
+    },
+    {
+        "id": "ent-universite",
+        "name": "Université du littoral",
+        "nace": "85.40",
+         "postes": [
+            {
+                "effectif": 5,
+                "name": "professeur des université",
+                "education": 3
+            },
+            {
+                "effectif": 10,
+                "name": "maître de conférence",
+                "education": 3
+            }
+         ]
+    }
+
 ]

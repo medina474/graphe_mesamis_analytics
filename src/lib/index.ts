@@ -21,6 +21,8 @@ const population = populationRunner.run(2254, 1, 85);
 
 const educationRunner = new EducationRunner(graph, population)
 educationRunner.run()
+
+/*
 const familyRunner = new FamilyRunner(graph, population);
 familyRunner.run();
 
@@ -30,7 +32,6 @@ workRunner.run();
 const membershipRunner = new MembershipRunner(graph, population);
 membershipRunner.load("data/clubs.json");
 membershipRunner.run();
-
 
 const librariesRunner = new LibrariesRunner(graph, population.filter(p => p.age >= 18));
 librariesRunner.load("data/serie.csv", "data/books.csv", "data/libraries.json", "data/awards.csv", "data/awardseditions.csv");
@@ -42,7 +43,7 @@ addressRunner.run();
 
 const friendshipRunner = new FriendshipRunner(graph, population);
 friendshipRunner.run(5000);
-
+*/
 writeFileSync(
   "./public/relationships.json",
   JSON.stringify(graph.export(), null, 2)
