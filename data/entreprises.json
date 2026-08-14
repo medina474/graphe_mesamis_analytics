@@ -273,7 +273,7 @@
         "nace": "10.61",
          "postes": [
             {
-                "effectif": 2,
+                "effectif": 4,
                 "name": "-"
             }
          ]
@@ -283,6 +283,10 @@
         "name": "Biscuiterie de l'île",
         "nace": "10.72",
          "postes": [
+            {
+                "effectif": 1,
+                "name": "dirigeant"
+            },
             {
                 "effectif": 10,
                 "name": "-"
@@ -335,7 +339,7 @@
     {
         "id": "ent-fromagerie",
         "name": "Fromagerie du lac",
-        "nace": "1051",
+        "nace": "10.51",
         "postes": [
             {
                 "effectif": 4,
@@ -370,8 +374,13 @@
         "name": "Glacier du port",
         "postes": [
             {
-                "effectif": 6,
-                "name": "-"
+                "effectif": 2,
+                "name": "artisan glacier "
+            },
+            {
+                "effectif": 4,
+                "name": "vendeur",
+                "ageMaximum": 28
             }
          ]
     },
@@ -427,6 +436,10 @@
             {
                 "effectif": 3,
                 "name": "-"
+            },
+            {
+                "effectif": 4,
+                "name": "cuisinier"
             }
          ]
     },
@@ -443,7 +456,7 @@
     },
     {
         "id": "ent-ecurie",
-        "name": "Écurie de la plage",
+        "name": "Écurie de la lagune",
         "nace": "01.43",
          "postes": [
             {
@@ -498,7 +511,7 @@
                 "effectif": 2,
                 "richesse": 0,
                 "education": 0,
-                "ageMaximum": 21,
+                "ageMaximum": 22,
                 "name": "apprenti"
             },
             {
@@ -509,7 +522,8 @@
             {
                 "effectif": 1,
                 "education": 3,
-                "name": "administrateur réseau"
+                "name": "administrateur réseau",
+                "ageMinimum": 25
             },
             {
                 "effectif": 1,
@@ -529,7 +543,8 @@
             {
                 "effectif": 5,
                 "name": "professeur des écoles",
-                "education": 3
+                "education": 3,
+                "ageMinimum": 25
             }
          ]
     },
@@ -541,19 +556,21 @@
             {
                 "effectif": 5,
                 "name": "professeur des écoles",
-                "education": 3
+                "education": 3,
+                "ageMinimum": 25
             }
          ]
     },
     {
         "id": "ent-college",
-        "name": "College",
+        "name": "Collège des Pins",
         "nace": "85.31",
          "postes": [
             {
                 "effectif": 15,
                 "name": "professeur",
-                "education": 3
+                "education": 3,
+                "ageMinimum": 25
             }
          ]
     },
@@ -565,7 +582,8 @@
             {
                 "effectif": 15,
                 "name": "professeur",
-                "education": 3
+                "education": 3,
+                "ageMinimum": 25
             }
          ]
     },
@@ -575,14 +593,21 @@
         "nace": "85.40",
          "postes": [
             {
-                "effectif": 5,
+                "effectif": 4,
                 "name": "professeur des université",
-                "education": 3
+                "education": 3,
+                "ageMinimum": 25
             },
             {
-                "effectif": 10,
+                "effectif": 8,
                 "name": "maître de conférence",
-                "education": 3
+                "education": 3,
+                "ageMinimum": 25
+            },
+            {
+                "effectif": 3,
+                "name": "administratif",
+                "education": 2
             }
          ]
     }
