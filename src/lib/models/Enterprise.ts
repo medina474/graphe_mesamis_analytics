@@ -1,4 +1,4 @@
-import { Education } from "../models/Person.js";
+import { Person, Education } from "../models/Person.js";
 
 export interface PlageRichesse {
   min: number;
@@ -49,6 +49,29 @@ export class Enterprise {
     return this.postes.reduce((total, poste) => total + poste.effectif, 0);
   }
 }
+
+export class Emploi {
+  constructor(
+    public readonly niveau: number,
+    public readonly enterprise: Enterprise,
+    public readonly poste: Poste,
+  ) {
+  }
+}
+
+export class Affectation {
+
+  constructor(
+    public readonly person: Person,
+    public readonly enterprise: Enterprise,
+    public readonly poste: Poste,
+  ) {
+  }
+}
+
+/**
+ * Facturation
+ */
 
 export class Facture {
   constructor(

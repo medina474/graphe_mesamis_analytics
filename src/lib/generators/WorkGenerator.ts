@@ -1,19 +1,9 @@
 import { DirectedGraph } from "graphology";
 import { Gender, Person, Education, Wealth } from "../models/Person.js";
-import { Enterprise, PlageRichesse, Poste } from "../models/Enterprise.js";
+import { Enterprise, Poste, Emploi, Affectation } from "../models/Enterprise.js";
+import type { PlageRichesse } from "../models/Enterprise.js";
 import { Random } from "../stats/Random.js";
 
-interface Emploi {
-  niveau: number;
-  enterprise: Enterprise;
-  poste: Poste;
-}
-
-interface Affectation {
-  person: Person;
-  enterprise: Enterprise;
-  poste: Poste;
-}
 
 export class WorkGenerator {
   private emplois: Emploi[];
@@ -22,6 +12,7 @@ export class WorkGenerator {
     private graph: DirectedGraph,
     private individus: Person[],
     private enterprises: Enterprise[],
+    private affectations: Affectation[],
   ) {
     this.emplois = [];
 
@@ -43,16 +34,10 @@ export class WorkGenerator {
   }
 
   generate() {
-    const disponibles = [
-      ...this.individus.filter((i) => i.age > 20 && i.age < 65),
-    ];
-    const nbDisponibles = disponibles.length;
-    console.log(`Population en âge de travailler : ${nbDisponibles}`);
-    const affectations: Affectation[] = [];
 
     for (const emploi of this.emplois) {
       for (let k = 0; k < emploi.poste.effectif; k++) {
-        const candidat = this.meilleurCandidat(emploi.poste, disponibles);
+        const candidat = this.meilleurCandidat(emploi.poste, this.individus);
 
         if (candidat === null) {
           console.log(
@@ -61,11 +46,11 @@ export class WorkGenerator {
           continue;
         }
 
-        affectations.push({
-          person: candidat,
-          enterprise: emploi.enterprise,
-          poste: emploi.poste,
-        });
+        this.affectations.push(new Affectation(
+          candidat,
+          emploi.enterprise,
+          emploi.poste,
+        ));
 
         candidat.work = emploi.enterprise
 
@@ -73,20 +58,10 @@ export class WorkGenerator {
           candidat.wealth = this.tirerRichesse(emploi.poste.richesse);
         }
 
-        this.graph.addEdge(candidat.id, emploi.enterprise.id, {
-          relation: "WORK",
-          weight: 1,
-        });
-
-        const index = disponibles.indexOf(candidat);
-        disponibles.splice(index, 1);
+        // Retirer l'individu
+        this.individus.splice(this.individus.indexOf(candidat), 1);
       }
     }
-
-    console.log(`Population en activité : ${affectations.length}`);
-    console.log(
-      `Taux d'activité : ${((affectations.length / nbDisponibles) * 100).toFixed(2)}`,
-    );
   }
 
   private meilleurCandidat(poste: Poste, personnes: Person[]): Person | null {
