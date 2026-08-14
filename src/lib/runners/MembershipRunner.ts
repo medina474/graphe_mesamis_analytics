@@ -29,8 +29,6 @@ export class MembershipRunner {
     );
 
     clubMembershipGenerator.generate();
-
-    this.updateClubs(this.clubs);
   }
 
   addClubs(clubs: Club[]): void {
@@ -49,13 +47,5 @@ export class MembershipRunner {
       size: 1,
       color: "#82ff69",
     });
-  }
-
-  updateClubs(clubs: Club[]): void {
-    for (const club of clubs) {
-      this.graph.mergeNodeAttributes(club.id, {
-        size: Math.ceil(club.size / 3.0),
-      });
-    }
   }
 }
