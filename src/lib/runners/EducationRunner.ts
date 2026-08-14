@@ -22,6 +22,7 @@ interface Grade {
 
 export class EducationRunner {
   private grades: Grade[];
+  private readonly assigned = new Set<string>();
 
   constructor(
     private readonly graph: DirectedGraph,
@@ -225,7 +226,7 @@ export class EducationRunner {
     console.log(`----------------------------------------`);
 
     for (let grade of this.grades) {
-      const students = this.population.filter((p) => p.age == grade.age);
+      const students = this.getStudents(grade);
 
       const nombreClasses = Math.ceil(
         students.length / grade.tailleCible
@@ -243,7 +244,7 @@ export class EducationRunner {
   private getStudents(grade: Grade): Person[] {
     const students: Person[] = [];
 
-    const targetSize = grade.tailleCible * grade.tailleMax;
+    const targetSize = 2 * grade.tailleMax;
 
     for (const distribution of grade.ageDistribution) {
       const age = grade.age + distribution.ageOffset;
