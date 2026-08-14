@@ -51,58 +51,38 @@ export class FriendsGenerator {
   generate(iterations: number): void {
     for (let k = 0; k < iterations; k++) {
       const a = this.randomPerson();
-      const b = this.preferentialPerson(a);
+      const result = this.preferentialPerson(a);
 
-      if (!b) {
-        console.log(`${k} pas de personne préférentielle`);
+      if (!result) {
+        console.log(`${k} ${a.firstname} pas de personne préférentielle`);
         continue;
       }
 
+      const { person: b, affinity, context } = result;
       const idA = a.id;
       const idB = b.id;
 
-      console.log(`${a.firstname} ? ${b.firstname}`)
-      if (this.graph.hasEdge(idA, idB)) {
-        console.log(`${k} personnes déja liées`);
-        continue;
-      }
-
-      const similarity = this.similarity(a, b);
-      const age = this.ageAffinity(a, b);
-      const gender = this.genderAffinity(a, b);
-
+      /*
+      * Opportunités sociales
+      */
       const triadic = this.triadicScore(idA, idB);
-      const interaction = this.interactionScore(idA, idB);
-
-      /*
-       * Affinité intrinsèque
-       */
-      const affinity = 3 * similarity + 1.5 * age + 1 * gender;
-
-      /*
-       * Opportunités sociales
-       */
       const opportunity = 2 * triadic;
 
       /*
        * Probabilité finale
        */
-      const z = -2 + affinity + opportunity;
+      const z = -2 + 3 * affinity + opportunity;
       const p = 1 / (1 + Math.exp(-z));
 
-      console.log(`affinity = ${affinity.toFixed(2)} : ${similarity.toFixed(2)} * ${age.toFixed(2)} * ${gender.toFixed(2)}`);
-      console.log(`opportunity = ${opportunity.toFixed(2)} : 1 + ${interaction.toFixed(2)} * 2 + ${triadic.toFixed(2)} * 2`);
-      console.log(`p = ${p.toFixed(2)} : 0.03 * ${affinity.toFixed(2)} * ${opportunity.toFixed(2)}`);
-
       if (Math.random() < p) {
-        console.log("match");
         a.edges++;
         b.edges++;
 
+        // Faire le lien maintenant, car utilisé dans l'exclusion
         this.graph.addEdge(idA, idB, {
           relation: "friends",
           category: "friends",
-          weight: 3,
+          weight: 1,
         });
       }
     }
@@ -112,7 +92,7 @@ export class FriendsGenerator {
     return this.individus[Math.floor(Math.random() * this.individus.length)];
   }
 
-  private preferentialPerson(exclude: Person): Person | null {
+  private preferentialPerson(exclude: Person): { person: Person; affinity: number; context: number } | null {
     const candidates = this.individus.filter(
       (person) =>
         person.id !== exclude.id && !this.graph.hasEdge(exclude.id, person.id),
@@ -122,29 +102,52 @@ export class FriendsGenerator {
       return null;
     }
 
-    const weights = candidates.map((person) => {
-      const degreeWeight = Math.pow(this.graph.degree(person.id) + 1, 0.5);
-      const homophilyWeight = this.contextAffinity(exclude, person); // ex: 1 + bonus clubs/travail
+    const scored = candidates.map((person) => {
 
-      return degreeWeight * homophilyWeight;
+      /*
+       * Affinité intrinsèque
+       */
+      const affinity =
+        this.similarity(exclude, person) *
+        this.ageAffinity(exclude, person) *
+        this.genderAffinity(exclude, person);
+
+      const context = this.contextAffinity(exclude, person);
+      const degreeWeight = Math.pow(this.friendDegree(person.id) + 1, 0.5);
+      const weight = degreeWeight * (0.1 + affinity * (1 + context));
+
+      return { person, affinity, context, weight };
     });
 
-    const total = weights.reduce((sum, weight) => sum + weight, 0);
+    const total = scored.reduce((sum, s) => sum + s.weight, 0);
     let random = Math.random() * total;
 
-    for (let i = 0; i < candidates.length; i++) {
-      random -= weights[i];
-      if (random <= 0) return candidates[i];
+    for (const s of scored) {
+      random -= s.weight;
+      if (random <= 0) {
+        return { person: s.person, affinity: s.affinity, context: s.context };
+      }
     }
 
-    return candidates[candidates.length - 1];
+    const last = scored[scored.length - 1];
+    return { person: last.person, affinity: last.affinity, context: last.context };
+  }
+
+  private similarityCosine(a: Person, b: Person): number {
+    const va = this.vector(a);
+    const vb = this.vector(b);
+
+    return Random.cosineSimilarity(va, vb);
   }
 
   private similarity(a: Person, b: Person): number {
     const va = this.vector(a);
     const vb = this.vector(b);
 
-    return Random.cosineSimilarity(va, vb);
+    const squaredDist = va.reduce((sum, v, i) => sum + (v - vb[i]) ** 2, 0);
+    const sigma = 0.5; // à calibrer : plus petit = clusters plus stricts
+
+    return Math.exp(-squaredDist / (2 * sigma * sigma));
   }
 
   private contextAffinity(a: Person, b: Person): number {
@@ -265,4 +268,16 @@ export class FriendsGenerator {
 
     return Math.min(score, 1);
   }
+
+  private friendDegree(personId: string): number {
+  let count = 0;
+
+  for (const edge of this.graph.edges(personId)) {
+    if (this.graph.getEdgeAttribute(edge, "relation") === "friends") {
+      count++;
+    }
+  }
+
+  return count;
+}
 }

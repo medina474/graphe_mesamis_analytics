@@ -4,7 +4,7 @@ import { Address } from "../models/Address.js";
 import { Random } from "../stats/Random.js";
 
 export class AddressGenerator {
-    
+
     private addressesDisponibles: Address[]
 
     constructor(
@@ -25,7 +25,10 @@ export class AddressGenerator {
         }
 
         const index = Random.int(0, this.addressesDisponibles.length)
+
+        // Permettre la cohabitation entre personnes "amies"
         const address = this.addressesDisponibles.splice(index, 1)[0];
+
         person.address = address;
 
         if (person.spouse) {
@@ -36,7 +39,7 @@ export class AddressGenerator {
                     withChildren = (Math.random() <= 0.90)
                 }
             }
-        
+
             if (withChildren && person.children) {
                 for (const child of person.children.filter(c => c.age < 21)) {
                     child.address = address

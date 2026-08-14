@@ -18,29 +18,27 @@ populationRunner.load(
 );
 const population = populationRunner.run(2080, 1, 85);
 
+const familyRunner = new FamilyRunner(graph, population);
+familyRunner.run();
 
-const familyRunner = new FamilyRunner(graph);
-familyRunner.run(population);
+const workRunner = new WorkRunner(graph, population);
+workRunner.run();
 
-const workRunner = new WorkRunner(graph);
-workRunner.run(population);
-
-const membershipRunner = new MembershipRunner(graph);
+const membershipRunner = new MembershipRunner(graph, population);
 membershipRunner.load("data/clubs.json");
-membershipRunner.run(population);
+membershipRunner.run();
 
 
 const librariesRunner = new LibrariesRunner(graph, population.filter(p => p.age >= 18));
 librariesRunner.load("data/serie.csv", "data/books.csv", "data/libraries.json", "data/awards.csv", "data/awardseditions.csv");
 librariesRunner.run(2000);
 
-
-const addressRunner = new AddressRunner(graph);
+const addressRunner = new AddressRunner(graph, population);
 addressRunner.load("data/voies.json", "data/adresses.csv");
-addressRunner.run(population);
+addressRunner.run();
 
-const friendshipRunner = new FriendshipRunner(graph);
-friendshipRunner.run(population, 3000);
+const friendshipRunner = new FriendshipRunner(graph, population);
+friendshipRunner.run(5000);
 
 writeFileSync(
   "./public/relationships.json",

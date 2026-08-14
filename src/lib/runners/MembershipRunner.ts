@@ -7,7 +7,7 @@ import { ClubMembershipGenerator } from "../generators/ClubMembershipGenerator.j
 export class MembershipRunner {
   private clubs: Club[] = [];
 
-  constructor(private readonly graph: DirectedGraph) {}
+  constructor(private readonly graph: DirectedGraph, private readonly population: Person[]) {}
 
   /**
    * Charge la liste des clubs depuis un fichier json.
@@ -19,12 +19,12 @@ export class MembershipRunner {
     this.addClubs(this.clubs);
   }
 
-  public run(population: Person[]): void {
+  public run(): void {
     console.log(`----------------------------------------`);
 
     const clubMembershipGenerator = new ClubMembershipGenerator(
       this.graph,
-      population,
+      this.population,
       this.clubs,
     );
 

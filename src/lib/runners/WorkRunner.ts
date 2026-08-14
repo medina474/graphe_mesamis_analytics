@@ -3,12 +3,11 @@ import { JsonLoader } from "../loaders/JsonLoader.js";
 import { WorkGenerator } from "../generators/WorkGenerator.js";
 import { Enterprise, Facture } from "../models/Enterprise.js";
 import { Person } from "../models/Person.js";
-import { fa } from "@faker-js/faker";
 
 export class WorkRunner {
-  constructor(private readonly graph: DirectedGraph) {}
+  constructor(private readonly graph: DirectedGraph, private readonly population: Person[]) {}
 
-  public run(population: Person[]): void {
+  public run(): void {
     console.log(`----------------------------------------`);
     const enterprises = JsonLoader.load("data/entreprises.json", Enterprise);
 
@@ -23,7 +22,7 @@ export class WorkRunner {
 
     const workGenerator = new WorkGenerator(
       this.graph,
-      population,
+      this.population,
       enterprises,
     );
 

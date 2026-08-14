@@ -5,21 +5,14 @@ import { Person } from "../models/Person.js";
 export class FriendshipRunner {
 
     constructor(
-        private readonly graph: DirectedGraph
-    ) {}
-
-    public run(population: Person[], iterations: number):void {
-        console.log(`----------------------------------------`);
-        const friendsGenerator = new FriendsGenerator(this.graph, population);
-        friendsGenerator.generate(iterations);
-        this.updatePersons(population);
+        private readonly graph: DirectedGraph,
+        private readonly population: Person[],
+    ) {
     }
 
-    updatePersons(personnes: Person[]): void {
-        for (const personne of personnes) {
-            this.graph.mergeNodeAttributes(personne.id, {
-                size: 1.0,
-            });
-        }
+    public run(iterations: number):void {
+        console.log(`----------------------------------------`);
+        const friendsGenerator = new FriendsGenerator(this.graph, this.population);
+        friendsGenerator.generate(iterations);
     }
 }

@@ -1,5 +1,6 @@
 import { Person } from "../models/Person.js";
-import { Copy, Loan, GenreInfo } from "../models/Book.js";
+import { Copy, Loan } from "../models/Book.js";
+import type { GenreInfo } from "../models/Book.js"
 import { Random } from "../stats/Random.js";
 
 export class LoanGenerator {
@@ -269,7 +270,7 @@ export class LoanGenerator {
 
       // Si la sélection fait partie d'une série,
       // préférer le tome suivant si la série est en cours (ou le tome 1)
-      if (selection[index].book.serie) {
+      if (selection[index].book.serie && selection[index].book.serie!.isOrdered) {
         const book = selection[index].book;
         const serieId = book.serie!.id;
         console.log(`${book.serie!.label} ${book.order}`);
@@ -305,6 +306,9 @@ export class LoanGenerator {
             return null;
           }
         }
+      }
+      else {
+        break;
       }
     }
 

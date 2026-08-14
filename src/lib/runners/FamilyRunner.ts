@@ -5,15 +5,16 @@ import { Person } from "../models/Person.js";
 export class FamilyRunner {
 
     constructor(
-        private readonly graph: DirectedGraph
+        private readonly graph: DirectedGraph,
+        private readonly population: Person[],
     ) {}
 
-    public run(population: Person[]):void {
+    public run():void {
         const familyGenerator = new FamilyGenerator(
             this.graph,
-            population
+            this.population
         );
-        
+
         familyGenerator.generate();
     }
 }

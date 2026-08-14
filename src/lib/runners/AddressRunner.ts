@@ -15,6 +15,7 @@ export class AddressRunner {
 
   constructor(
     private readonly graph: DirectedGraph,
+    private readonly population: Person[],
     private lat0 = 48.75,
     private lon0 = -4,
   ) {}
@@ -27,11 +28,11 @@ export class AddressRunner {
     this.addAddresses(this.addresses);
   }
 
-  public run(population: Person[]): void {
+  public run(): void {
     const addressGenerator = new AddressGenerator(this.graph, this.addresses);
-    addressGenerator.generateAll(population);
+    addressGenerator.generateAll(this.population);
 
-    for (const p of population) {
+    for (const p of this.population) {
       if (p.address) {
         this.graph.addEdge(p.id, p.address.id, {
           relation: "LIVE",
