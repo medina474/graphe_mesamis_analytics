@@ -6,10 +6,11 @@ import { Random } from "../stats/Random.js";
 export class AddressGenerator {
 
     private addressesDisponibles: Address[]
-
+        
     constructor(
         private graph: DirectedGraph,
-        private addresses: Address[]
+        private addresses: Address[],
+        private divorceRate: number = 0.05,
     ) {
         this.addressesDisponibles = [...this.addresses];
     }
@@ -33,15 +34,16 @@ export class AddressGenerator {
 
         if (person.spouse) {
             let withChildren: boolean = true;
-            if (Math.random() <= 0.95) {
+            if (Math.random() <= (1 - this.divorceRate)) {
                 person.spouse.address = address
+            } else {
                 if (person.gender == Gender.Female) {
                     withChildren = (Math.random() <= 0.90)
                 }
             }
 
             if (withChildren && person.children) {
-                for (const child of person.children.filter(c => c.age < 21)) {
+                for (const child of person.children.filter(c => c.age < Random.int(18, 22))) {
                     child.address = address
                 }
             }
@@ -49,6 +51,38 @@ export class AddressGenerator {
     }
 
     public generateAll(persons: Person[]) {
+        // Gérer les pensions de famille
+        const candidates = persons.filter(person =>
+            person.gender === Gender.Female &&
+            person.age > 64 &&
+            !person.spouse &&
+            !person.address
+        );
+        const capacity = Random.int(2, 7);
+        
+        // Gérer les jeunes filles au pair
+        const families = persons.filter(person =>
+            person.spouse &&
+            person.children?.some(child => child.age < 10)
+        );
+
+        const candidates = persons.filter(person =>
+            !person.address &&
+            !person.spouse &&
+            person.age >= 18 &&
+            person.age <= 30
+        );
+        
+        // Gérer les cohabitations
+        const jeunes = persons.filter(person =>
+            !person.spouse &&
+            person.age < 30  &&
+            !person.address
+        );
+
+        console.log(`Nombre de célibataires de moins de 30 ans : ${jeunes.length}`)
+        Random.shuffle(eligibles);
+        
         for (const person of persons.sort((a, b) => b.age - a.age)) {
             if (!person.address) {
                 this.generate(person)
