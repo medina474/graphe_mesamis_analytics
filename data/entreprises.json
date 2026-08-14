@@ -11,13 +11,18 @@
                 "name": "patron"
             },
             {
-                "effectif": 2,
+                "effectif": 3,
                 "richesse": 2,
                 "ageMinimum": 30,
                 "name": "cadre"
             },
             {
-                "effectif": 30,
+                "effectif": 10,
+                "richesse": 0,
+                "name": "intérimaire"
+            },
+            {
+                "effectif": 20,
                 "richesse": { "min": 0, "max": 1 },
                 "name": "ouvrier"
             }
