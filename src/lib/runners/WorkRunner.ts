@@ -1,35 +1,49 @@
 import { DirectedGraph } from "graphology";
 import { JsonLoader } from "../loaders/JsonLoader.js";
 import { WorkGenerator } from "../generators/WorkGenerator.js";
-import { Enterprise, Facture } from "../models/Enterprise.js";
+import { Enterprise, Facture, Affectation } from "../models/Enterprise.js";
 import { Person } from "../models/Person.js";
 
 export class WorkRunner {
   constructor(private readonly graph: DirectedGraph, private readonly population: Person[]) {}
 
   public run(): void {
-    console.log(`----------------------------------------`);
+    console.log(`----------------------------------------
+Emploi
+----------------------------------------`);
     const enterprises = JsonLoader.load("data/entreprises.json", Enterprise);
 
     for (const enterprise of enterprises) {
       this.addEnterprise(enterprise);
     }
 
+    const affectations: Affectation[] = [];
+
+    const workForce = [...this.population.filter((i) => i.age > 20 && i.age < 65)]
+
+    const workGenerator = new WorkGenerator(
+      this.graph,
+      workForce,
+      enterprises,
+      affectations,
+    );
+
+    const nbDisponibles = workForce.length;
+    console.log(`Population en âge de travailler : ${nbDisponibles}`);
+
+    workGenerator.generate();
+
+    console.log(`Population en activité : ${affectations.length}`);
+    console.log(
+      `Taux d'activité : ${((affectations.length / nbDisponibles) * 100).toFixed(2)} %`,
+    );
+
+    this.addEdgesWork(affectations)
+
     const factures = JsonLoader.load("data/factures.json", Facture);
     for (const facture of factures) {
       this.addFacture(facture);
     }
-
-    const workGenerator = new WorkGenerator(
-      this.graph,
-      this.population,
-      enterprises,
-    );
-
-    workGenerator.generate();
-
-    population.reduce((s, c) => { s+= c.enterprise ? : 1 : 0 }, 0)
-    console.log(`${ s / population.length }`)
   }
 
   addEnterprise(enterprise: Enterprise): void {
@@ -59,5 +73,19 @@ export class WorkRunner {
       relation: "INVOICE",
       weight: 1,
     });
+  }
+
+  addEdgeWork(affectation: Affectation): void {
+    this.graph.addEdge(affectation.person.id, affectation.enterprise.id, {
+      relation: "WORK",
+      poste: affectation.poste,
+      weight: 1,
+    });
+  }
+
+  addEdgesWork(affectations: Affectation[]): void {
+    for (const affectation of affectations) {
+      this.addEdgeWork(affectation)
+    }
   }
 }
