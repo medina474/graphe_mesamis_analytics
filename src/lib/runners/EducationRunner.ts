@@ -231,6 +231,8 @@ export class EducationRunner {
         students.length / grade.tailleCible
       );
 
+      console.log(`Nombre de classes : ${nombreClasses} ${students.length / nombreClasses}`)
+
       for (let c = 0; c < nombreClasses; c++) {
         grade.classes[c] = [];
         grade.classes[c].push(...students.splice(0, 30));

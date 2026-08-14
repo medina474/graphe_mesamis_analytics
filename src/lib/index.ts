@@ -19,13 +19,12 @@ populationRunner.load(
 );
 const population = populationRunner.run(2254, 1, 85);
 
-const educationRunner = new EducationRunner(graph, population)
-educationRunner.run()
-
-/*
 const familyRunner = new FamilyRunner(graph, population);
 familyRunner.run();
 
+const educationRunner = new EducationRunner(graph, population)
+educationRunner.run()
+/*
 const workRunner = new WorkRunner(graph, population);
 workRunner.run();
 

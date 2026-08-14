@@ -6,7 +6,7 @@ export class FamilyRunner {
 
     constructor(
         private readonly graph: DirectedGraph,
-        private readonly population: Person[],
+        private population: Person[],
     ) {}
 
     public run():void {
@@ -16,5 +16,8 @@ export class FamilyRunner {
         );
 
         familyGenerator.generate();
+
+        this.population = this.population.filter(p => p.age >= 18 || p.mother != null || p.father != null)
+
     }
 }
