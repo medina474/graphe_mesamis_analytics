@@ -12,9 +12,9 @@ export class AgeDistribution implements Distribution<number> {
     minAge = 18,
     maxAge = Number.MAX_SAFE_INTEGER,
   ) {
-    const entries = pyramid
-      .entries
-      .filter((e) => e.age >= minAge && e.age <= maxAge);
+    const entries = pyramid.entries.filter(
+      (e) => e.age >= minAge && e.age <= maxAge,
+    );
 
     this.ages = entries.map((e) => e.age);
     this.weights = entries.map((e) => e.male + e.female);

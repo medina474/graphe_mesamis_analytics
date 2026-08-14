@@ -6,9 +6,8 @@ import { Random } from "../stats/Random.js";
 export class GenderDistribution implements Distribution<Gender> {
   constructor(private readonly pyramid: AgePyramidStat) {}
   sample(person: Partial<Person>): Gender {
-
     return Random.bool(this.pyramid.maleProbability(person.age!))
-            ? Gender.Male
-            : Gender.Female;
+      ? Gender.Male
+      : Gender.Female;
   }
 }
