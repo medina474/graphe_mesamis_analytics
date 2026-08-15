@@ -5,7 +5,7 @@ import { Club } from "../models/Club.js";
 import { ClubMembershipGenerator } from "../generators/ClubMembershipGenerator.js";
 
 export class MembershipRunner {
-  private clubs: Club[] = [];
+  public clubs: Club[] = [];
 
   constructor(
     private readonly graph: DirectedGraph,
@@ -55,9 +55,6 @@ Clubs
       category: "club",
       name: club.name,
       label: club.name,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: 1,
       color: "#82ff69",
     });
   }

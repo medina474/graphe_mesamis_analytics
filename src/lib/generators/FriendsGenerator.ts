@@ -294,8 +294,8 @@ export class FriendsGenerator {
     }
 
     // Clubs communs
-    const clubsA = this.getNeighborsByCategory(a, "MEMBER");
-    const clubsB = this.getNeighborsByCategory(b, "MEMBER");
+    const clubsA = this.getNeighborsByRelation(a, "MEMBER");
+    const clubsB = this.getNeighborsByRelation(b, "MEMBER");
 
     const commonClubs = this.intersectionSize(clubsA, clubsB);
 
@@ -304,8 +304,8 @@ export class FriendsGenerator {
     }
 
     // Entreprise commune
-    const enterprisesA = this.getNeighborsByCategory(a, "WORK");
-    const enterprisesB = this.getNeighborsByCategory(b, "WORK");
+    const enterprisesA = this.getNeighborsByRelation(a, "WORK");
+    const enterprisesB = this.getNeighborsByRelation(b, "WORK");
 
     const commonEnterprises = this.intersectionSize(enterprisesA, enterprisesB);
 
@@ -320,7 +320,7 @@ export class FriendsGenerator {
     let count = 0;
 
     for (const edge of this.graph.edges(personId)) {
-      if (this.graph.getEdgeAttribute(edge, "relation") === "friends") {
+      if (this.graph.getEdgeAttribute(edge, "relation") === "FRIENDS") {
         count++;
       }
     }
