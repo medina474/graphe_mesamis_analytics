@@ -7,7 +7,7 @@ import { Person } from "../models/Person.js";
 export class WorkRunner {
   constructor(private readonly graph: DirectedGraph, private readonly population: Person[]) {}
 
-  
+
   public run(): void {
     console.log(`----------------------------------------
 Emploi
@@ -52,8 +52,6 @@ Emploi
       category: "Enterprise",
       name: enterprise.name,
       label: enterprise.name,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
       color: "#ffd035",
     });
   }

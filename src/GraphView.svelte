@@ -74,8 +74,8 @@
         count = countEdge(graph, node, "CLASSIFY-AS")
       } else if (relationFilter.includes("CONTAIN")) {
         count = countEdge(graph, node, "CONTAIN")
-      } else if (relationFilter.includes("friends")) {
-        count = countEdge(graph, node, "friends")
+      } else if (relationFilter.includes("FRIENDS")) {
+        count = countEdge(graph, node, "FRIENDS")
       } else if (relationFilter.includes("CHILD")) {
         count = countEdge(graph, node, "child")
       } else if (relationFilter.includes("YY")) {
@@ -189,7 +189,7 @@
       <option value="marriage|child|father|mother">Famille</option>
       <option value="MEMBER">Clubs</option>
       <option value="WORK">Travail</option>
-      <option value="friends">Amitiés</option>
+      <option value="FRIENDS">Amitiés</option>
       <option value="WRITE">Livres - auteurs</option>
       <option value="CLASSIFY-AS">- genres</option>
       <option value="PARTS-OF">- series</option>

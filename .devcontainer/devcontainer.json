@@ -2,6 +2,9 @@
     "name": "Mes Amis - Svelte Dashboard",
     "image": "node:26",
     "forwardPorts": [5173],
+    "runArgs": [
+    "--add-host=host.docker.internal:host-gateway"
+  ],
     "customizations": {
         "vscode": {
             "extensions": [

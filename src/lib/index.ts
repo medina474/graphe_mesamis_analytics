@@ -9,6 +9,7 @@ import { AddressRunner } from "./runners/AddressRunner.js";
 import { EducationRunner } from "./runners/EducationRunner.js";
 import { MultiDirectedGraph } from "graphology";
 import { WaysRunner } from "./runners/WaysRunner.js";
+import neo4j from "neo4j-driver";
 
 const graph: MultiDirectedGraph = new MultiDirectedGraph();
 
@@ -56,3 +57,32 @@ writeFileSync(
   "./public/relationships.json",
   JSON.stringify(graph.export(), null, 2)
 );
+
+const driver = neo4j.driver(
+  "bolt://host.docker.internal:7687",
+  neo4j.auth.basic("neo4j", "supermotdepasse")
+);
+
+const session = driver.session();
+
+//try {
+  for (const nodeId of graph.nodes()) {
+    const attributes = graph.getNodeAttributes(nodeId);
+
+    await session.run(
+      `
+      MERGE (p:Person {id: $id})
+      SET p += $attributes
+      `,
+      {
+        id: nodeId,
+        attributes: attributes
+      }
+    );
+  }
+
+
+
+//} finally {
+  await session.close();
+//}

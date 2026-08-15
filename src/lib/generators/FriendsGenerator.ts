@@ -124,8 +124,7 @@ export class FriendsGenerator {
 
         // Faire le lien maintenant, car utilisé dans l'exclusion
         this.graph.addEdge(idA, idB, {
-          relation: "friends",
-          category: "friends",
+          relation: "FRIENDS",
           weight: 1,
         });
       }

@@ -58,9 +58,6 @@ export class AddressRunner {
     this.graph.addNode(voie.id, {
       category: "Way",
       label: voie.voie,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: 1,
       color: "#ff3535",
     });
   }

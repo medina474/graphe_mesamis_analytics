@@ -29,6 +29,7 @@
     "echarts-stat": "^1.2.0",
     "graphology": "^0.26.0",
     "graphology-layout-forceatlas2": "^0.10.1",
+    "neo4j-driver": "^6.2.0",
     "random-js": "^2.1.0",
     "sigma": "^3.0.3",
     "tailwindcss": "^4.3.3"
