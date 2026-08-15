@@ -37,7 +37,7 @@ export class AddressRunner {
 
         // 20 mètres autour
         const { x, y } = Geo.coordToGraph(p.address.lat, p.address.lon);
-        const position = Random.around(x, y, 0.1);
+        const position = Random.circle(x, y, 0.05);
 
         this.graph.mergeNodeAttributes(p.id, {
           x_geo: position.x,

@@ -286,7 +286,7 @@ export class EducationRunner {
 
   public run(): void {
     console.log(`----------------------------------------
-Education
+Éducation
 ----------------------------------------`);
 
     this.addNodesEtablissements();
@@ -340,13 +340,13 @@ Education
     grade: Grade,
   ) {
     const { x, y } = Geo.coordToGraph(etablissement.etablissement.latitude, etablissement.etablissement.longitude);
-    const position = Random.around(x, y, 0.1);
+    const position = Random.circle(x, y, 0.075);
     this.graph.addNode(`class-${index}`, {
       category: "Classe",
       name: grade.niveau,
       label: grade.niveau,
-      x_geo: x,
-      y_geo: y,
+      x_geo: position.x,
+      y_geo: position.y,
       color: "#508415",
     });
 

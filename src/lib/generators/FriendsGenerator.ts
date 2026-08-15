@@ -2,16 +2,34 @@ import { Random } from "../utilities/Random.js";
 import { Person } from "../models/Person.js";
 import { UndirectedGraph } from "graphology";
 
-
 export class FriendsGenerator {
-
   private readonly stats: { mean: number; std: number }[];
+  private readonly sigma: number;
 
   constructor(
     private readonly graph: UndirectedGraph,
     private readonly individus: Person[],
   ) {
     this.stats = this.computeStats();
+    this.sigma = this.calibrateSigma();
+
+    // à lancer une fois, sur un échantillon de paires aléatoires
+    console.log("Similarité")
+    const sample = [];
+    for (let i = 0; i < 1000; i++) {
+      const a = individus[Math.floor(Math.random() * individus.length)];
+      const b = individus[Math.floor(Math.random() * individus.length)];
+      if (a.id === b.id) continue;
+
+      sample.push(this.similarity(a, b));
+    }
+
+    sample.sort((x, y) => x - y);
+    console.log("min", sample[0]);
+    console.log("p25", sample[Math.floor(sample.length * 0.25)]);
+    console.log("median", sample[Math.floor(sample.length * 0.5)]);
+    console.log("p75", sample[Math.floor(sample.length * 0.75)]);
+    console.log("max", sample[sample.length - 1]);
   }
 
   private rawVector(person: Person): number[] {
@@ -48,6 +66,32 @@ export class FriendsGenerator {
     return stats;
   }
 
+  private calibrateSigma(): number {
+    const sampleSize = Math.min(1000, this.individus.length * 5);
+    const distances: number[] = [];
+
+    for (let i = 0; i < sampleSize; i++) {
+      const a =
+        this.individus[Math.floor(Math.random() * this.individus.length)];
+      const b =
+        this.individus[Math.floor(Math.random() * this.individus.length)];
+      if (a.id === b.id) continue;
+
+      const va = this.vector(a);
+      const vb = this.vector(b);
+      const squaredDist = va.reduce((sum, v, i) => sum + (v - vb[i]) ** 2, 0);
+
+      distances.push(squaredDist);
+    }
+
+    distances.sort((x, y) => x - y);
+    const medianSquaredDist = distances[Math.floor(distances.length / 2)];
+
+    // On veut qu'une paire à distance médiane ait une similarité ~0.5
+    // exp(-d / (2*sigma^2)) = 0.5  =>  sigma^2 = d / (2*ln(2))
+    return Math.sqrt(medianSquaredDist / (2 * Math.log(2)));
+  }
+
   generate(iterations: number): void {
     for (let k = 0; k < iterations; k++) {
       const a = this.randomPerson();
@@ -63,8 +107,8 @@ export class FriendsGenerator {
       const idB = b.id;
 
       /*
-      * Opportunités sociales
-      */
+       * Opportunités sociales
+       */
       const triadic = this.triadicScore(idA, idB);
       const opportunity = 2 * triadic;
 
@@ -92,7 +136,9 @@ export class FriendsGenerator {
     return this.individus[Math.floor(Math.random() * this.individus.length)];
   }
 
-  private preferentialPerson(exclude: Person): { person: Person; affinity: number; context: number } | null {
+  private preferentialPerson(
+    exclude: Person,
+  ): { person: Person; affinity: number; context: number } | null {
     const candidates = this.individus.filter(
       (person) =>
         person.id !== exclude.id && !this.graph.hasEdge(exclude.id, person.id),
@@ -103,7 +149,6 @@ export class FriendsGenerator {
     }
 
     const scored = candidates.map((person) => {
-
       /*
        * Affinité intrinsèque
        */
@@ -130,7 +175,11 @@ export class FriendsGenerator {
     }
 
     const last = scored[scored.length - 1];
-    return { person: last.person, affinity: last.affinity, context: last.context };
+    return {
+      person: last.person,
+      affinity: last.affinity,
+      context: last.context,
+    };
   }
 
   private similarityCosine(a: Person, b: Person): number {
@@ -145,9 +194,8 @@ export class FriendsGenerator {
     const vb = this.vector(b);
 
     const squaredDist = va.reduce((sum, v, i) => sum + (v - vb[i]) ** 2, 0);
-    const sigma = 0.5; // à calibrer : plus petit = clusters plus stricts
 
-    return Math.exp(-squaredDist / (2 * sigma * sigma));
+    return Math.exp(-squaredDist / (2 * this.sigma * this.sigma));
   }
 
   private contextAffinity(a: Person, b: Person): number {
@@ -172,7 +220,7 @@ export class FriendsGenerator {
      * 2 : 0.86
      * 3 : 0.95
      */
-    score +=  (1 - Math.exp(-commonClubs));
+    score += 1 - Math.exp(-commonClubs);
     score += 0.32 * (1 - Math.exp(-commonEnterprises));
 
     /* 1 et 1 : min : 0 max : 1.32 */
@@ -270,14 +318,14 @@ export class FriendsGenerator {
   }
 
   private friendDegree(personId: string): number {
-  let count = 0;
+    let count = 0;
 
-  for (const edge of this.graph.edges(personId)) {
-    if (this.graph.getEdgeAttribute(edge, "relation") === "friends") {
-      count++;
+    for (const edge of this.graph.edges(personId)) {
+      if (this.graph.getEdgeAttribute(edge, "relation") === "friends") {
+        count++;
+      }
     }
-  }
 
-  return count;
-}
+    return count;
+  }
 }

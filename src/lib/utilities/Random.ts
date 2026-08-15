@@ -222,4 +222,13 @@ export class Random {
       y: y + Math.sin(angle) * distance,
     };
   }
+
+  static circle(x: number, y: number, radius: number) {
+    const angle = Math.random() * Math.PI * 2;
+
+    return {
+      x: x + Math.cos(angle) * radius,
+      y: y + Math.sin(angle) * radius,
+    };
+  }
 }

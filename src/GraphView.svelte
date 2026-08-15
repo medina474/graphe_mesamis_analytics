@@ -46,14 +46,14 @@
 
     graph.forEachNode((node, attributes) => {
 
-      if (typeof attributes.size === undefined) {
+      if (typeof attributes.size === 'undefined') {
         attributes.size = 1;
       }
 
-      if (typeof attributes.x_geo !== undefined) {
+      if (typeof attributes.x_geo !== 'undefined') {
         attributes.x = attributes.x_geo;
         attributes.y = attributes.y_geo;
-      } else if (typeof attributes.x === undefined) {
+      } else if (typeof attributes.x === 'undefined') {
         attributes.x = Math.random() * 1000;
         attributes.y = Math.random() * 1000;
       }
@@ -63,7 +63,9 @@
       if (relationFilter.includes("MANAGE")) {
         count = attributes.reading * 6;
       } else if (relationFilter.includes("WORK")) {
-        count = attributes.wealth * 2;
+        count = attributes.wealth * 3;
+      } else if (relationFilter.includes("MEMBER")) {
+         count = countEdge(graph, node, "MEMBER")
       } else if (relationFilter.includes("WRITE")) {
         count = countEdge(graph, node, "WRITE")
       }  else if (relationFilter.includes("PARTS-OF")) {
@@ -73,17 +75,11 @@
       } else if (relationFilter.includes("CONTAIN")) {
         count = countEdge(graph, node, "CONTAIN")
       } else if (relationFilter.includes("friends")) {
-        graph.forEachEdge(node, (_edge, edgeAttributes) => {
-          if (edgeAttributes.relation === "friends") {
-            count++;
-          }
-        });
+        count = countEdge(graph, node, "friends")
       } else if (relationFilter.includes("CHILD")) {
-        graph.forEachEdge(node, (_edge, edgeAttributes) => {
-          if (edgeAttributes.relation === "CHILD") {
-            count++;
-          }
-        });
+        count = countEdge(graph, node, "child")
+      } else if (relationFilter.includes("YY")) {
+        count = countEdge(graph, node, "YY") / 5
       } else {
         count = 0;
       }
@@ -205,6 +201,7 @@
       <option value="LIVE">Adresse</option>
       <option value="INVOICE">Facturation</option>
       <option value="ZZ|YY">Education</option>
+      <option value="ROUTE">Route</option>
     </select>
   </div>
 

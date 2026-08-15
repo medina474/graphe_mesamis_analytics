@@ -69,9 +69,11 @@ export class LoanGenerator {
           return exemplaire.availableAt <= currentDay;
         });
 
+        /*
         console.log(
           `${currentDay.toLocaleDateString("fr-FR")} : ${dailyQuota} copies prévues | ${this.copiesAvalaiblesCurrentDay.length} copies disponibles.`,
         );
+        */
       }
 
       /*
@@ -127,9 +129,12 @@ export class LoanGenerator {
          * Elle doit attendre 7 jours pour être de nouveau disponible et laisser la chance à d'autres
          */
 
+        /*
         console.log(
           `Pas de copie compatible pour ${emprunteur.firstname} ${Object.keys(emprunteur.interestTags).join(", ")}`,
         );
+        */
+
         emprunteur.availableAt = new Date(
           currentDay.getTime() + Random.int(3, 8),
         );
@@ -157,9 +162,12 @@ export class LoanGenerator {
         previous: pret_precedent,
       };
 
+      /*
       console.log(
         `${pret.copy.id} | ${pret.copy.book.title} | ${pret.preteur.firstname} -> ${pret.emprunteur.firstname} ${pret.emprunteur.reading}`,
       );
+      */
+
       prets.push(pret);
       pretsToday++;
 
@@ -273,7 +281,7 @@ export class LoanGenerator {
       if (selection[index].book.serie && selection[index].book.serie!.isOrdered) {
         const book = selection[index].book;
         const serieId = book.serie!.id;
-        console.log(`${book.serie!.label} ${book.order}`);
+        //console.log(`${book.serie!.label} ${book.order}`);
 
         const preferredOrder = emprunteur.series[serieId]
           ? emprunteur.series[serieId] + 1

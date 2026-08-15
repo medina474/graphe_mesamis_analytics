@@ -3,16 +3,19 @@ import { FriendsGenerator } from "../generators/FriendsGenerator.js";
 import { Person } from "../models/Person.js";
 
 export class FriendshipRunner {
+  constructor(
+    private readonly graph: DirectedGraph,
+    private readonly population: Person[],
+  ) {}
 
-    constructor(
-        private readonly graph: DirectedGraph,
-        private readonly population: Person[],
-    ) {
-    }
+  public run(iterations: number): void {
+        console.log(`----------------------------------------
+Amitié
+----------------------------------------`);
 
-    public run(iterations: number):void {
-        console.log(`----------------------------------------`);
-        const friendsGenerator = new FriendsGenerator(this.graph, this.population);
-        friendsGenerator.generate(iterations);
-    }
+    const friendsGenerator = new FriendsGenerator(this.graph, this.population);
+    friendsGenerator.generate(iterations);
+
+    console.log(`----------------------------------------`);
+  }
 }

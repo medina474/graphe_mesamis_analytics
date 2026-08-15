@@ -7,6 +7,7 @@ import { Person } from "../models/Person.js";
 export class WorkRunner {
   constructor(private readonly graph: DirectedGraph, private readonly population: Person[]) {}
 
+  
   public run(): void {
     console.log(`----------------------------------------
 Emploi
