@@ -32,12 +32,15 @@ export class Person {
 
   age: number = 0;
 
-  education: Education = 0;
-  wealth: Wealth = 0;
+  education: Education = Education.None;
+  wealth: Wealth = Wealth.Low;
 
-  sport: number = 0;
-  reading: number = 0;
   music: number = 0;
+  reading: number = 0;
+  sport: number = 0;
+
+  reading_seed = 0;
+  wealth_seed = 0;
 
   books: Book[] = [];
   emprunts: Loan[] = [];
@@ -46,7 +49,7 @@ export class Person {
   interestTags: Record<string, number>;
   series: Record<string, number>;
 
-  edges: number = 0;
+  friendsCount: number = 0;
 
   // Famille
   spouse?: Person;

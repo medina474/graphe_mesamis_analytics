@@ -15,7 +15,7 @@ let options = $derived<EChartsOption>({
     title: {
       text: "Éducation",
     },
-    color: ["#4A90E2", "#FF69B4"],
+    color: ["#90CAF9", "#81C784", "#FFD54F", "#E57373"],
     legend: {
       orient: "horizontal",
       bottom: 0,

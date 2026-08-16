@@ -4,7 +4,7 @@
         "name": "Rugby Club",
         "tags": ["sport", "collectif"],
         "exclusive": ["sport"],
-        "capacity": 60,
+        "capacity": 70,
         "male": 1,
         "criteria": {
             "sport": 1
@@ -17,7 +17,8 @@
         "exclusive": ["sport"],
         "capacity": 50,
         "criteria": {
-            "sport": 1
+            "sport": 1,
+            "wealth": 1
         }
     },
     {
@@ -60,7 +61,7 @@
         "id": "club-danse",
         "name": "Danse",
         "tags": ["sport"],
-        "capacity": 50,
+        "capacity": 60,
         "male": 0.10,
         "criteria": {
             "sport": 0.8
@@ -70,7 +71,7 @@
         "id": "club-golf",
         "name": "Golf Club",
         "tags": ["sport", "individuel"],
-        "capacity": 30,
+        "capacity": 40,
         "criteria": {
             "sport": 0.8,
             "wealth": 1
@@ -109,8 +110,8 @@
         "name": "Club Basket",
         "tags": ["sport", "collectif"],
         "exclusive": ["sport"],
-        "capacity": 50,
-        "male": 0.75,
+        "capacity": 60,
+        "male": 0.85,
         "criteria": {
             "sport": 1
         }
@@ -155,5 +156,15 @@
         "name": "Petanque",
         "tags": ["sport"],
         "capacity": 40
+    },
+    {
+        "id": "club-lecture",
+        "name": "Lecture",
+        "tags": ["culture"],
+        "capacity": 40,
+        "male": 0.20,
+        "criteria": {
+            "reading": 1
+        }
     }
 ]

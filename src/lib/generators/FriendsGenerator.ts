@@ -119,8 +119,8 @@ export class FriendsGenerator {
       const p = 1 / (1 + Math.exp(-z));
 
       if (Math.random() < p) {
-        a.edges++;
-        b.edges++;
+        a.friendsCount++;
+        b.friendsCount++;
 
         // Faire le lien maintenant, car utilisé dans l'exclusion
         this.graph.addEdge(idA, idB, {
@@ -201,14 +201,14 @@ export class FriendsGenerator {
     let score: number = 0;
 
     // Clubs communs
-    const clubsA = this.getNeighborsByCategory(a.id, "MEMBER");
-    const clubsB = this.getNeighborsByCategory(b.id, "MEMBER");
+    const clubsA = this.getNeighborsByRelation(a.id, "MEMBER");
+    const clubsB = this.getNeighborsByRelation(b.id, "MEMBER");
 
     const commonClubs = this.intersectionSize(clubsA, clubsB);
 
     // Entreprise commune
-    const enterprisesA = this.getNeighborsByCategory(a.id, "WORK");
-    const enterprisesB = this.getNeighborsByCategory(b.id, "WORK");
+    const enterprisesA = this.getNeighborsByRelation(a.id, "WORK");
+    const enterprisesB = this.getNeighborsByRelation(b.id, "WORK");
 
     const commonEnterprises = this.intersectionSize(enterprisesA, enterprisesB);
 
@@ -250,14 +250,14 @@ export class FriendsGenerator {
     return 1 - Math.exp(-common / 2);
   }
 
-  private getNeighborsByCategory(
+  private getNeighborsByRelation(
     personId: string,
-    category: string,
+    relation: string,
   ): Set<string> {
     const result = new Set<string>();
 
     for (const neighbor of this.graph.neighbors(personId)) {
-      if (this.graph.getNodeAttribute(neighbor, "relation") === category) {
+      if (this.graph.getNodeAttribute(neighbor, "relation") === relation) {
         result.add(neighbor);
       }
     }

@@ -58,6 +58,25 @@
         attributes.y = Math.random() * 1000;
       }
 
+      if (attributes.category == "Person") {
+        switch (attributes.wealth) {
+          case 0:
+            attributes.color = "#90CAF9";
+            break;
+          case 1:
+            attributes.color = "#81C784";
+            break;
+          case 2:
+            attributes.color = "#FFD54F";
+            break;
+          case 3:
+            attributes.color = "#E57373";
+            break;
+          default:
+          attributes.color = "#ff0000";
+        }
+      }
+
       let count = 0;
 
       if (relationFilter.includes("MANAGE")) {

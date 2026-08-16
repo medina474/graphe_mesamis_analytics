@@ -16,7 +16,7 @@
   let { data }: { data: RadarData[] } = $props();
 
   let options = $derived<EChartsOption>({
-    color: ["#67F9D8", "#FFE434", "#56A3F1", "#FF917C"],
+    color: ["#81C784", "#FFD54F", "#E57373"],
 
     title: {
       text: "Profils",

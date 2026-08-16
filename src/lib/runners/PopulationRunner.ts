@@ -1,3 +1,6 @@
+import * as fs from 'fs';
+import { parse } from 'csv/sync';
+
 import { DirectedGraph } from "graphology";
 import { PersonGenerator } from "../generators/PersonGenerator.js";
 import { Person, Gender } from "../models/Person.js";
@@ -50,6 +53,39 @@ export class PopulationRunner {
     return population;
   }
 
+  public import(path: string) {
+    const contenu = fs.readFileSync(path, 'utf-8');
+
+    const records = parse(contenu, {
+      columns: true,
+      skip_empty_lines: true
+    }) as Person[];
+
+    const population =
+          records.map((r: Person) => {
+
+            console.log(r)
+
+            const p = new Person(
+              r.id,
+            )
+            p.firstname = r.firstname
+            p.lastname = r.lastname
+            p.age = r.age
+            p.education = r.education
+            p.wealth = r.wealth
+            p.reading = r.reading
+            p.sport = r.sport
+            p.music = r.music
+            p.wealth_seed = r.wealth_seed
+            p.reading_seed = r.reading_seed
+            return p;
+          })
+
+    this.addPersons(population);
+    return population;
+  }
+
   addPerson(person: Person): void {
     this.graph.addNode(person.id, {
       category: "Person",
@@ -58,11 +94,9 @@ export class PopulationRunner {
       genre: person.gender,
       age: person.age,
       sport: person.sport,
-      reading_orig: person.reading,
       reading: person.reading,
       music: person.music,
       education: person.education,
-      wealth_orig: person.wealth,
       wealth: person.wealth,
       label: `${person.firstname} ${person.lastname} (${person.age})`,
       color: person.gender === Gender.Male ? "#4A90E2" : "#FF69B4",

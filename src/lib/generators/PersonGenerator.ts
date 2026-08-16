@@ -82,6 +82,9 @@ export class PersonGenerator {
     person.reading = this.readingDistribution.sample(person);
     person.music = this.musicDistribution.sample(person);
 
+    person.wealth_seed = person.wealth;
+    person.reading_seed = person.reading;
+    
     return person;
   }
 
