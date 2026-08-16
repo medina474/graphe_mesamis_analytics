@@ -1,5 +1,5 @@
-import * as fs from 'fs';
-import { parse } from 'csv/sync';
+import * as fs from "fs";
+import { parse } from "csv/sync";
 
 import { DirectedGraph } from "graphology";
 import { PersonGenerator } from "../generators/PersonGenerator.js";
@@ -14,6 +14,8 @@ import { AgePyramidLoader } from "../loaders/AgePyramidLoader.js";
 import { FirstnameLoader } from "../loaders/FirstnameLoader.js";
 import { LastnameLoader } from "../loaders/LastnameLoader.js";
 
+import { exportObjectsToCsv } from "../utilities/CSVExporter.js";
+
 /**
  * Crée une population d'individus
  */
@@ -21,6 +23,7 @@ export class PopulationRunner {
   private pyramid: AgePyramidStat;
   private firstnames: FirstnameStat[] = [];
   private lastnames: LastnameStat[] = [];
+  private population: Person[] = [];
 
   constructor(private readonly graph: DirectedGraph) {
     this.pyramid = new AgePyramidStat([]);
@@ -36,8 +39,19 @@ export class PopulationRunner {
     this.lastnames = LastnameLoader.load(lastnameStatPath);
   }
 
-  public run(nb: number, minAge: number, maxAge = Number.MAX_SAFE_INTEGER): Person[] {
-    console.log(`----------------------------------------`);
+  public run(
+    nb: number,
+    minAge: number,
+    maxAge = Number.MAX_SAFE_INTEGER,
+  ): Person[] {
+    console.log(`----------------------------------------
+Population
+----------------------------------------`);
+
+    if (this.firstnames.length == 0 || this.lastnames.length == 0) {
+      return [];
+    }
+
     const generator = new PersonGenerator(
       this.pyramid,
       this.firstnames,
@@ -46,44 +60,61 @@ export class PopulationRunner {
       maxAge,
     );
 
-    const population = generator.generateMany(nb);
+    this.population = generator.generateMany(nb);
 
-    this.addPersons(population);
+    this.addPersons();
 
-    return population;
+    return this.population;
   }
 
   public import(path: string) {
-    const contenu = fs.readFileSync(path, 'utf-8');
+    const contenu = fs.readFileSync(path, "utf-8");
 
     const records = parse(contenu, {
       columns: true,
-      skip_empty_lines: true
+      skip_empty_lines: true,
     }) as Person[];
 
-    const population =
-          records.map((r: Person) => {
+    const population = records.map((r: Person) => {
+      console.log(r);
 
-            console.log(r)
+      const p = new Person(r.id);
+      p.firstname = r.firstname;
+      p.lastname = r.lastname;
+      p.age = r.age;
+      p.education = r.education;
+      p.wealth = r.wealth;
+      p.reading = r.reading;
+      p.sport = r.sport;
+      p.music = r.music;
+      p.wealth_seed = r.wealth_seed;
+      p.reading_seed = r.reading_seed;
+      return p;
+    });
 
-            const p = new Person(
-              r.id,
-            )
-            p.firstname = r.firstname
-            p.lastname = r.lastname
-            p.age = r.age
-            p.education = r.education
-            p.wealth = r.wealth
-            p.reading = r.reading
-            p.sport = r.sport
-            p.music = r.music
-            p.wealth_seed = r.wealth_seed
-            p.reading_seed = r.reading_seed
-            return p;
-          })
-
-    this.addPersons(population);
+    this.addPersons();
     return population;
+  }
+
+  public export(path: string) {
+    exportObjectsToCsv(
+      path,
+      this.population.map((p) => ({
+        id: p.id,
+        firstname: p.firstname,
+        lastname: p.lastname,
+        gender: p.gender,
+        age: p.age,
+        education: p.education,
+        wealth: p.wealth,
+        music: p.music,
+        reading: p.reading,
+        sport: p.sport,
+        wealth_seed: p.wealth_seed,
+        reading_seed: p.reading_seed,
+        friendsCount: p.friendsCount,
+      })),
+    );
   }
 
   addPerson(person: Person): void {
@@ -103,8 +134,8 @@ export class PopulationRunner {
     });
   }
 
-  addPersons(persons: Person[]): void {
-    for (const person of persons) {
+  private addPersons(): void {
+    for (const person of this.population) {
       this.addPerson(person);
     }
   }

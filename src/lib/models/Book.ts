@@ -63,6 +63,7 @@ export class Loan {
 export class Library {
 
     public books: Book[]
+    public manager?: Person;
 
     constructor(
         public readonly id:string,

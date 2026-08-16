@@ -2,6 +2,7 @@ import { Person } from "../models/Person.js";
 import { Copy, Loan } from "../models/Book.js";
 import type { GenreInfo } from "../models/Book.js"
 import { Random } from "../utilities/Random.js";
+import { exportObjectsToCsv } from "../utilities/CSVExporter.js";
 
 export class LoanGenerator {
   private copiesAvalaiblesCurrentDay: Copy[] = [];
@@ -36,9 +37,9 @@ export class LoanGenerator {
      * Le livre est immédiatement disponible
      * Les propriétaires ont déja lus leurs livres
      */
-    for (const exemplaire of this.copies) {
-      exemplaire.availableAt = dateDebut;
-      exemplaire.owner.oeuvresLues.add(exemplaire.book);
+    for (const copy of this.copies) {
+      copy.availableAt = dateDebut;
+      copy.owner.oeuvresLues.add(copy.book);
     }
 
     const maintenant = new Date(dateDebut);
@@ -63,10 +64,10 @@ export class LoanGenerator {
         backupDayTime = currentDay.getTime(); // Copie la valeur pas la référence
 
         /*
-         * Quels sont les exemplaires disponible aujourd'hui ?
+         * Quels sont les copies disponible aujourd'hui ?
          */
-        this.copiesAvalaiblesCurrentDay = this.copies.filter((exemplaire) => {
-          return exemplaire.availableAt <= currentDay;
+        this.copiesAvalaiblesCurrentDay = this.copies.filter((c) => {
+          return c.availableAt <= currentDay;
         });
 
         /*
@@ -121,9 +122,9 @@ export class LoanGenerator {
        */
       const emprunteur = this.tirerPersonne(candidats);
 
-      const exemplaire = this.choisirExemplaire(emprunteur);
+      const copy = this.choisirExemplaire(emprunteur);
 
-      if (!exemplaire) {
+      if (!copy) {
         /*
          * Cette personne ne dispose finalement d'aucun livre compatible.
          * Elle doit attendre 7 jours pour être de nouveau disponible et laisser la chance à d'autres
@@ -141,20 +142,20 @@ export class LoanGenerator {
         continue;
       }
 
-      const preteur = exemplaire.holder;
+      const preteur = copy.holder;
 
       const duree = this.dureePret();
 
       const fin = new Date(currentDay.getTime() + duree);
 
       let pret_precedent;
-      if (preteur != exemplaire.owner) {
-        pret_precedent = this.dernierPret(prets, exemplaire);
+      if (preteur != copy.owner) {
+        pret_precedent = this.dernierPret(prets, copy);
       }
 
       const pret: Loan = {
         id: `loan_${index++}`,
-        copy: exemplaire,
+        copy: copy,
         preteur,
         emprunteur,
         start: new Date(currentDay),
@@ -174,13 +175,13 @@ export class LoanGenerator {
       /*
        * Le livre change de détenteur.
        */
-      exemplaire.holder = emprunteur;
+      copy.holder = emprunteur;
 
       /*
        * Le livre ne pourra pas être repris
        * avant la fin du prêt.
        */
-      exemplaire.availableAt = fin;
+      copy.availableAt = fin;
 
       /*
        * L'emprunteur ne pourra pas emprunter
@@ -192,17 +193,17 @@ export class LoanGenerator {
        * L'œuvre est maintenant considérée comme lue.
        *
        * Important : on utilise oeuvre.id et non
-       * exemplaire.id.
+       * copy.id.
        */
-      emprunteur.oeuvresLues.add(exemplaire.book);
+      emprunteur.oeuvresLues.add(copy.book);
 
-      for (const tag of exemplaire.book.genres) {
+      for (const tag of copy.book.genres) {
         emprunteur.interestTags[tag] = (emprunteur.interestTags[tag] ?? 0) + 1;
       }
 
       // Stocker les séries en cours de lecture
-      if (exemplaire.book.serie) {
-        emprunteur.series[exemplaire.book.serie.id] = exemplaire.book.order!;
+      if (copy.book.serie) {
+        emprunteur.series[copy.book.serie.id] = copy.book.order!;
       }
     }
 
@@ -253,8 +254,8 @@ export class LoanGenerator {
       return null;
     }
 
-    const poids = selection.map((exemplaire) =>
-      this.scoreExemplaire(emprunteur, exemplaire),
+    const poids = selection.map((c) =>
+      this.scoreExemplaire(emprunteur, c),
     );
 
     const total = poids.reduce((somme, p) => somme + p, 0);
@@ -327,13 +328,13 @@ export class LoanGenerator {
    * Le score est calculé à partir du nombre de genres en commun entre
    * la personne et le livre
    * @param emprunteur
-   * @param exemplaire
+   * @param copy
    * @returns
    */
-  private scoreExemplaire(emprunteur: Person, exemplaire: Copy): number {
+  private scoreExemplaire(emprunteur: Person, copy: Copy): number {
     return (
       1 +
-      exemplaire.book.genres.reduce(
+      copy.book.genres.reduce(
         (somme, genre) => somme + (emprunteur.interestTags[genre] ?? 0),
         0,
       )
@@ -368,9 +369,9 @@ export class LoanGenerator {
     return jours * 24 * 60 * 60 * 1000;
   }
 
-  private dernierPret(prets: Loan[], exemplaire: Copy): Loan | undefined {
+  private dernierPret(prets: Loan[], copy: Copy): Loan | undefined {
     const finds = prets
-      .filter((p) => p.copy == exemplaire)
+      .filter((p) => p.copy == copy)
       .sort((a, b) => b.end.getTime() - a.end.getTime());
     return finds.length > 0 ? finds[0] : undefined;
   }

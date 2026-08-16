@@ -10,7 +10,7 @@ import { EducationRunner } from "./runners/EducationRunner.js";
 import { MultiDirectedGraph } from "graphology";
 import { WaysRunner } from "./runners/WaysRunner.js";
 import neo4j from "neo4j-driver";
-import { exportObjectsToCsv } from "./utils/CSVExporter.js";
+
 
 const graph: MultiDirectedGraph = new MultiDirectedGraph();
 
@@ -54,32 +54,17 @@ waysRunner.load("data/geo/points.csv", "data/geo/routes.csv");
 waysRunner.run();
 */
 
+
+/* Export */
+
 writeFileSync(
   "./public/relationships.json",
   JSON.stringify(graph.export(), null, 2)
 );
 
-// Exporter la population générée en CSV
-
-exportObjectsToCsv(
-  "./public/population.csv",
-  population.map(p => ({
-    id: p.id,
-    firstname: p.firstname,
-    lastname: p.lastname,
-    gender: p.gender,
-    age: p.age,
-    education: p.education,
-    wealth: p.wealth,
-    music: p.music,
-    reading: p.reading,
-    sport: p.sport,
-    wealth_seed: p.wealth_seed,
-    reading_seed: p.reading_seed,
-    friendsCount: p.friendsCount,
-  }))
-);
-
+populationRunner.export("./public/population.csv");
+familyRunner.export("./public/marriage.csv", "./public/mother.csv", "./public/father.csv");
+librariesRunner.export();
 
 /*
 const driver = neo4j.driver(

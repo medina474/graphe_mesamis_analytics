@@ -7,10 +7,10 @@ import {
   Author,
   Loan,
   Award,
-  AwardEdition
+  AwardEdition,
 } from "../models/Book.js";
 
-import type  { GenreInfo } from "../models/Book.js";
+import type { GenreInfo } from "../models/Book.js";
 
 import { LibrariesGenerator } from "../generators/LibrariesGenerator.js";
 import { BooksLoader } from "../loaders/BooksLoader.js";
@@ -20,17 +20,18 @@ import { AwardsEditionsLoader } from "../loaders/AwardsEditionsLoader.js";
 import { JsonLoader } from "../loaders/JsonLoader.js";
 import { Person } from "../models/Person.js";
 import { LoanGenerator } from "../generators/LoanGenerator.js";
+import { exportObjectsToCsv } from "../utilities/CSVExporter.js";
 
 export class LibrariesRunner {
   private series: Serie[] = [];
   private books: Book[] = [];
   private libraries: Library[] = [];
   private authors: Author[] = [];
-  private prets: Loan[] = [];
+  private loans: Loan[] = [];
   private awards: Award[] = [];
   private awardsEditions: AwardEdition[] = [];
 
-  private exemplaires: Copy[] = [];
+  private copies: Copy[] = [];
   private genres: Record<string, GenreInfo> = {};
 
   constructor(
@@ -62,7 +63,11 @@ export class LibrariesRunner {
     this.addNodesAwards();
 
     // importer la définition des bibliothèques
-    this.awardsEditions = AwardsEditionsLoader.load(awardsEditionsPath, this.books, this.awards);
+    this.awardsEditions = AwardsEditionsLoader.load(
+      awardsEditionsPath,
+      this.books,
+      this.awards,
+    );
     this.addNodesAwardsEdition();
 
     // Extraire les tags depuis la liste des livres
@@ -77,7 +82,7 @@ export class LibrariesRunner {
           this.genres[genre] = {
             id: `T${index++}`,
             count: 1,
-            countInLibrary: 0
+            countInLibrary: 0,
           };
         }
       }
@@ -141,10 +146,11 @@ export class LibrariesRunner {
     console.log(`----------------------------------------`);
     for (const [genre, info] of Object.entries(this.genres)) {
       let nb = this.libraries.reduce(
-        (a: number, l) => a + (l.books.some((b) => b.genres.includes(genre)) ? 1 : 0),
+        (a: number, l) =>
+          a + (l.books.some((b) => b.genres.includes(genre)) ? 1 : 0),
         0,
       );
-      info.countInLibrary = nb
+      info.countInLibrary = nb;
       if (nb == 0) console.log(`${genre} : ${nb} (${genre})`);
     }
 
@@ -165,8 +171,9 @@ export class LibrariesRunner {
         continue;
       }
 
-      this.addEdgeManage(candidat, library);
+      library.manager = candidat;
 
+      this.addEdgeManage(candidat, library);
       for (const book of library.books) {
         candidat.books.push(book);
         for (const tag of book.genres) {
@@ -175,32 +182,38 @@ export class LibrariesRunner {
       }
 
       for (const book of library.books) {
-        const exemplaire = new Copy(`X${index++}`, book, candidat, candidat, new Date());
-        this.addNodeCopy(exemplaire);
-        this.exemplaires.push(exemplaire);
-        this.addEdgeContain(library, exemplaire);
-        this.addEdgeCopyOf(exemplaire, book);
+        const copy = new Copy(
+          `X${index++}`,
+          book,
+          candidat,
+          candidat,
+          new Date(),
+        );
+        this.addNodeCopy(copy);
+        this.copies.push(copy);
+        this.addEdgeContain(library, copy);
+        this.addEdgeCopyOf(copy, book);
       }
     }
-
+    
     const loanGenerator = new LoanGenerator(
       this.population,
-      this.exemplaires,
+      this.copies,
       this.genres,
     );
 
-    this.prets = loanGenerator.generer(nb, new Date(2026, 0, 1));
-    for (const pret of this.prets) {
+    this.loans = loanGenerator.generer(nb, new Date(2026, 0, 1));
+    for (const pret of this.loans) {
       this.addLoan(pret);
     }
 
     for (const serie of this.series) {
-      console.log(`${serie.label} ${serie.volumesAvailable}/${serie.volumes}`)
+      console.log(`${serie.label} ${serie.volumesAvailable}/${serie.volumes}`);
     }
     /* Mettre à jour la propriété reading des personnes */
     let total = 0;
     for (const person of this.population) {
-      person.emprunts = this.prets.filter((p) => p.emprunteur.id == person.id);
+      person.emprunts = this.loans.filter((p) => p.emprunteur.id == person.id);
       total = Math.max(total, person.books.length + person.emprunts.length);
     }
 
@@ -208,6 +221,40 @@ export class LibrariesRunner {
       person.reading = (person.books.length + person.emprunts.length) / total;
     }
   }
+
+  public export(): void {
+    exportObjectsToCsv(
+      "./public/libraries.csv",
+      this.libraries.map((l) => ({
+        id: l.id,
+        manager: l.manager!.id,
+      })),
+    );
+
+    exportObjectsToCsv(
+      "./public/libraries.books.csv",
+      this.copies.map((c) => ({
+        id: c.id,
+        book: c.book.id,
+        owner: c.owner.id,
+      })),
+    );
+
+    exportObjectsToCsv(
+      "./public/libraries.loan.csv",
+      this.loans.map((l) => ({
+        id: l.id,
+        copy: l.copy.id,
+        preteur: l.preteur.id,
+        emprunteur: l.emprunteur.id,
+        dateStart: l.start,
+        dateEnd: l.end,
+        previous: l.previous?.id,
+        dateReturn: l.returnedDate,
+      })),
+    );
+  }
+  /* */
 
   /* Noeuds */
 
@@ -239,10 +286,10 @@ export class LibrariesRunner {
     });
   }
 
-  addNodeCopy(exemplaire: Copy): void {
-    this.graph.addNode(exemplaire.id, {
+  addNodeCopy(copy: Copy): void {
+    this.graph.addNode(copy.id, {
       category: "Copy",
-      label: `${exemplaire.book.title} ${exemplaire.id}`,
+      label: `${copy.book.title} ${copy.id}`,
       color: "#77fffd",
     });
   }
@@ -317,27 +364,25 @@ export class LibrariesRunner {
 
   /**
    * (:Person)-[:REPRESENT]->(:Book)
-   * @param exemplaire
-   * @param book
+   * @param pret
    */
   addLoan(pret: Loan): void {
-
     this.graph.addNode(pret.id, {
       category: "Loan",
       label: "Prêt",
       color: "#503177",
     });
 
-    this.addEdgeBorrow(pret.emprunteur, pret)
-    this.addEdgeLend(pret.preteur, pret)
-    this.addEdgeConcern(pret, pret.copy)
+    this.addEdgeBorrow(pret.emprunteur, pret);
+    this.addEdgeLend(pret.preteur, pret);
+    this.addEdgeConcern(pret, pret.copy);
 
     if (pret.previous) {
-      this.addEdgeFollow(pret, pret.previous)
+      this.addEdgeFollow(pret, pret.previous);
     }
 
     if (pret.returnedDate) {
-      this.addEdgeReturnTo(pret)
+      this.addEdgeReturnTo(pret);
     }
   }
 
@@ -378,11 +423,11 @@ export class LibrariesRunner {
 
   /**
    * (:Copy)-[:COPY-OF]->(:Book)
-   * @param exemplaire
+   * @param copy
    * @param book
    */
-  addEdgeCopyOf(exemplaire: Copy, book: Book): void {
-    this.graph.addEdge(exemplaire.id, book.id, {
+  addEdgeCopyOf(copy: Copy, book: Book): void {
+    this.graph.addEdge(copy.id, book.id, {
       relation: "COPY-OF",
       weight: 1,
     });
@@ -391,10 +436,10 @@ export class LibrariesRunner {
   /**
    * (:Library)-[:CONTAIN]->(:Copy)
    * @param library
-   * @param exemplaire
+   * @param copy
    */
-  addEdgeContain(library: Library, exemplaire: Copy): void {
-    this.graph.addEdge(library.id, exemplaire.id, {
+  addEdgeContain(library: Library, copy: Copy): void {
+    this.graph.addEdge(library.id, copy.id, {
       relation: "CONTAIN",
       weight: 1,
     });
@@ -412,8 +457,8 @@ export class LibrariesRunner {
     });
   }
 
-  addEdgeConcern(pret: Loan, exemplaire: Copy) {
-    this.graph.addEdge(pret.id, exemplaire.id, {
+  addEdgeConcern(pret: Loan, copy: Copy) {
+    this.graph.addEdge(pret.id, copy.id, {
       relation: "CONCERN",
       weight: 1,
     });
@@ -460,7 +505,7 @@ export class LibrariesRunner {
 
   addEdgeAwardEdition(awardEdition: AwardEdition, book: Book): void {
     this.graph.addEdge(awardEdition.id, book.id, {
-      relation: (awardEdition.place == 1) ? "REWARD" : "NOMINATE",
+      relation: awardEdition.place == 1 ? "REWARD" : "NOMINATE",
       categorie: awardEdition.categorie,
       weight: 1,
     });
