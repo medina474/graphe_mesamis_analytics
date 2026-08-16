@@ -97,6 +97,8 @@
         count = countEdge(graph, node, "FRIENDS")
       } else if (relationFilter.includes("CHILD")) {
         count = countEdge(graph, node, "child")
+      } else if (relationFilter.includes("INVOICE")) {
+        count = countEdge(graph, node, "INVOICE");
       } else if (relationFilter.includes("YY")) {
         count = countEdge(graph, node, "YY") / 5
       } else {
