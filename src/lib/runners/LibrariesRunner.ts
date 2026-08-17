@@ -195,14 +195,14 @@ export class LibrariesRunner {
         this.addEdgeCopyOf(copy, book);
       }
     }
-    
+
     const loanGenerator = new LoanGenerator(
       this.population,
       this.copies,
       this.genres,
     );
 
-    this.loans = loanGenerator.generer(nb, new Date(2026, 0, 1));
+    this.loans = loanGenerator.generate(nb, new Date(2026, 0, 1));
     for (const pret of this.loans) {
       this.addLoan(pret);
     }

@@ -22,7 +22,7 @@ export class LoanGenerator {
       });
   }
 
-  generer(nombrePrets: number, dateDebut: Date = new Date()): Loan[] {
+  generate(nombrePrets: number, dateDebut: Date = new Date()): Loan[] {
     console.log(`Prêts`);
     console.log(`----------------------------------------`);
     const prets: Loan[] = [];

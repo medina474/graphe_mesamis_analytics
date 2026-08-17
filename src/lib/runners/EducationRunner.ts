@@ -1,3 +1,6 @@
+import * as fs from "fs";
+import { parse } from "csv/sync";
+
 import { DirectedGraph } from "graphology";
 import { Person } from "../models/Person.js";
 import type {
@@ -312,6 +315,7 @@ export class EducationRunner {
     }
   }
 
+  
   addNodesEtablissements() {
     for (const etablissement of this.etablissements) {
       this.addNodeEtablissement(etablissement);

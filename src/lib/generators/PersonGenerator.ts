@@ -57,7 +57,7 @@ export class PersonGenerator {
      * Les distributions peuvent utiliser
      * les propriétés déjà présentes.
      */
-    const person = new Person (id);
+    const person = new Person(id);
 
     // Caractéristiques démographiques
 
@@ -84,7 +84,7 @@ export class PersonGenerator {
 
     person.wealth_seed = person.wealth;
     person.reading_seed = person.reading;
-    
+
     return person;
   }
 

@@ -1,3 +1,6 @@
+import * as fs from "fs";
+import { parse } from "csv/sync";
+
 import { DirectedGraph } from "graphology";
 import { FriendsGenerator } from "../generators/FriendsGenerator.js";
 import { Person } from "../models/Person.js";

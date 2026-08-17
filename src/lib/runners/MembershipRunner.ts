@@ -1,3 +1,6 @@
+import * as fs from "fs";
+import { parse } from "csv/sync";
+
 import { DirectedGraph } from "graphology";
 import { JsonLoader } from "../loaders/JsonLoader.js";
 import { Person } from "../models/Person.js";
@@ -43,6 +46,10 @@ Clubs
     }
     console.log(`${count} ${this.population.length}`);
   }
+
+  public export() {}
+
+  public import() {}
 
   addClubs(clubs: Club[]): void {
     for (const club of clubs) {

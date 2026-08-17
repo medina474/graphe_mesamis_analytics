@@ -62,7 +62,7 @@ Population
 
     this.population = generator.generateMany(nb);
 
-    this.addPersons();
+    this.addNodesPersons();
 
     return this.population;
   }
@@ -76,8 +76,6 @@ Population
     }) as Person[];
 
     const population = records.map((r: Person) => {
-      console.log(r);
-
       const p = new Person(r.id);
       p.firstname = r.firstname;
       p.lastname = r.lastname;
@@ -92,7 +90,7 @@ Population
       return p;
     });
 
-    this.addPersons();
+    this.addNodesPersons();
     return population;
   }
 
@@ -117,7 +115,7 @@ Population
     );
   }
 
-  addPerson(person: Person): void {
+  addNodePerson(person: Person): void {
     this.graph.addNode(person.id, {
       category: "Person",
       firstname: person.firstname,
@@ -134,9 +132,9 @@ Population
     });
   }
 
-  private addPersons(): void {
+  private addNodesPersons(): void {
     for (const person of this.population) {
-      this.addPerson(person);
+      this.addNodePerson(person);
     }
   }
 }

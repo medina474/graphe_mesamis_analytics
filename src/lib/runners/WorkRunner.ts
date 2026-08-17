@@ -1,3 +1,6 @@
+import * as fs from "fs";
+import { parse } from "csv/sync";
+
 import { DirectedGraph } from "graphology";
 import { JsonLoader } from "../loaders/JsonLoader.js";
 import { WorkGenerator } from "../generators/WorkGenerator.js";
@@ -46,6 +49,10 @@ Emploi
       this.addFacture(facture);
     }
   }
+
+  public export() {}
+
+  public import() {}
 
   addEnterprise(enterprise: Enterprise): void {
     this.graph.addNode(enterprise.id, {

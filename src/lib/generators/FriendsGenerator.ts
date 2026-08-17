@@ -9,6 +9,7 @@ export class FriendsGenerator {
   constructor(
     private readonly graph: UndirectedGraph,
     private readonly individus: Person[],
+    private readonly genderAffinityParam: number = 0.7
   ) {
     this.stats = this.computeStats();
     this.sigma = this.calibrateSigma();
@@ -232,7 +233,7 @@ export class FriendsGenerator {
   }
 
   private genderAffinity(a: Person, b: Person): number {
-    return a.gender === b.gender ? 1 : 0.7;
+    return a.gender === b.gender ? this.genderAffinityParam : 0.0;
   }
 
   private triadicScore(a: string, b: string): number {
