@@ -1,4 +1,4 @@
-numero,id_voie,lon,lat,appartement,valeur_locative
+numero,id_voie,lon,lat,logement,valeur_locative
 1,29082_b095,-4.018625,48.745231,1,0
 4,29082_b095,-4.018627,48.745333,1,0
 7,29082_b095,-4.018825,48.745505,1,0

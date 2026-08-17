@@ -44,7 +44,7 @@ if (generateNewData) {
 }
 
 const addressRunner = new AddressRunner(graph, population);
-addressRunner.load("data/voies.json", "data/geo/adresses.csv");
+addressRunner.load("data/geo/voies.json", "data/geo/adresses.csv");
 addressRunner.run();
 
 const workRunner = new WorkRunner(graph, population);

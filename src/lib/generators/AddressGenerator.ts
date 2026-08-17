@@ -156,7 +156,9 @@ Logement
             colocation--;
         }
 
-        for (const person of persons.sort((a, b) => b.age - a.age)) {
+        // En triant du plusâgé au plus jeune , on s'assure que les enfants sont logés auprès de leurs parents.
+        for (const person of persons.filter(p => p.age > 18)
+          .sort((a, b) => b.age - a.age)) {
             if (!person.address) {
                 this.generate(person)
             }

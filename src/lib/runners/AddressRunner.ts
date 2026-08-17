@@ -45,7 +45,22 @@ export class AddressRunner {
     }
   }
 
-  public export(path: string) {
+  public export(pathVoies: string, pathAdresses: string) {
+    exportObjectsToCsv(
+      pathVoies,
+      this.voies.map((r) => ({
+        id: r.id,
+        voie: r.voie,
+      })),
+    );
+    
+    exportObjectsToCsv(
+      pathAdresses,
+      this.population.map((r) => ({
+        id: r.id,
+        adresse: r.adress.id
+      })),
+    );
   }
 
   public import(path: string) {
