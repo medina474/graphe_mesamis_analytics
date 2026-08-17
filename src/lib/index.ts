@@ -57,11 +57,24 @@ const membershipRunner = new MembershipRunner(graph, population);
 membershipRunner.load("data/clubs.json");
 membershipRunner.run();
 
-const librariesRunner = new LibrariesRunner(graph, population.filter(p => p.age >= 18));
-librariesRunner.load("data/serie.csv", "data/books.csv", "data/libraries.json", "data/awards.csv", "data/awardseditions.csv");
+const librariesRunner = new LibrariesRunner(
+  graph,
+  population.filter((p) => p.age >= 18),
+);
+librariesRunner.load(
+  "data/serie.csv",
+  "data/books.csv",
+  "data/libraries.json",
+  "data/awards.csv",
+  "data/awardseditions.csv",
+);
 librariesRunner.run(2000);
 
-const friendshipRunner = new FriendshipRunner(graph, population, membershipRunner.clubs);
+const friendshipRunner = new FriendshipRunner(
+  graph,
+  population,
+  membershipRunner.clubs,
+);
 friendshipRunner.run(1000);
 
 /*
@@ -77,15 +90,12 @@ writeFileSync(
   JSON.stringify(graph.export(), null, 2),
 );
 
-if (generateNewData)
-{
+if (generateNewData) {
   populationRunner.export("./public/population.csv");
-  familyRunner.export(
-    "./public/marriage.csv",
-    "./public/children.csv",
-  );
+  familyRunner.export("./public/marriage.csv", "./public/children.csv");
   librariesRunner.export();
-  friendshipRunner.export("./public/friends.csv")
+  friendshipRunner.export("./public/friends.csv");
+  educationRunner.export("./public/etablissement.csv");
 }
 
 /*

@@ -1,5 +1,6 @@
 import * as fs from "fs";
 import { parse } from "csv/sync";
+import { exportObjectsToCsv } from "../utilities/CSVExporter.js";
 
 import { DirectedGraph } from "graphology";
 import { Person } from "../models/Person.js";
@@ -306,16 +307,53 @@ export class EducationRunner {
 
       for (let e of grade.etablissements) {
         let indexClasse = 1;
-        console.log(`${e.etablissement.name} : ${e.classes.length} classes`);
         for (let classe of e.classes) {
-          this.addNodeClasse(classe, e, index++, grade);
+          classe.id = `class-${index++}`
+          this.addNodeClasse(classe, e, index, grade);
           console.log(`Classe ${indexClasse++} : ${classe.length} élèves`);
         }
       }
     }
   }
 
-  
+  public export(pathEtabissement: string) {
+    exportObjectsToCsv(
+      pathEtabissement,
+      this.etablissements.map((r) => ({
+        id: r.id,
+        name: r.name,
+        longitude: r.longitude,
+        latitude: r.latitude,
+      })),
+    );
+
+    const classes = [];
+
+    for (const g of this.grades) {
+      for (const e of g.etablissements) {
+        for (const c of e.classes) {
+          classes.push({
+            id: c.
+            etablissement: e.etablissement.id,
+            niveau: g.niveau
+          })
+        }
+      }
+    }
+
+    exportObjectsToCsv(
+      pathEtabissement,
+      classes.map((r) => ({
+        id: r.id,
+        name: r.name,
+        longitude: r.longitude,
+        latitude: r.latitude,
+      })),
+    );
+  }
+
+  public import(path: string) {}
+
   addNodesEtablissements() {
     for (const etablissement of this.etablissements) {
       this.addNodeEtablissement(etablissement);
@@ -343,7 +381,10 @@ export class EducationRunner {
     index: number,
     grade: Grade,
   ) {
-    const { x, y } = Geo.coordToGraph(etablissement.etablissement.latitude, etablissement.etablissement.longitude);
+    const { x, y } = Geo.coordToGraph(
+      etablissement.etablissement.latitude,
+      etablissement.etablissement.longitude,
+    );
     const position = Random.circle(x, y, 0.075);
     this.graph.addNode(`class-${index}`, {
       category: "Classe",
@@ -360,14 +401,10 @@ export class EducationRunner {
     });
 
     for (const p of classe) {
-      this.graph.addEdge(
-        `class-${index}`,
-        p.id,
-        {
-          relation: "YY",
-          weight: 1,
-        },
-      );
+      this.graph.addEdge(`class-${index}`, p.id, {
+        relation: "YY",
+        weight: 1,
+      });
     }
   }
 }

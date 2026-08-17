@@ -6,6 +6,7 @@ import { AddressLoader } from "../loaders/AddressLoader.js";
 import { Person } from "../models/Person.js";
 import { Random } from "../utilities/Random.js";
 import { Geo } from "../utilities/Geo.js";
+import { exportObjectsToCsv } from "../utilities/CSVExporter.js";
 
 export class AddressRunner {
   private voies: Voie[] = [];
@@ -18,7 +19,7 @@ export class AddressRunner {
 
   public load(voiePath: string, addressPath: string) {
     this.voies = JsonLoader.load(voiePath, Voie);
-    this.addVoies(this.voies);
+    this.addNodesVoies(this.voies);
 
     this.addresses = AddressLoader.load(addressPath, this.voies);
     this.addAddresses(this.addresses);
@@ -30,10 +31,7 @@ export class AddressRunner {
 
     for (const p of this.population) {
       if (p.address) {
-        this.graph.addEdge(p.id, p.address.id, {
-          relation: "LIVE",
-          weight: 1,
-        });
+        this.addEdgeLive(p);
 
         // 20 mètres autour
         const { x, y } = Geo.coordToGraph(p.address.lat, p.address.lon);
@@ -47,14 +45,26 @@ export class AddressRunner {
     }
   }
 
+  public export(path: string) {
+  }
 
-  addVoies(voies: Voie[]) {
+  public import(path: string) {
+  }
+
+  addEdgeLive(person: Person) {
+    this.graph.addEdge(person.id, person.address!.id, {
+      relation: "LIVE",
+      weight: 1,
+    });
+  }
+
+  addNodesVoies(voies: Voie[]) {
     for (const voie of voies) {
-      this.addVoie(voie);
+      this.addNodeVoie(voie);
     }
   }
 
-  addVoie(voie: Voie): void {
+  addNodeVoie(voie: Voie): void {
     this.graph.addNode(voie.id, {
       category: "Way",
       label: voie.voie,
