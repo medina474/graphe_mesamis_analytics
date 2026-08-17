@@ -207,7 +207,7 @@
   <div class="controls">
     <select bind:value={relationFilter}>
       <option value="NONE">Toutes les relations</option>
-      <option value="marriage|child|father|mother">Famille</option>
+      <option value="MARRIAGE|CHILD">Famille</option>
       <option value="MEMBER">Clubs</option>
       <option value="WORK">Travail</option>
       <option value="FRIENDS">Amitiés</option>

@@ -9,24 +9,39 @@ import { AddressRunner } from "./runners/AddressRunner.js";
 import { EducationRunner } from "./runners/EducationRunner.js";
 import { MultiDirectedGraph } from "graphology";
 import { WaysRunner } from "./runners/WaysRunner.js";
+import { Person } from "./models/Person.js";
 import neo4j from "neo4j-driver";
 
+const generateNewData = false;
 
 const graph: MultiDirectedGraph = new MultiDirectedGraph();
 
 const populationRunner = new PopulationRunner(graph);
-populationRunner.load(
-  "data/demography/age-pyramid-guyane.json",
-  "data/demography/prenoms.json",
-  "data/demography/noms.csv",
-);
-let population = populationRunner.run(2254, 0, 85);
+
+let population: Person[];
+
+if (generateNewData) {
+  populationRunner.load(
+    "data/demography/age-pyramid-guyane.json",
+    "data/demography/prenoms.json",
+    "data/demography/noms.csv",
+  );
+  population = populationRunner.run(2254, 0, 85);
+} else {
+  population = populationRunner.import("./public/population.csv");
+}
 
 const familyRunner = new FamilyRunner(graph, population);
-familyRunner.run();
 
-// Retirer les enfants sans mère, ni père.
-population = population.filter(p => p.age >= 18 || p.mother != null || p.father != null)
+if (generateNewData) {
+  familyRunner.run();
+  // Retirer les enfants sans mère, ni père.
+  population = population.filter(
+    (p) => p.age >= 18 || p.mother != null || p.father != null,
+  );
+} else {
+  familyRunner.import("./public/marriage.csv");
+}
 
 const addressRunner = new AddressRunner(graph, population);
 addressRunner.load("data/voies.json", "data/geo/adresses.csv");
@@ -35,7 +50,7 @@ addressRunner.run();
 const workRunner = new WorkRunner(graph, population);
 workRunner.run();
 
-const educationRunner = new EducationRunner(graph, population)
+const educationRunner = new EducationRunner(graph, population);
 educationRunner.run();
 
 const membershipRunner = new MembershipRunner(graph, population);
@@ -59,11 +74,15 @@ waysRunner.run();
 
 writeFileSync(
   "./public/relationships.json",
-  JSON.stringify(graph.export(), null, 2)
+  JSON.stringify(graph.export(), null, 2),
 );
 
 populationRunner.export("./public/population.csv");
-familyRunner.export("./public/marriage.csv", "./public/mother.csv", "./public/father.csv");
+familyRunner.export(
+  "./public/marriage.csv",
+  "./public/mother.csv",
+  "./public/father.csv",
+);
 librariesRunner.export();
 
 /*

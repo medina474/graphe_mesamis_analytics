@@ -171,8 +171,6 @@ export class FamilyGenerator {
         relation: "marriage",
         type: "line",
         size: 0.5,
-        category: "family",
-        weight: 3,
       });
 
       // Une personne ne peut être marié qu'une fois
@@ -241,35 +239,23 @@ export class FamilyGenerator {
         epoux.children.push(enfant);
 
         this.graph.addEdge(femme.id, enfant.id, {
-          type: "arrow",
           size: 0.5,
           relation: "mother",
-          category: "family",
-          weight: 2,
         });
 
         this.graph.addEdge(enfant.id, femme.id, {
           relation: "child",
-          type: "arrow",
           size: 0.5,
-          category: "family",
-          weight: 2,
         });
 
         this.graph.addEdge(epoux.id, enfant.id, {
           relation: "father",
-          type: "arrow",
           size: 0.5,
-          category: "family",
-          weight: 2,
         });
 
         this.graph.addEdge(enfant.id, epoux.id, {
           relation: "child",
-          type: "arrow",
           size: 0.5,
-          category: "family",
-          weight: 2,
         });
 
         this.graph.mergeNodeAttributes(enfant.id, {
