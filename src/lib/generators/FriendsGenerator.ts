@@ -104,13 +104,11 @@ export class FriendsGenerator {
       }
 
       const { person: b, affinity, context } = result;
-      const idA = a.id;
-      const idB = b.id;
 
       /*
        * Opportunités sociales
        */
-      const triadic = this.triadicScore(idA, idB);
+      const triadic = this.triadicScore(a.id, b.id);
       const opportunity = 2 * triadic;
 
       /*
@@ -123,8 +121,10 @@ export class FriendsGenerator {
         a.friendsCount++;
         b.friendsCount++;
 
+        a.friends.push(b);
+
         // Faire le lien maintenant, car utilisé dans l'exclusion
-        this.graph.addEdge(idA, idB, {
+        this.graph.addEdge(a.id, b.id, {
           relation: "FRIENDS",
           weight: 1,
         });
@@ -227,16 +227,23 @@ export class FriendsGenerator {
     return score;
   }
 
-  private ageAffinity(a: Person, b: Person): number {
+  public ageAffinity(a: Person, b: Person): number {
     const difference = Math.abs(a.age - b.age);
     return Math.exp(-difference / 15);
   }
 
-  private genderAffinity(a: Person, b: Person): number {
+  public genderAffinity(a: Person, b: Person): number {
     return a.gender === b.gender ? this.genderAffinityParam : 0.0;
   }
 
-  private triadicScore(a: string, b: string): number {
+  /**
+   * Fermeture Triadique
+   * Si deux personnes sont amies avec une même personne, elles ont plus de chances de devenir amies à leur tour
+   * @param a
+   * @param b
+   * @returns
+   */
+  public triadicScore(a: string, b: string): number {
     const neighborsA = new Set(this.graph.neighbors(a));
     const neighborsB = new Set(this.graph.neighbors(b));
 
@@ -288,7 +295,7 @@ export class FriendsGenerator {
       if (
         relation === "mother" ||
         relation === "father" ||
-        relation === "child"
+        relation === "CHILD"
       ) {
         score += 0.6;
       }

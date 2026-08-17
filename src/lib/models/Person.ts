@@ -49,6 +49,7 @@ export class Person {
   interestTags: Record<string, number>;
   series: Record<string, number>;
 
+  friends: Person[] = [];
   friendsCount: number = 0;
 
   // Famille

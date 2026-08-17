@@ -12,7 +12,7 @@ import { WaysRunner } from "./runners/WaysRunner.js";
 import { Person } from "./models/Person.js";
 import neo4j from "neo4j-driver";
 
-const generateNewData = false;
+const generateNewData = true;
 
 const graph: MultiDirectedGraph = new MultiDirectedGraph();
 
@@ -56,19 +56,19 @@ educationRunner.run();
 const membershipRunner = new MembershipRunner(graph, population);
 membershipRunner.load("data/clubs.json");
 membershipRunner.run();
-/*
+
 const librariesRunner = new LibrariesRunner(graph, population.filter(p => p.age >= 18));
 librariesRunner.load("data/serie.csv", "data/books.csv", "data/libraries.json", "data/awards.csv", "data/awardseditions.csv");
 librariesRunner.run(2000);
-*/
-const friendshipRunner = new FriendshipRunner(graph, population);
+
+const friendshipRunner = new FriendshipRunner(graph, population, membershipRunner.clubs);
 friendshipRunner.run(1000);
+
 /*
 const waysRunner = new WaysRunner(graph);
 waysRunner.load("data/geo/points.csv", "data/geo/routes.csv");
 waysRunner.run();
 */
-
 
 /* Export */
 
@@ -77,13 +77,16 @@ writeFileSync(
   JSON.stringify(graph.export(), null, 2),
 );
 
-populationRunner.export("./public/population.csv");
-familyRunner.export(
-  "./public/marriage.csv",
-  "./public/mother.csv",
-  "./public/father.csv",
-);
-librariesRunner.export();
+if (generateNewData)
+{
+  populationRunner.export("./public/population.csv");
+  familyRunner.export(
+    "./public/marriage.csv",
+    "./public/children.csv",
+  );
+  librariesRunner.export();
+  friendshipRunner.export("./public/friends.csv")
+}
 
 /*
 const driver = neo4j.driver(
@@ -114,3 +117,4 @@ const session = driver.session();
 //} finally {
   await session.close();
 //}
+*/
